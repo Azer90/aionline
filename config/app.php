@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'PRC',
 
     /*
     |--------------------------------------------------------------------------
@@ -177,6 +177,13 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Stevenyangecho\UEditor\UEditorServiceProvider::class,
+        Yansongda\LaravelPay\PayServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
+        Vanry\Scout\TNTSearchScoutServiceProvider::class,
+        Encore\Chartjs\ChartjsServiceProvider::class,
+
     ],
 
     /*
@@ -225,6 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Pay' => Yansongda\LaravelPay\Facades\Pay::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
