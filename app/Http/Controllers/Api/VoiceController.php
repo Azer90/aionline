@@ -75,7 +75,7 @@ class VoiceController extends Controller
         $audio->filters()->clip(TimeCode::fromSeconds(0), TimeCode::fromSeconds(60));
         $audio->save($format, storage_path().'/app/tem/test.pcm');
         echo json_encode(["progress"=>2]);
-        $this->compound();
+        $this->compound(); 
     }
 
     /**
