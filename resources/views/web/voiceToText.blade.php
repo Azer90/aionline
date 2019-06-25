@@ -1,5 +1,9 @@
 @include('web.layouts.header')
-
+<style>
+    .webuploader-pick{
+        padding: 0;
+    }
+</style>
 <body>
 @include('web.layouts.nav')
 <div class="contant" style="margin-top: 0;">
@@ -45,7 +49,7 @@
         <img src="images/line_03.jpg" class="line" />
         <div class="gem1">
             <div class="btns_grow">
-                <div class="fl">点击选择文件</div>
+                <div class="fl" id="select">点击选择文件</div>
                 <div class="fr">立即下载</div>
             </div>
             <p>请上传需要转换的语音文件，最大支持20M，<br />支持的文件格式：<span>MP3，MAV，M4A，WMA，AAC，FLAC，AC3，M4R，APE，OGG，WAV格式</span></p>
@@ -130,6 +134,32 @@
     </div>
 </div>
 @extends('web.layouts.footer')
-
-
+<script type="text/javascript" src="{{asset('js/home/webuploader.js')}}" ></script>
+<script>
+    var uploader = WebUploader.create({
+        swf: 'swf/Uploader.swf',
+        server: 'http://www.aionline.com/api/voice',     // 服务端地址
+        auto:true,
+        pick: '#select',         // 指定选择文件的按钮容器
+        resize: false,
+        chunked: true,           //开启分片上传
+        chunkSize: 1024*1024*2,  //每一片的大小
+        chunkRetry: 100,         // 如果遇到网络错误,重新上传次数
+        threads: 3,              //上传并发数。允许同时最大上传进程数。
+        // 只允许选择图片文件。
+        accept: {
+        //     title: 'Images',
+        //     extensions: 'MP3，MAV，M4A，WMA，AAC，FLAC，AC3，M4R，APE，OGG，WAV',
+            mimeTypes: 'audio/*'
+        }
+    });
+//上传进度
+    uploader.on( 'uploadProgress', function( file,percentage  ) {
+        console.log(percentage);
+    })
+//上传成功
+    uploader.on( 'uploadSuccess', function( file ) {
+       console.log(file)
+    });
+</script>
 
