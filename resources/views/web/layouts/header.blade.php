@@ -10,4 +10,5 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="{{asset('css/home/swiper.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('css/home/css.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('css/home/progressjs.css')}}" />
 </head>

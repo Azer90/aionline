@@ -11,33 +11,18 @@ $(document).on('click','.menu',function(){
 })
 })
 $(function(){
-
 	var str = '<img src="images/menu.png" class="menu"/>';
 	$('.navbar .navbar_mid').append(str);
 	var strs = `<div class="fadeinsaa">
 			<ul class='sf'>
 			<img src="images/close.png" class="closes"/>
-				<li>
-						<a href="online.html">首页</a>
-					</li>
-					<li>
-						<a href="yuyin.html">语音转文字</a>
-					</li>
-					<li>
-						<a href="yuyin1.html">在线语音合成</a>
-					</li>
-					<li>
-						<a href="img.html">图像AI处理</a>
-					</li>
-					<li>
-						<a href="wenzi.html">文字在线识别</a>
-					</li>
-					<li>
-						<a href="#">使用教程</a>
-					</li>
-					<li>
-						<a href="#">服务定制</a>
-					</li>
+				<li><a href="online.html">首页</a></li>
+  				<li><a href="yuyin.html">语音转文字</a></li>
+  				<li><a href="yuyin1.html">在线语音合成</a></li>
+  				<li><a href="img.html">图像AI处理</a></li>
+  				<li><a href="online.html">文字在线识别</a></li>
+  				<li><a href="list_article.html">使用教程</a></li>
+  				<li><a href="index.html">服务定制</a></li>
 			</ul>
 		</div>`;
 		//$('body').append(strs);
@@ -62,3 +47,16 @@ $('.slide_img img').click(function() {
         el: '.swiper-pagination',
       },
     });
+$('.slide_gem .slide_top .slide_navbar ul li').click(function(){
+	var n = $(this).index();
+	$(this).addClass('on').siblings().removeClass('on')
+	$('.fadines .itemg').eq(n).show().siblings().hide()
+})
+
+
+$(document).on("click","input[type=range]",function(e){
+	$(this).next().html($(this).val())
+});
+$('.slide_gem .slide_top .fadines ul li').click(function(){
+	$(this).addClass('on').siblings().removeClass('on')
+})

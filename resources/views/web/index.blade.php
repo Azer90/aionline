@@ -20,16 +20,16 @@
             <span>Voice Conversion</span>
         </div>
         <div class="voice_box">
-            <div class="fl">
+            <a href="{{ route('voiceToText') }}"><div class="fl">
                 <img src="{{asset('images/onlines_551.png')}}"/>
                 <p>语音转文字</p>
                 <span>内容文字介绍内容文字介绍内容文字介绍内容文字介绍</span>
-            </div>
-            <div class="fr">
+                </div></a>
+            <a href="{{ route('voiceCompose') }}"> <div class="fr">
                 <img src="{{asset('images/onlines_03.png')}}"/>
                 <p>在线语音合成</p>
                 <span>内容文字介绍内容文字介绍内容文字介绍内容文字介绍</span>
-            </div>
+                </div></a>
         </div>
     </div>
     <div class="image_ai">
@@ -130,4 +130,4 @@
         </li>
     </ul>
 </div>
-@include('web.layouts.footer')
+@extends('web.layouts.footer')

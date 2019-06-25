@@ -90,4 +90,4 @@
         <p>下一页</p>
     </div>
 </div>
-@include('web.layouts.footer')
+@extends('web.layouts.footer')

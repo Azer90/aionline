@@ -44,7 +44,7 @@ th {
 
 div {
   box-sizing: border-box; }
-
+.hide{display: none;}
 html,
 body {
   position: relative;
@@ -152,13 +152,21 @@ a:hover {
       overflow: hidden; }
       .navbar .navbar_mid ul li {
         font-size: 16px;
+        padding: 5px 20px;
         float: left;
-        margin-right: 64px; }
+        margin-right: 17px; }
         .navbar .navbar_mid ul li:last-child {
           margin-right: 0; }
         .navbar .navbar_mid ul li a {
           color: #222121; }
-
+  .navbar .navbar_mid ul li:hover{
+  	background: #0F6FE0;
+  }
+  .navbar .navbar_mid ul li:hover a{
+  	color: #fff;
+  }
+  .navbar .navbar_mid ul li.on{background: #0F6FE0;}
+  .navbar .navbar_mid ul li.on a{color: #fff;}
 .contant {
   overflow: hidden;
   width: 1200px;
@@ -194,7 +202,7 @@ a:hover {
         color: #333333;
         line-height: 44px;
         border-bottom: 1px solid #e8e8e8; }
-        .contant .main_left ul li.on {
+        .contant .main_left ul li.on a{
           color: #0f6fe0; }
   .contant .main_right {
     overflow: hidden;
@@ -595,6 +603,10 @@ footer {
   width: 100%;
   height: 543px;
   position: relative; }
+
+.src .src_box{ width: 50%; height: 100%; right: 0; top: 0; background: rgba(255,255,255,0.6); position: absolute;}
+.src .src_box #dragIcon{height: 100%; width: 42px; background:url(../../images/imgs_03.png); transform: translateX(-50%); top: 0;}
+  
   .src .imgs {
     width: 100%;
     height: 100%; }
@@ -824,10 +836,15 @@ footer {
   height: 178px;
   padding: 16px 24px;
   background-image: url(../../images/bgsa_03.jpg);
-  background-size: 100%; }
-  .gem p {
-    font-size: 16px;
-    color: #fff; }
+  background-size: 100%; 
+  font-size: 16px;
+    color: #fff; 
+  box-sizing: border-box;
+  text-align: left;
+	outline: none;
+    }
+
+   
 
 .gem1 {
   overflow: hidden;
@@ -950,7 +967,11 @@ footer {
     text-align: center;
     color: #fff;
     width: 58px; }
-
+ .yins span {
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+    width: 58px; }
 .plays {
   overflow: hidden;
   margin-top: 33px;
@@ -1118,8 +1139,82 @@ footer {
         color: #fff;
         text-align: left; }
 
-
-
+.box_sl{
+	overflow: hidden;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	padding-top: 20px;
+	justify-content: center;
+}
+.box_sl .box_sl_item{
+	margin: 0 85px; 
+}
+.box_sl .box_sl_item em{
+	display: block;
+	font-style: normal;
+	text-align: center;
+	font-size: 15px;
+	color: #333;
+	margin-top: 10px;
+}
+.box_sl .box_sl_item .sl_g{
+	width: 52px;
+	margin: 0 auto;
+	height: 52px;
+	border-radius: 50%;
+	background: #2a8fee;
+	font-size: 18px;
+	color: #FFFFFF;text-align: center;
+	line-height: 52px;
+	font-weight: bold;
+	position: relative;
+}
+.box_sl .box_sl_item .sl_g1{
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	background: #d0d0d0;
+	position: relative;
+	background: #2a8fee;
+	font-size: 18px;
+	color: #FFFFFF;text-align: center;
+	line-height: 52px;
+}
+.box_sl .box_sl_item .sl_g::after{
+	content: '';
+	width: 65px;
+	height: 65px;
+	border-radius: 50%;
+	background: #2a8fee;
+	position: absolute;
+	opacity: 0.2;
+	left: -7px;
+	top: -7px;
+}
+.box_sl .box_sl_item .sl_g1::after{
+	content: '';
+	width: 65px;
+	height: 65px;
+	border-radius: 50%;
+	background: #f5f5f5;
+	position: absolute;
+	opacity: 0.8;
+	left: -7px;
+	top: -7px;
+}
+.box_sl .box_sl_item .sl_g::before{
+	content: '';
+	width: 170px;
+	background-image: url(../../images/lings_03.jpg);
+	background-size: 100%;
+	height: 13px;
+	position: absolute;
+	opacity: 0.2;
+	left: 50px;
+	top: 20px;
+}
+.yins_fr {width: 90%;}
 @media  (max-width: 1200px) {
 		.header .header_mid{
 			width: 95%;
@@ -1299,26 +1394,3 @@ white-space: nowrap;}
 }
 
 
- input[type="range"] {
-                margin-top: 2px;
-                background-color: #7F7E7E;
-                outline: none;
-                border-radius: 15px;
-                width: 85%;
-                -webkit-appearance: none;
-                height:10px;
-            }
-            input[type="range"]::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                cursor: default;
-                top: -5px;
-                height: 20px;
-                width: 20px;
-                background: #147DFD;
-                border-radius: 50%;
-            }
-            .yins span{
-            	font-size: 16px;
-            	margin-left: 15px;
-            	color: #fff;
-            }

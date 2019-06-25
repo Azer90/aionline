@@ -1,8 +1,6 @@
 @include('web.layouts.header')
-
 <body>
 @include('web.layouts.nav')
-
 <div class="contant" style="margin-top: 0;">
     <div class="acticle_banner">
         <div class="swiper-container">
@@ -18,14 +16,14 @@
     <div class="main_left">
         <h2>文字在线识别</h2>
         <ul>
-            <li>通用识别</li>
-            <li>身份证识别</li>
-            <li class="on">行驶证</li>
-            <li>驾驶证</li>
-            <li>营业执照</li>
-            <li>表格文字识别</li>
-            <li>手写文字识别</li>
-            <li>银行卡识别</li>
+            <li><a href="#">通用识别</a></li>
+            <li><a href="#">身份证识别</a></li>
+            <li class="on"><a href="#">行驶证</a></li>
+            <li><a href="#">驾驶证</a></li>
+            <li><a href="#">营业执照</a></li>
+            <li><a href="#">表格文字识别</a></li>
+            <li><a href="#">手写文字识别</a></li>
+            <li><a href="#">银行卡识别</a></li>
         </ul>
     </div>
     <div class="main_right">
@@ -40,11 +38,11 @@
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">语音识别</a>
+                        <a href="#">文字在线识别</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">语音转文字</a>
+                        <a href="#">行驶证</a>
                     </li>
                 </ul>
             </div>
@@ -94,4 +92,4 @@
         </div>
     </div>
 </div>
-@include('web.layouts.footer')
+@extends('web.layouts.footer')

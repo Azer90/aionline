@@ -15,16 +15,12 @@
         </div>
     </div>
     <div class="main_left">
-        <h2>文字在线识别</h2>
+        <h2>图像处理</h2>
         <ul>
-            <li>通用识别</li>
-            <li>身份证识别</li>
-            <li class="on">行驶证</li>
-            <li>驾驶证</li>
-            <li>营业执照</li>
-            <li>表格文字识别</li>
-            <li>手写文字识别</li>
-            <li>银行卡识别</li>
+            <li class="on"><a href="#">图像去雾</a></li>
+            <li><a href="#">图像无损放大</a></li>
+            <li><a href="#">黑白图片上色</a></li>
+            <li><a href="#">拉伸图片修复</a></li>
         </ul>
     </div>
     <div class="main_right">
@@ -39,19 +35,19 @@
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">语音识别</a>
+                        <a href="#">图像处理</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">语音转文字</a>
+                        <a href="#">图像去雾</a>
                     </li>
                 </ul>
             </div>
         </div>
         <img src="images/line_03.jpg" class="line" />
-        <div class="src">
+        <div class="src" >
             <img src="images/imgs_16.jpg" class="imgs" />
-            <img src="images/imgs_03.png" class="ms" />
+            <div class="src_box" id="panel" ><div id="dragIcon"></div></div>
             <div class="url">
                 <div class="url_box">
                     <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -93,7 +89,7 @@
             <div class="t_top">
                 <div>
                     <p>推荐阅读</p>
-                    <img src="images/more_03.jpg" />
+                    <a href="#"><img src="images/more_03.jpg" /></a>
                 </div>
                 <img src="images/line_03.jpg" class="line"/>
             </div>
@@ -112,4 +108,43 @@
         </div>
     </div>
 </div>
-@include('web.layouts.footer')
+@extends('web.layouts.footer')
+@section('script')
+    <script>
+        window.onload = function () {
+            // 1. 获取两个大小div
+            var oPanel = document.getElementById('panel');
+            var oDragIcon = document.getElementById('dragIcon');
+            // 定义4个变量
+            var disX = 0;//鼠标按下时光标的X值
+
+            var disW = 0; //拖拽前div的宽
+
+            //3. 给小div加点击事件
+            oDragIcon.onmousedown = function (ev) {
+                var ev = ev || window.event;
+                disX = ev.clientX; // 获取鼠标按下时光标x的值
+                disW = oPanel.offsetWidth; // 获取拖拽前div的宽
+                document.onmousemove = function (ev) {
+                    var ev = ev || window.event;
+                    //拖拽时为了对宽和高 限制一下范围，定义两个变量
+                    var W = disX + disW - ev.clientX;
+
+                    if(W<50){
+                        W = 50;
+                    }
+                    if(W>900){
+                        W =900;
+                    }
+
+                    oPanel.style.width =W +'px';// 拖拽后物体的宽
+
+                }
+                document.onmouseup = function () {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+            }
+        }
+    </script>
+@endsection

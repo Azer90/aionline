@@ -12,7 +12,7 @@
         <ul>
             @foreach ($nav as $value)
                 @if ($value['url']==$name)
-                    <li><a class="indexCurrent" href="{{ route($value['url'])  }}">{{ $value['name'] }}</a></li>
+                    <li class="on"><a  href="{{ route($value['url'])  }}">{{ $value['name'] }}</a></li>
                 @else
                     <li><a  href="{{ route($value['url']) }}">{{ $value['name'] }}</a></li>
                 @endif
@@ -26,12 +26,7 @@
     <ul class='sf'>
         <img src="images/close.png" class="closes"/>
         @foreach ($nav as $value)
-            @if ($value['url']==$name)
-                <li><a class="indexCurrent" href="{{ route($value['url'])  }}">{{ $value['name'] }}</a></li>
-            @else
-                <li><a  href="{{ route($value['url']) }}">{{ $value['name'] }}</a></li>
-            @endif
-
+           <li><a  href="{{ route($value['url']) }}">{{ $value['name'] }}</a></li>
         @endforeach
     </ul>
 </div>

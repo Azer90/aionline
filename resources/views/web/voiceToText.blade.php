@@ -17,8 +17,8 @@
     <div class="main_left">
         <h2>语音识别</h2>
         <ul>
-            <li class="on">语音转文字</li>
-            <li> 在线语音合成</li>
+            <li class="on"> <a href="{{ route('voiceToText') }}">语音转文字</a></li>
+            <li> <a href="{{ route('voiceCompose') }}">在线语音合成</a></li>
         </ul>
     </div>
     <div class="main_right">
@@ -52,7 +52,25 @@
         </div>
         <div class="data-list">
             <p>预计剩余时间：<span>00:18</span>    已经转换时间：<span>00:22</span></p>
-            <img src="images/srcs_03.jpg"/>
+            <div class="box_sl">
+                <div class="box_sl_item">
+                    <div class="sl_g">1</div>
+                    <em>上传文件</em>
+                </div>
+                <div class="box_sl_item">
+                    <div class="sl_g">2</div>
+                    <em>上传完成</em>
+                </div>
+                <div class="box_sl_item">
+                    <div class="sl_g">3</div>
+                    <em>开始转换</em>
+                </div>
+                <div class="box_sl_item">
+                    <div class="sl_g1">4</div>
+                    <em>转换完成</em>
+                </div>
+            </div>
+
         </div>
         <div class="item_dis">
             <div>
@@ -111,7 +129,7 @@
         </div>
     </div>
 </div>
-@include('web.layouts.footer')
+@extends('web.layouts.footer')
 
 
 

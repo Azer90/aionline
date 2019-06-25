@@ -63,4 +63,5 @@
         document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
     }
 </script>
+@yield('script')
 </html>
