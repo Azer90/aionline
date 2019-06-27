@@ -40,7 +40,7 @@
 </div>
 <footer>Copyright ©2006-2019.All Rights Reserved 版权所有 苏州图可互联网信息有限公司 网站备案号：苏ICP备18023366号-1</footer>
 </body>
-<script type="text/javascript" src="{{asset('js/home/jquery-2.1.4.js')}}"></script>
+
 <script type="text/javascript" src="{{asset('js/home/swiper.min.js')}}" ></script>
 <script type="text/javascript" src="{{asset('js/home/js.js')}}" ></script>
 <script>

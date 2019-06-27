@@ -11,6 +11,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/home/swiper.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('css/home/css.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('css/home/progressjs.css')}}" />
+
+    <link rel="stylesheet" type="text/css" href="{{asset('css/home/webuploader.css')}}" />
+    <script type="text/javascript" src="{{asset('js/home/jquery-2.1.4.js')}}"></script>
     <script>
         let host= "{{ get_host()}}";
         let menu=host+'/images/menu.png';

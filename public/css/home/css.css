@@ -872,6 +872,22 @@ footer {
         background: #189BD4; }
       .gem1 .btns_grow div.fr {
         background: #FB1703; }
+
+.gem1 .btns_grow .fr {
+  overflow: hidden;
+  width: 165px;
+  border-radius: 6px;
+  text-align: center;
+  color: #fff;
+  line-height: 44px;
+  font-size: 16px;
+  height: 44px;
+}
+
+.gem1 .btns_grow .fr {
+  background: #FB1703; }
+
+
   .gem1 p {
     font-size: 14px;
     color: #d8d3d3;

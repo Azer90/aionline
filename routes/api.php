@@ -27,6 +27,7 @@ Route::group($attributes,function (Router $router) {
 
     $router->any('voice', "VoiceController@voiceDistinguish")->name('voice');
     $router->any('formatConversion', "VoiceController@formatConversion")->name('formatConversion');
+    $router->any('fileDownload', "VoiceController@fileDownload")->name('fileDownload');
     $router->any('ImageEnlarge', "ImageProcessController@ImageEnlarge")->name('ImageEnlarge');
 
 });

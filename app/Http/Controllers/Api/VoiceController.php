@@ -8,25 +8,24 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\fileHandle\FileUploadClass;
 use App\Http\Controllers\Controller;
 use FFMpeg\Coordinate\TimeCode;
 use Illuminate\Http\Request;
 use FFMpeg\FFMpeg;
+use Illuminate\Support\Facades\DB;
 use Lib\imageProcessSdk\AipSpeech;
 
 class VoiceController extends Controller
 {
-    private $app_id = '';
-    private $api_key = '';
-    private $secret_key = '';
-    private $common = "";
+    private $app_id = '16652049';
+    private $api_key = 'Mwi5PAfF3Wkn025z3qyAAXtF';
+    private $secret_key = 'Xx8081FEtLFMTfCW1BFtVDfIhI6mqdIQ';
+    private $file_upload;
 
     public function __construct()
     {
-        $this->common = new Common();
-        $this->app_id=Common::APP_ID;
-        $this->api_key=Common::API_KEY;
-        $this->secret_key=Common::SECRET_KEY;
+        $this->file_upload = new FileUploadClass();
     }
     /**
      * 语音文件上传
@@ -34,26 +33,29 @@ class VoiceController extends Controller
     public function voiceDistinguish(Request $request)
     {
         if($request->isMethod("post")){
-            $file = $request->file('audio');
-            $upload_res = $this->common->upload($file);
+              $data = $request->input();
 
-            if($upload_res["state"]){
-                echo json_encode(["progress"=>1]);
-                $this->formatConversion($upload_res["path"]);
-            }else{
-                return response()->json(["code"=>0,"message"=>$this->common->getError()]);
-            }
+
+               $file_info =$this->file_upload->fileSave(storage_path('app/uploads/'));
+               $upload_res = $this->file_upload->msg;
+               if($file_info){
+                    if($data["chunks"]==$data["chunk"]+1){
+                        return response()->json(["code"=>1,"message"=>"上传成功","data"=>$upload_res["info"]]);
+                    }
+               }else{
+                   return response()->json(["code"=>0,"message"=>$upload_res["info"]]);
+               }
+
         }
     }
 
     /**
      * 格式转换
      */
-    public function formatConversion()
+    public function formatConversion(Request $request)
     {
-//        $path
-        $path = storage_path('app/uploads') . "/2019-06-22-17-35-00-5d0df64412a7c.mp3";
 
+        $path = $request->input("path");
         $a = array(
             'ffmpeg.binaries' => 'D:\ffmpeg\bin\ffmpeg.exe',
             'ffprobe.binaries' => 'D:\ffmpeg\bin\ffprobe.exe',
@@ -63,32 +65,67 @@ class VoiceController extends Controller
         $ffmpeg = FFMpeg::create($a);
         $audio = $ffmpeg->open($path);
         $info = $ffmpeg-> getFile($path);
+        $duration = $info["duration"];//时长
 
         $format = new \FFMpeg\Format\Audio\Wav();
 
         $format->on('progress', function ($audio, $format, $percentage) {
             echo "$percentage % transcoded";
         });
+        $num = ceil($duration/30);
+        set_time_limit(120);
+        $file_name = date("Ymd",time()).uniqid().".txt";
+        $txt = storage_path()."/app/txt/".$file_name;
+        for ($i=0;$i < $num; $i++){
+            $format->setAudioChannels(2)
+                ->setAudioKiloBitrate(256);
+            $audio->filters()->clip(TimeCode::fromSeconds($i*30), TimeCode::fromSeconds(30));
+            $pcm_path = storage_path().'/app/tem/'.uniqid().".pcm";
 
-        $format->setAudioChannels(2)
-            ->setAudioKiloBitrate(256);
-        $audio->filters()->clip(TimeCode::fromSeconds(0), TimeCode::fromSeconds(60));
-        $audio->save($format, storage_path().'/app/tem/test.pcm');
-        echo json_encode(["progress"=>2]);
-        $this->compound(); 
+            $audio->save($format,$pcm_path);
+            $this->compound($pcm_path,$txt);
+        }
+        DB::table("ai_dis")->insert(["path"=>$txt,"file_name"=>$file_name,"create_time"=>date("Y-m-d H:i:s",time())]);
+        @unlink($path);
+        return response()->json(["code"=>1,"message"=>"识别成功","data"=>$file_name]);
     }
 
     /**
      * 语音识别
      */
-    public function compound()
+    public function compound($pcm_path,$txt)
     {
         $client = new AipSpeech($this->app_id,$this->api_key,$this->secret_key);
-        $res = $client->asr(file_get_contents(storage_path().'/app/tem/test.pcm'), 'pcm', 16000, array(
+
+        $res = $client->asr(file_get_contents($pcm_path), 'pcm', 16000, array(
             'dev_pid' => 1536,
         ));
-        echo json_encode(["progress"=>3]);
 
-        return response()->json(["code"=>0,"message"=>"识别成功","data"=>$res]);
+        if($res["err_msg"]=="success."){
+            file_put_contents($txt,$res["result"][0],FILE_APPEND);
+        }
+        @unlink($pcm_path);
+        return $res;
+    }
+
+    /**
+     * 是否关注
+     */
+    public function isFollow()
+    {
+        
+    }
+    /**
+     * 文件下载
+     */
+    public function fileDownload(Request $request)
+    {
+        $file = $request->input("file");
+
+        $file_info =DB::table("ai_dis")->where("file_name",$file)->first();
+        $file_info = json_encode($file_info,true);
+        $file_info = json_decode($file_info,true);
+        $this->file_upload->fileDownload($file_info["path"]);
+
     }
 }
