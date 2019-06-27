@@ -35,7 +35,6 @@ class VoiceController extends Controller
         if($request->isMethod("post")){
               $data = $request->input();
 
-
                $file_info =$this->file_upload->fileSave(storage_path('app/uploads/'));
                $upload_res = $this->file_upload->msg;
                if($file_info){
@@ -45,7 +44,6 @@ class VoiceController extends Controller
                }else{
                    return response()->json(["code"=>0,"message"=>$upload_res["info"]]);
                }
-
         }
     }
 

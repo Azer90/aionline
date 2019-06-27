@@ -212,7 +212,7 @@ class FileUploadClass
      */
     public function fileDownload($filePath,$filename=''){
         if(empty($filePath)){
-            $this->msg('error','缺少文件路劲');
+            $this->msg('error','缺少文件路径');
             return false;
         }
         if (strpos($filePath,'.')!==0){
