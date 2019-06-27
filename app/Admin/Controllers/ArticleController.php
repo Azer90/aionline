@@ -92,7 +92,7 @@ class ArticleController extends Controller
         $grid->description(trans('admin.description'))->style('max-width:200px;word-break:break-all;')->display(function ($text) {
             return  str_limit($text, 100, '...');
         });
-        $grid->hits(trans('admin.hits'))->style('max-width:200px;word-break:break-all;');
+       // $grid->hits(trans('admin.hits'))->style('max-width:200px;word-break:break-all;');
 
         $states = [
             'on'  => ['value' => 1, 'text' => '打开', 'color' => 'primary'],
@@ -153,15 +153,15 @@ class ArticleController extends Controller
         $form->text('description', trans('admin.description'))->placeholder('填写文章内容描述')->rules('required|max:120');
 
         $form->UEditor('content',trans('admin.content'))->rules('required');
-        $form->number('hits', trans('admin.hits'))->default(0)->max(9999999)->min(0);
+        //$form->number('hits', trans('admin.hits'))->default(0)->max(9999999)->min(0);
         $form->select('classify_id','分类')->options($class)->rules('required');
         $states = [
             'on'  => ['value' => 1, 'text' => '打开', 'color' => 'success'],
             'off' => ['value' => 0, 'text' => '关闭', 'color' => 'danger'],
         ];
-        $form->radio('type',trans('admin.type'))->options(['hot' => '热门']);
+        $form->radio('type',trans('admin.type'))->options(['common' => '常见问题','recommend'=>'推荐阅读']);
         $form->switch('show', trans('admin.show'))->states($states);
-        $form->multipleSelect('tags')->options(Tag::all()->pluck('name', 'id'));
+        $form->multipleSelect('tags','标签')->options(Tag::all()->pluck('name', 'id'));
 
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));

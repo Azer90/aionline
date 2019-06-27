@@ -14,11 +14,17 @@ class Article extends Model
     {
         return $this->belongsTo(Classify::class);
     }
-    public function tags()
+
+
+    public function getTagsAttribute($value)
     {
-        return $this->belongsToMany(Tag::class);
+        return explode(',', $value);
     }
 
+    public function setTagsAttribute($value)
+    {
+        $this->attributes['tags'] = implode(',', $value);
+    }
     /**
      * 索引的字段
      *

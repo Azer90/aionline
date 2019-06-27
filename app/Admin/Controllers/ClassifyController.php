@@ -83,10 +83,7 @@ class ClassifyController extends Controller
 
         $grid->id('ID')->sortable();
         $grid->column('name', trans('admin.name'));
-        $grid->column('url', '路由別名');
-        $grid->column('keywords', trans('admin.keywords'))->style('max-width:200px;word-break:break-all;');
-        $grid->description(trans('admin.description'))->style('max-width:200px;word-break:break-all;');
-
+        $grid->column('url', '类别Icon');
         $grid->created_at(trans('admin.created_at'));
         $grid->updated_at(trans('admin.updated_at'));
         $grid->actions(function ($actions) {
@@ -124,10 +121,7 @@ class ClassifyController extends Controller
         $form->display('id', 'ID');
 
         $form->text('name','分类名')->rules('required');
-        $form->text('url','路由別名')->prepend('<i class="fa fa-internet-explorer fa-fw"></i>')->placeholder('用于前台路由')->rules('required');
-        $form->text('keywords', trans('admin.keywords'))->placeholder('多关键词之间用英文逗号隔开');
-        $form->text('description', trans('admin.description'))->placeholder('填写文章内容描述');
-
+        $form->image('url','类别Icon')->uniqueName()->rules('required');
 
 
         $form->display('created_at', trans('admin.created_at'));

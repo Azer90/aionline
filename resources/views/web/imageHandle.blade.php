@@ -94,16 +94,11 @@
                 <img src="images/line_03.jpg" class="line"/>
             </div>
             <ul>
-                <li><a href="#">推荐阅读推荐阅读文章调用推荐阅读推荐阅读文章调用</a></li>
-                <li><a href="#">推荐阅读推荐阅读文章调用推荐阅读推荐阅读文章调用</a></li>
-                <li><a href="#">推荐阅读推荐阅读文章调用推荐阅读推荐阅读文章调用</a></li>
-                <li><a href="#">推荐阅读推荐阅读文章调用推荐阅读推荐阅读文章调用</a></li>
-                <li><a href="#">推荐阅读推荐阅读文章调用推荐阅读推荐阅读文章调用</a></li>
-                <li><a href="#">推荐阅读推荐阅读文章调用推荐阅读推荐阅读文章调用</a></li>
-                <li><a href="#">推荐阅读推荐阅读文章调用推荐阅读推荐阅读文章调用</a></li>
-                <li><a href="#">推荐阅读推荐阅读文章调用推荐阅读推荐阅读文章调用</a></li>
-                <li><a href="#">推荐阅读推荐阅读文章调用推荐阅读推荐阅读文章调用</a></li>
-                <li><a href="#">推荐阅读推荐阅读文章调用推荐阅读推荐阅读文章调用</a></li>
+                @foreach ($recommend as $value)
+                    <li>
+                        <a href="{{ route('detail',['id'=>$value['id']]) }}">{{ $value['title'] }}</a>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>

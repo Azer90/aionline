@@ -11,4 +11,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/home/swiper.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('css/home/css.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('css/home/progressjs.css')}}" />
+    <script>
+        let host= "{{ get_host()}}";
+        let menu=host+'/images/menu.png';
+    </script>
 </head>

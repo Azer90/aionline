@@ -9,85 +9,22 @@
 </div>
 <div class="list_contant">
     <ul>
-        <li>
-            <div>
-                <img src="images/list_07.jpg"/>
-                <span>一个在线免费转换语音文件的方法</span>
-            </div>
-            <p>分享一个在线免费压缩PDF文件的方法，分享一个在线免费压缩PDF文件的方法分享一个在线免费压缩PDF文件的方法 </p>
-            <a href="#">查看更多</a>
-        </li>
-        <li>
-            <div>
-                <img src="images/list_07.jpg"/>
-                <span>一个在线免费转换语音文件的方法</span>
-            </div>
-            <p>分享一个在线免费压缩PDF文件的方法，分享一个在线免费压缩PDF文件的方法分享一个在线免费压缩PDF文件的方法 </p>
-            <a href="#">查看更多</a>
-        </li>
-        <li>
-            <div>
-                <img src="images/list_07.jpg"/>
-                <span>一个在线免费转换语音文件的方法</span>
-            </div>
-            <p>分享一个在线免费压缩PDF文件的方法，分享一个在线免费压缩PDF文件的方法分享一个在线免费压缩PDF文件的方法 </p>
-            <a href="#">查看更多</a>
-        </li>
-        <li>
-            <div>
-                <img src="images/list_07.jpg"/>
-                <span>一个在线免费转换语音文件的方法</span>
-            </div>
-            <p>分享一个在线免费压缩PDF文件的方法，分享一个在线免费压缩PDF文件的方法分享一个在线免费压缩PDF文件的方法 </p>
-            <a href="#">查看更多</a>
-        </li>
-        <li>
-            <div>
-                <img src="images/list_07.jpg"/>
-                <span>一个在线免费转换语音文件的方法</span>
-            </div>
-            <p>分享一个在线免费压缩PDF文件的方法，分享一个在线免费压缩PDF文件的方法分享一个在线免费压缩PDF文件的方法 </p>
-            <a href="#">查看更多</a>
-        </li>
-        <li>
-            <div>
-                <img src="images/list_07.jpg"/>
-                <span>一个在线免费转换语音文件的方法</span>
-            </div>
-            <p>分享一个在线免费压缩PDF文件的方法，分享一个在线免费压缩PDF文件的方法分享一个在线免费压缩PDF文件的方法 </p>
-            <a href="#">查看更多</a>
-        </li>
-        <li>
-            <div>
-                <img src="images/list_07.jpg"/>
-                <span>一个在线免费转换语音文件的方法</span>
-            </div>
-            <p>分享一个在线免费压缩PDF文件的方法，分享一个在线免费压缩PDF文件的方法分享一个在线免费压缩PDF文件的方法 </p>
-            <a href="#">查看更多</a>
-        </li>
-        <li>
-            <div>
-                <img src="images/list_07.jpg"/>
-                <span>一个在线免费转换语音文件的方法</span>
-            </div>
-            <p>分享一个在线免费压缩PDF文件的方法，分享一个在线免费压缩PDF文件的方法分享一个在线免费压缩PDF文件的方法 </p>
-            <a href="#">查看更多</a>
-        </li>
-        <li>
-            <div>
-                <img src="images/list_07.jpg"/>
-                <span>一个在线免费转换语音文件的方法</span>
-            </div>
-            <p>分享一个在线免费压缩PDF文件的方法，分享一个在线免费压缩PDF文件的方法分享一个在线免费压缩PDF文件的方法 </p>
-            <a href="#">查看更多</a>
-        </li>
+        @foreach ($article as $value)
+
+            <li>
+                <div>
+                    <img src="{{ $value['img'] }}"/>
+                    <span>{{ $value['title'] }}</span>
+                </div>
+                <p>{{ str_limit($value['description'],150) }} </p>
+                <a href="{{ route('detail',['id'=>$value['id']]) }}">查看更多</a>
+            </li>
+
+        @endforeach
+
+
     </ul>
-    <div class="list_page">
-        <p>上一页</p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <p>下一页</p>
-    </div>
+    {{ $article->links('web.paginate') }}
+
 </div>
 @extends('web.layouts.footer')
