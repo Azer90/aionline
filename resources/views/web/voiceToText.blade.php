@@ -164,7 +164,6 @@
                     data:{path:response.data},
                     success:function (res) {
                         $(".fr").attr("href","/api/fileDownload?file="+res.data);
-
                         clearTimeout(conversion_time);
                         clearTimeout(down_time);
                     }

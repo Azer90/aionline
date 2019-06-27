@@ -38,9 +38,15 @@ class VoiceController extends Controller
                $file_info =$this->file_upload->fileSave(storage_path('app/uploads/'));
                $upload_res = $this->file_upload->msg;
                if($file_info){
+                   if(isset($data["chunks"])){
+
                     if($data["chunks"]==$data["chunk"]+1){
                         return response()->json(["code"=>1,"message"=>"上传成功","data"=>$upload_res["info"]]);
                     }
+
+                   }else{
+                       return response()->json(["code"=>1,"message"=>"上传成功","data"=>$upload_res["info"]]);
+                   }
                }else{
                    return response()->json(["code"=>0,"message"=>$upload_res["info"]]);
                }
@@ -72,8 +78,14 @@ class VoiceController extends Controller
         });
         $num = ceil($duration/30);
         set_time_limit(120);
+
         $file_name = date("Ymd",time()).uniqid().".txt";
+        if(!file_exists( storage_path()."/app/txt")){
+            mkdir(storage_path()."/app/txt",0777);
+        }
         $txt = storage_path()."/app/txt/".$file_name;
+
+
         for ($i=0;$i < $num; $i++){
             $format->setAudioChannels(2)
                 ->setAudioKiloBitrate(256);
@@ -83,8 +95,11 @@ class VoiceController extends Controller
             $audio->save($format,$pcm_path);
             $this->compound($pcm_path,$txt);
         }
+
         DB::table("ai_dis")->insert(["path"=>$txt,"file_name"=>$file_name,"create_time"=>date("Y-m-d H:i:s",time())]);
         @unlink($path);
+
+
         return response()->json(["code"=>1,"message"=>"识别成功","data"=>$file_name]);
     }
 
