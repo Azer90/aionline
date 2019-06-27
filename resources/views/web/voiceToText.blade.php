@@ -116,7 +116,7 @@
 <script>
     var uploader = WebUploader.create({
         swf: 'swf/Uploader.swf',
-        server: 'http://www.aionline.com/api/voice',     // 服务端地址
+        server: host+'/api/voice',     // 服务端地址
         auto:true,
         pick: '#select',         // 指定选择文件的按钮容器
         resize: false,
@@ -158,7 +158,7 @@
 
             if(response.code==1){
                 $.ajax({
-                    url:"http://www.aionline.com/api/formatConversion",
+                    url:host+"/api/formatConversion",
                     dataType:"json",
                     type:"post",
                     data:{path:response.data},
