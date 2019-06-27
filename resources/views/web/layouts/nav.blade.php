@@ -24,7 +24,7 @@
 
 <div class="fadeinsaa">
     <ul class='sf'>
-        <img src="images/close.png" class="closes"/>
+        <img src="{{asset('images/close.png')}}" class="closes"/>
         @foreach ($nav as $value)
            <li><a  href="{{ route($value['url']) }}">{{ $value['name'] }}</a></li>
         @endforeach
