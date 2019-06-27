@@ -216,7 +216,7 @@ class FileUploadClass
             return false;
         }
         if (strpos($filePath,'.')!==0){
-            $filePath='.'.$filePath;
+            $filePath=$filePath;
         }
 
         if (is_file($filePath)) {
@@ -228,6 +228,7 @@ class FileUploadClass
             }else{
                 $showname = ltrim(strrchr($filePath, '/'), '/');
             }
+
             $realpath =realpath($filePath);
             header("Content-Description: File Transfer");
             header('Content-type: application/octet-stream');
