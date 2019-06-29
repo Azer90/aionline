@@ -56,7 +56,7 @@
                     </div>
                     <p>或</p>
                     <div class="jcs">
-                        <a href="#">本地上传</a>
+                        <div href="#" id="upload">本地上传</div>
                     </div>
                 </div>
                 <span>图片文件类型支持jpg、png、jpeg、bmp、图片大小不超过2M。</span>
@@ -64,13 +64,13 @@
             <div class="youhua fl">优化后</div>
             <div class="youhua fr">优化前</div>
         </div>
-        <div class="slide_img">
-            <img src="images/imgs_13.jpg" class="on" />
-            <img src="images/imgs_07.jpg" />
-            <img src="images/imgs_09.jpg" />
-            <img src="images/imgs_11.jpg" />
-            <img src="images/imgs_13.jpg" />
-        </div>
+        {{--<div class="slide_img">--}}
+            {{--<img src="images/imgs_13.jpg" class="on" />--}}
+            {{--<img src="images/imgs_07.jpg" />--}}
+            {{--<img src="images/imgs_09.jpg" />--}}
+            {{--<img src="images/imgs_11.jpg" />--}}
+            {{--<img src="images/imgs_13.jpg" />--}}
+        {{--</div>--}}
         <div class="item_dis">
             <div>
                 <img src="images/icons_07.jpg" />
@@ -141,5 +141,46 @@
                 }
             }
         }
+
+        var uploader = WebUploader.create({
+            swf: 'swf/Uploader.swf',
+            server: host+'/api/voice',     // 服务端地址
+            auto:true,
+            pick: '#upload',         // 指定选择文件的按钮容器
+            resize: false,
+            chunked: true,           //开启分片上传
+            chunkSize: 1024*1024*2,  //每一片的大小
+            chunkRetry: 100,         // 如果遇到网络错误,重新上传次数
+            threads: 3,              //上传并发数。允许同时最大上传进程数。
+            fileSizeLimit:20*1024*1024,
+            // 只允许选择图片文件。
+            accept: {
+                //     title: 'Images',
+                //     extensions: 'MP3，MAV，M4A，WMA，AAC，FLAC，AC3，M4R，APE，OGG，WAV',
+                mimeTypes: 'audio/*'
+            }
+        });
+
+        /**
+         * 验证文件格式以及文件大小
+         */
+        uploader.on("error", function (type) {
+            if (type == "Q_TYPE_DENIED") {
+                layer.msg("请上传音频文件");
+            } else if (type == "Q_EXCEED_SIZE_LIMIT") {
+                layer.msg("文件大小不能超过20M");
+            }else {
+                layer.msg("上传出错！请检查后重新上传！错误代码"+type);
+            }
+        });
+        //上传进度
+        uploader.on( 'uploadProgress', function( file,percentage  ) {
+            // console.log(percentage);
+        });
+        uploader.on( 'startUpload', function( ) {
+
+
+
+        });
     </script>
 @endsection

@@ -9,68 +9,72 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Http\Controllers\Api\fileHandle\FileUploadClass;
 use Lib\imageProcessSdk\AipOcr;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class WordsDistinguishController extends Controller
 {
-    private $app_id = '';
-    private $api_key = '';
-    private $secret_key = '';
-    private $common = "";
+    private $app_id = '16652049';
+    private $api_key = 'Mwi5PAfF3Wkn025z3qyAAXtF';
+    private $secret_key = 'Xx8081FEtLFMTfCW1BFtVDfIhI6mqdIQ';
+    private $file_upload;
     private $client;
     public function __construct()
     {
-        $this->common = new Common();
-        $this->app_id=Common::APP_ID;
-        $this->api_key=Common::API_KEY;
-        $this->secret_key=Common::SECRET_KEY;
-
+        $this->file_upload = new FileUploadClass();
         $this->client = new AipOcr($this->app_id, $this->api_key, $this->secret_key);
 
     }
+
     /**
-     * 文字
+     * 文字识别图片上传
      */
-    public function word(Request $request)
+    public function wordUpload(Request $request)
     {
         $type = $request->input("type");
         $ori = $request->input("ori");
-        $file = $request->file('image');
-        $upload_res = $this->common->upload($file);
+
+        $this->file_upload->fileSave(storage_path('app/uploads/'));
+        $upload_info = $this->file_upload->msg;
+dump($upload_info);
+        $res = $this->word($type,$ori,$upload_info["path"]);
+    }
+
+    /**
+     * 文字
+     */
+    public function word($type,$ori,$path)
+    {
         $res = "";
-        if($upload_res["state"]){
-            switch ($type){
-                case 1:
-                    $res=$this->currency($upload_res["path"]);//通用识别
-                    break;
-                case 2:
-                    $Ori = $ori ? $ori : 1;
-                    $res=$this->idcard($upload_res["path"],$Ori);//身份证识别
-                    break;
-                case 3:$this->driving($upload_res["path"]);//驾驶证
-                    break;
-                case 4:$this->vehicleLicense($upload_res["path"]);//行驶证
-                    break;
-                case 5:$this->businessLicense($upload_res["path"]);//营业执照
-                    break;
-                case 6:$this->handwriting($upload_res["path"]);//手写文字识别
-                    break;
-                case 7:$this->bankcard($upload_res["path"]);//银行卡
-                    break;
-                case 8:;
-                    break;
-            }
-            
-        }else{
-            return response()->json(["code"=>0,"message"=>$this->common->getError()]);
+        switch ($type){
+            case 1:
+                $res=$this->currency($path);//通用识别
+                break;
+            case 2:
+                $Ori = $ori ? $ori : 1;
+                $res=$this->idcard($path,$Ori);//身份证识别
+                break;
+            case 3:
+                $res = $this->driving($path);//驾驶证
+                break;
+            case 4:
+                $res = $this->vehicleLicense($path);//行驶证
+                break;
+            case 5:
+                $res = $this->businessLicense($path);//营业执照
+                break;
+            case 6:
+                $res = $this->handwriting($path);//手写文字识别
+                break;
+            case 7:
+                $res = $this->bankcard($path);//银行卡
+                break;
+            case 8:;
+                break;
         }
-        $message = "识别成功";
-        if($type==2){
-            $message = $res["message"];
-        }
-        return response()->json(["code"=>0,"message"=>$message,"data"=>$res]);
+        return $res;
     }
 
     /**

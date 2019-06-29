@@ -38,9 +38,14 @@ class VoiceController extends Controller
                $file_info =$this->file_upload->fileSave(storage_path('app/uploads/'));
                $upload_res = $this->file_upload->msg;
                if($file_info){
+                   if(isset($data["chunks"])){
+
                     if($data["chunks"]==$data["chunk"]+1){
                         return response()->json(["code"=>1,"message"=>"上传成功","data"=>$upload_res["info"]]);
                     }
+                   }else{
+                       return response()->json(["code"=>1,"message"=>"上传成功","data"=>$upload_res["info"]]);
+                   }
                }else{
                    return response()->json(["code"=>0,"message"=>$upload_res["info"]]);
                }
@@ -52,7 +57,6 @@ class VoiceController extends Controller
      */
     public function formatConversion(Request $request)
     {
-
         $path = $request->input("path");
         $a = array(
             'ffmpeg.binaries' => 'D:\ffmpeg\bin\ffmpeg.exe',
@@ -72,8 +76,14 @@ class VoiceController extends Controller
         });
         $num = ceil($duration/30);
         set_time_limit(120);
+        //文件
         $file_name = date("Ymd",time()).uniqid().".txt";
+        if(!file_exists( storage_path()."/app/txt")){
+            mkdir(storage_path()."/app/txt",0777);
+        }
         $txt = storage_path()."/app/txt/".$file_name;
+        $sCon = 0;
+        //分割转换pcm文件
         for ($i=0;$i < $num; $i++){
             $format->setAudioChannels(2)
                 ->setAudioKiloBitrate(256);
@@ -81,11 +91,22 @@ class VoiceController extends Controller
             $pcm_path = storage_path().'/app/tem/'.uniqid().".pcm";
 
             $audio->save($format,$pcm_path);
-            $this->compound($pcm_path,$txt);
+            $compound_res = $this->compound($pcm_path,$txt);
+
+            if($compound_res){
+                $sCon+=1;
+            }
         }
+
         DB::table("ai_dis")->insert(["path"=>$txt,"file_name"=>$file_name,"create_time"=>date("Y-m-d H:i:s",time())]);
         @unlink($path);
-        return response()->json(["code"=>1,"message"=>"识别成功","data"=>$file_name]);
+
+        if($sCon){
+            return response()->json(["code"=>1,"message"=>"识别成功","data"=>$file_name]);
+        }else{
+            return response()->json(["code"=>0,"message"=>"识别失败","data"=>$file_name]);
+        }
+
     }
 
     /**
@@ -101,9 +122,14 @@ class VoiceController extends Controller
 
         if($res["err_msg"]=="success."){
             file_put_contents($txt,$res["result"][0],FILE_APPEND);
+            @unlink($pcm_path);
+            return true;
+        }else{
+            @unlink($pcm_path);
+            return false;
         }
-        @unlink($pcm_path);
-        return $res;
+
+
     }
 
     /**
@@ -121,9 +147,9 @@ class VoiceController extends Controller
         $file = $request->input("file");
 
         $file_info =DB::table("ai_dis")->where("file_name",$file)->first();
+
         $file_info = json_encode($file_info,true);
         $file_info = json_decode($file_info,true);
         $this->file_upload->fileDownload($file_info["path"]);
-
     }
 }
