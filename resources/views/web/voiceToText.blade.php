@@ -53,7 +53,7 @@
         <div class="gem1">
             <div class="btns_grow">
                 <div class="fl" id="select">点击选择文件</div>
-                <a href="#" class="fr">立即下载</a>
+                <a href="#" class="fr download" style="display: none;margin-left: 20px">立即下载</a>
             </div>
             <p>请上传需要转换的语音文件，最大支持20M，<br />支持的文件格式：<span>MP3，MAV，M4A，WMA，AAC，FLAC，AC3，M4R，APE，OGG，WAV格式</span></p>
         </div>
@@ -61,23 +61,22 @@
             <p>预计剩余时间：<span class="down_time">2：00</span>    已经转换时间：<span class="conversion_time">0：00</span></p>
             <div class="box_sl">
                 <div class="box_sl_item">
-                    <div class="sl_g">1</div>
+                    <div class="sl_g1">1</div>
                     <em>上传文件</em>
                 </div>
                 <div class="box_sl_item">
-                    <div class="sl_g">2</div>
+                    <div class="sl_g1">2</div>
                     <em>上传完成</em>
                 </div>
                 <div class="box_sl_item">
-                    <div class="sl_g">3</div>
+                    <div class="sl_g1">3</div>
                     <em>开始转换</em>
                 </div>
                 <div class="box_sl_item">
-                    <div class="sl_g1">4</div>
+                    <div class="sl_zh1">4</div>
                     <em>转换完成</em>
                 </div>
             </div>
-
         </div>
         <div class="item_dis">
             <div>
@@ -112,7 +111,8 @@
     </div>
 </div>
 @extends('web.layouts.footer')
-<script type="text/javascript" src="{{asset('js/home/webuploader.js')}}" ></script>
+
+<script type="text/javascript" src="{{asset('js/home/layer.js')}}" ></script>
 <script>
     var uploader = WebUploader.create({
         swf: 'swf/Uploader.swf',
@@ -151,19 +151,33 @@
     });
     uploader.on( 'startUpload', function( ) {
         time();
+        $(".sl_g1:eq(0)").attr("class","sl_g")
+
     });
+
 
 //上传成功
     uploader.on( 'uploadSuccess', function( file,response  ) {
-
             if(response.code==1){
+                $(".sl_g1:eq(0)").attr("class","sl_g")
                 $.ajax({
-                    url:host+"/api/formatConversion",
+                    url:host+"/api/word",
                     dataType:"json",
                     type:"post",
                     data:{path:response.data},
+                    beforeSend:function(){
+
+                        $(".sl_g1:eq(0)").attr("class","sl_g")
+                    },
                     success:function (res) {
-                        $(".fr").attr("href","/api/fileDownload?file="+res.data);
+                        if(res.code==1){
+                            $(".sl_zh1:eq(0)").attr("class","sl_zh")
+                            $(".download").show();
+                            $(".fr").attr("href","/api/fileDownload?file="+res.data);
+                        }else{
+                            layer.alert(res.message);
+                        }
+
                         clearTimeout(conversion_time);
                         clearTimeout(down_time);
                     }

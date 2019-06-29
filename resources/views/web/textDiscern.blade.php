@@ -1,4 +1,11 @@
 @include('web.layouts.header')
+<style>
+    .webuploader-pick{
+        padding: 0;!important;
+        width: 100%;
+        background: #0F6FE0;
+    }
+</style>
 <body>
 @include('web.layouts.nav')
 <div class="contant" style="margin-top: 0;">
@@ -16,14 +23,14 @@
     <div class="main_left">
         <h2>文字在线识别</h2>
         <ul>
-            <li><a href="#">通用识别</a></li>
-            <li><a href="#">身份证识别</a></li>
-            <li class="on"><a href="#">行驶证</a></li>
-            <li><a href="#">驾驶证</a></li>
-            <li><a href="#">营业执照</a></li>
-            <li><a href="#">表格文字识别</a></li>
-            <li><a href="#">手写文字识别</a></li>
-            <li><a href="#">银行卡识别</a></li>
+            <li class="on" data-type="1"><a href="#">通用识别</a></li>
+            <li data-type="2"><a href="#">身份证识别</a></li>
+            <li data-type="3"><a href="#">行驶证</a></li>
+            <li data-type="4"><a href="#">驾驶证</a></li>
+            <li data-type="5"><a href="#">营业执照</a></li>
+            <li data-type="6"><a href="#">表格文字识别</a></li>
+            <li data-type="7"><a href="#">手写文字识别</a></li>
+            <li data-type="8"><a href="#">银行卡识别</a></li>
         </ul>
     </div>
     <div class="main_right">
@@ -55,7 +62,7 @@
                     <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
                     <div class="jc"><a href="#">检测</a></div>
                     <p>或</p>
-                    <div class="jcs"><a href="#">本地上传</a></div>
+                    <div class="jcs"><div id="upload" href="#">本地上传</div></div>
                 </div>
                 <span>图片文件类型支持jpg、png、jpeg、bmp、图片大小不超过2M。</span>
             </div>
@@ -93,3 +100,54 @@
     </div>
 </div>
 @extends('web.layouts.footer')
+
+<script>
+    var uploader = WebUploader.create({
+        swf: 'swf/Uploader.swf',
+        server: host+'/api/word',     // 服务端地址
+        auto:true,
+        pick: '#upload',         // 指定选择文件的按钮容器
+        resize: false,
+        chunked: true,           //开启分片上传
+        chunkSize: 1024*1024*2,  //每一片的大小
+        chunkRetry: 100,         // 如果遇到网络错误,重新上传次数
+        threads: 3,              //上传并发数。允许同时最大上传进程数。
+        fileSizeLimit:20*1024*1024,
+        formData:1,
+        // 只允许选择图片文件。
+        accept: {
+            //     title: 'Images',
+            //     extensions: 'MP3，MAV，M4A，WMA，AAC，FLAC，AC3，M4R，APE，OGG，WAV',
+            mimeTypes: 'image/*'
+        }
+    });
+    uploader.options.formData.type = 1;
+    /**
+     * 验证文件格式以及文件大小
+     */
+    uploader.on("error", function (type) {
+        if (type == "Q_TYPE_DENIED") {
+            layer.msg("请上传音频文件");
+        } else if (type == "Q_EXCEED_SIZE_LIMIT") {
+            layer.msg("文件大小不能超过20M");
+        }else {
+            layer.msg("上传出错！请检查后重新上传！错误代码"+type);
+        }
+    });
+    //上传进度
+    uploader.on( 'uploadProgress', function( file,percentage  ) {
+        // console.log(percentage);
+    });
+    uploader.on( 'startUpload', function( ) {
+    });
+
+    /**
+     * 选项卡切换
+     */
+
+    $(".main_left li").on("click",function () {
+        var type = $(this).data("type");
+        $(this).attr("class","on").siblings().removeClass("on");
+    })
+
+</script>

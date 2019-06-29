@@ -29,6 +29,7 @@ Route::group($attributes,function (Router $router) {
     $router->any('formatConversion', "VoiceController@formatConversion")->name('formatConversion');
     $router->any('fileDownload', "VoiceController@fileDownload")->name('fileDownload');
     $router->any('ImageEnlarge', "ImageProcessController@ImageEnlarge")->name('ImageEnlarge');
+    $router->any('word', "WordsDistinguishController@word")->name('word');
 
 });
 //Route::get('/voice', function(){

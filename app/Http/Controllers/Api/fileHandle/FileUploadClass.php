@@ -238,7 +238,8 @@ class FileUploadClass
             } else {
                 header('Content-Disposition: attachment; filename="' . $showname . '"');
             }
-            header("X-Sendfile: $realpath");
+//            header("X-Sendfile: $realpath");
+            readfile($realpath);
             exit;
         } else {
             $this->msg('error','文件不存在!');
