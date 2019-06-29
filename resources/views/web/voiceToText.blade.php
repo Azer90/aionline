@@ -161,12 +161,11 @@
             if(response.code==1){
                 $(".sl_g1:eq(0)").attr("class","sl_g")
                 $.ajax({
-                    url:host+"/api/word",
+                    url:host+"/api/formatConversion",
                     dataType:"json",
                     type:"post",
                     data:{path:response.data},
                     beforeSend:function(){
-
                         $(".sl_g1:eq(0)").attr("class","sl_g")
                     },
                     success:function (res) {
