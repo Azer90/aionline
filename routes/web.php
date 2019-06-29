@@ -24,3 +24,5 @@ Route::get('voiceCompose', 'VoiceComposeController@index')->name('voiceCompose')
 Route::get('voiceToText', 'VoiceToTextController@index')->name('voiceToText');//语音转文字
 
 Route::get('tutorials/{id}', 'TutorialsController@detail')->where('id', '[0-9]+')->name('detail');
+
+Route::get('search/{tag}', 'TutorialsController@search')->name('search'); //全文搜索

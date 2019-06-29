@@ -65,4 +65,25 @@ class TutorialsController extends Controller
         return view('web.detail')->with(compact('nav','name','seo','config','article','common','new','up','down','link'));
     }
 
+    public function search($tag){
+        $link=Link::all();
+        $common=Article::select('id','title')->where(['type'=>'common','show'=>1])->take(5)->get();//常见问题
+        $new=Article::select('id','title')->where(['show'=>1])->orderBy('id', 'desc')->take(5)->get();//最新资讯
+        $nav=$this->nav;
+        $name=$this->name;
+        $seo=$this->seo;
+        $config=$this->system;
+        $config['title_tag']=$tag;
+        $article_index= Article::search($tag)->paginate(9);
+        foreach ($article_index as $key=>$value){
+
+            if(!empty($value->classify)){
+                $article_index[$key]['img']=get_host().'/upload/'.$value->classify->url;
+            }else{
+                $article_index[$key]['img']='';
+            }
+        }
+        return view('web.search')->with(compact('nav','name','seo','config','article_index','tag','common','new','link'));
+    }
+
 }

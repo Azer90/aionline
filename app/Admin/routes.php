@@ -22,6 +22,8 @@ Route::group([
     $router->resource('goods', 'GoodsController')->names('admin.goods');
     $router->resource('tag', 'TagController')->names('admin.tag');
     $router->resource('refundOrder', 'RefundOrderController',['only' => ['index']])->names('admin.refundOrder');
+    $router->resource('singlepages', 'SinglePageController')->names('admin.singlepages');
+
     $router->post('refund', 'RefundController@init')->name('refund');
 
     $router->post('linkImport', 'ImportController@linkImport')->name('linkImport');
