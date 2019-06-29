@@ -21,10 +21,10 @@
             <div class="item">
                 <p>联系我们</p>
                 <span>邮箱：{{$config['email']}}</span>
-                <span>地址： {{$config['email']}}</span>
+                <span>地址： {{$config['address']}}</span>
                 <span>客服电话：{{$config['phone']}}</span>
                 <span>QQ：{{$config['qq']}}</span>
-                <span>网址：http://www.szxxxx.com/</span>
+                <span>网址：{{ $config['website'] }}</span>
             </div>
         </div>
         <ul class="link">
@@ -38,7 +38,7 @@
         </ul>
     </div>
 </div>
-<footer>Copyright ©2006-2019.All Rights Reserved 版权所有 苏州图可互联网信息有限公司 网站备案号：苏ICP备18023366号-1</footer>
+<footer>Copyright ©2006-2019.All Rights Reserved 版权所有 {{$config['copyright']}} 网站备案号：{{$config['icp']}}</footer>
 </body>
 
 <script type="text/javascript" src="{{asset('js/home/swiper.min.js')}}" ></script>

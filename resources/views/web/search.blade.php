@@ -9,7 +9,7 @@
 </div>
 <div class="list_contant">
     <ul>
-        @foreach ($article as $value)
+        @foreach ($article_index as $value)
 
             <li>
                 <div>
@@ -22,25 +22,25 @@
 
         @endforeach
     </ul>
-    {{ $article->links('web.paginate') }}
+    {{ $article_index->links('web.paginate') }}
 
 </div>
 @extends('web.layouts.footer')
 @section('script')
-<script>
-    function searchUrl() {
+    <script>
+        function searchUrl() {
 
-        var reg = /^(\s*)$/g;
+            var reg = /^(\s*)$/g;
 
-        if (reg.test(document.getElementById("searchValueId").value))
+            if (reg.test(document.getElementById("searchValueId").value))
 
-            var res = '\'\'';
+                var res = '\'\'';
 
-        else
-            res = document.getElementById("searchValueId").value;
+            else
+                res = document.getElementById("searchValueId").value;
 
-        window.location.href = 'http://' + location.hostname + '/search/' + res;
+            window.location.href = 'http://' + location.hostname + '/search/' + res;
 
-    }
-</script>
+        }
+    </script>
 @endsection
