@@ -35,7 +35,7 @@
     </div>
     <div class="main_right">
         <div class="main_tops1">
-            <div class="fl">图像去雾</div>
+            <div class="fl name">图像去雾</div>
             <div class="fr">
                 <img src="images/icon_11.png" />
                 <ul>
@@ -49,7 +49,7 @@
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">行驶证</a>
+                        <a href="#" class="name">行驶证</a>
                     </li>
                 </ul>
             </div>
@@ -121,13 +121,13 @@
             mimeTypes: 'image/*'
         }
     });
-    uploader.options.formData.type = 1;
+
     /**
      * 验证文件格式以及文件大小
      */
     uploader.on("error", function (type) {
         if (type == "Q_TYPE_DENIED") {
-            layer.msg("请上传音频文件");
+            layer.msg("请上传l文件");
         } else if (type == "Q_EXCEED_SIZE_LIMIT") {
             layer.msg("文件大小不能超过20M");
         }else {
@@ -147,7 +147,11 @@
 
     $(".main_left li").on("click",function () {
         var type = $(this).data("type");
+        var name = $(this).children("a").text();
         $(this).attr("class","on").siblings().removeClass("on");
+        uploader.options.formData.type = type;
+        $(".name").text(name);
+        console.log(name);
     })
 
 </script>
