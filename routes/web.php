@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use Illuminate\Routing\Router;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,3 +26,10 @@ Route::get('voiceToText', 'VoiceToTextController@index')->name('voiceToText');//
 Route::get('tutorials/{id}', 'TutorialsController@detail')->where('id', '[0-9]+')->name('detail');
 
 Route::get('search/{tag}', 'TutorialsController@search')->name('search'); //全文搜索
+
+
+Route::group( ['prefix'=> 'wechat'], function (Router $router) {
+    $router->any('/', 'WeChatController@serve');
+    $router->any('/menu', 'WeChatController@menu');
+
+});
