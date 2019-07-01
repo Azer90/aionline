@@ -21,13 +21,21 @@ class WeChatController extends Controller
             Log::useFiles(storage_path('logs/wechat_ts.log'));
             Log::info($message);
             if(isset($message['Event'])){
-                if($message['Event']=='SCAN'&&$message['EventKey']=='validate_logon'){
-                    return "登录成功";
-                }
+                switch ($message['Event']){
+                    case 'subscribe':
+                        return "登录成功";
+                        break;
+                    case 'unsubscribe':
+                        return "注销成功";
+                        break;
+
+                    default:
+                        return "您好！欢迎关注我们";
+                };
+
             }
 
-
-                return "您好！欢迎关注";
+                 return "您好！欢迎关注";
 
 
         });
