@@ -76,6 +76,7 @@ class VoiceController extends Controller
         });
         $num = ceil($duration/30);
         set_time_limit(120);
+
         //文件
         $file_name = date("Ymd",time()).uniqid().".txt";
         if(!file_exists( storage_path()."/app/txt")){
@@ -83,13 +84,15 @@ class VoiceController extends Controller
         }
         $txt = storage_path()."/app/txt/".$file_name;
         $sCon = 0;
+
+        $format->setAudioChannels(2)
+            ->setAudioKiloBitrate(256);
         //分割转换pcm文件
+
         for ($i=0;$i < $num; $i++){
-            $format->setAudioChannels(2)
-                ->setAudioKiloBitrate(256);
+
             $audio->filters()->clip(TimeCode::fromSeconds($i*30), TimeCode::fromSeconds(30));
             $pcm_path = storage_path().'/app/tem/'.uniqid().".pcm";
-
             $audio->save($format,$pcm_path);
             $compound_res = $this->compound($pcm_path,$txt);
 

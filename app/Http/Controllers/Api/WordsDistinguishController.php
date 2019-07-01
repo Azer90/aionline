@@ -33,22 +33,28 @@ class WordsDistinguishController extends Controller
      */
     public function wordUpload(Request $request)
     {
-        $type = $request->input("type");
+        $type = $request->input("dis_type");
         $ori = $request->input("ori");
 
         $this->file_upload->fileSave(storage_path('app/uploads/'));
         $upload_info = $this->file_upload->msg;
-dump($upload_info);
-        $res = $this->word($type,$ori,$upload_info["path"]);
+
+        $res = $this->word($type,$ori,$upload_info["info"]);
+
+        if(isset($res["error_code"])){
+            return response()->json(["code"=>0,"message"=>$res["error_msg"]]);
+        }else{
+            return response()->json(["code"=>1,"message"=>"文字识别成功","data"=>$res,"type"=>$type]);
+        }
     }
 
     /**
      * 文字
      */
-    public function word($type,$ori,$path)
+    public function word($dis_type,$ori,$path)
     {
         $res = "";
-        switch ($type){
+        switch ($dis_type){
             case 1:
                 $res=$this->currency($path);//通用识别
                 break;
@@ -57,21 +63,22 @@ dump($upload_info);
                 $res=$this->idcard($path,$Ori);//身份证识别
                 break;
             case 3:
-                $res = $this->driving($path);//驾驶证
+                $res = $this->vehicleLicense($path);//行驶证
                 break;
             case 4:
-                $res = $this->vehicleLicense($path);//行驶证
+                $res = $this->driving($path);//驾驶证
                 break;
             case 5:
                 $res = $this->businessLicense($path);//营业执照
                 break;
             case 6:
-                $res = $this->handwriting($path);//手写文字识别
+                $res = $this->form($path);//表格文字识别
                 break;
             case 7:
-                $res = $this->bankcard($path);//银行卡
+                $res = $this->handwriting($path);//手写文字识别
                 break;
-            case 8:;
+            case 8:
+                $res = $this->bankcard($path);//银行卡;
                 break;
         }
         return $res;
@@ -86,6 +93,7 @@ dump($upload_info);
         $options = array();
         $options["probability"] = "true";
         $res = $this->client->basicAccurate($image,$options);
+
         return $res;
     }
 
@@ -145,7 +153,8 @@ dump($upload_info);
         $image = file_get_contents($path);
 
         $res = $this->client->drivingLicense($image);
-        return $res["data"];
+
+        return $res;
     }
 
     /**
@@ -156,7 +165,8 @@ dump($upload_info);
         $image = file_get_contents($path);
 
         $res = $this->client->vehicleLicense($image);
-        return $res["data"];
+
+        return $res;
     }
 
     /**
