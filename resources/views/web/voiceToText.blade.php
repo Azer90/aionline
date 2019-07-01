@@ -123,8 +123,8 @@
         chunked: true,           //开启分片上传
         chunkSize: 1024*1024*2,  //每一片的大小
         chunkRetry: 100,         // 如果遇到网络错误,重新上传次数
-        threads: 3,              //上传并发数。允许同时最大上传进程数。
-        fileSizeLimit:20*1024*1024,
+        threads: 1,              //上传并发数。允许同时最大上传进程数。
+        fileSingleSizeLimit:20*1024*1024,
         // 只允许选择图片文件。
         accept: {
         //     title: 'Images',
@@ -158,6 +158,7 @@
 
 //上传成功
     uploader.on( 'uploadSuccess', function( file,response  ) {
+
             if(response.code==1){
                 $(".sl_g1:eq(0)").attr("class","sl_g")
                 $.ajax({
