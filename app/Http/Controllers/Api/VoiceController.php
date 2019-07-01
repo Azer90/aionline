@@ -72,7 +72,7 @@ class VoiceController extends Controller
         $format = new \FFMpeg\Format\Audio\Wav();
 
         $format->on('progress', function ($audio, $format, $percentage) {
-            echo "$percentage % transcoded";
+//            echo "$percentage % transcoded";
         });
         $num = ceil($duration/30);
         set_time_limit(120);

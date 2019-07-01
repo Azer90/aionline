@@ -125,6 +125,7 @@
         chunkRetry: 100,         // 如果遇到网络错误,重新上传次数
         threads: 1,              //上传并发数。允许同时最大上传进程数。
         fileSingleSizeLimit:20*1024*1024,
+        duplicate :true,
         // 只允许选择图片文件。
         accept: {
         //     title: 'Images',

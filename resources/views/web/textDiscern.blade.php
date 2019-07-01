@@ -68,7 +68,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img src="images/icons_03.jpg"/>
+            <img class="currency_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -124,7 +124,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img src="images/icons_03.jpg"/>
+            <img class="cart_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -180,7 +180,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img src="images/icons_03.jpg"/>
+            <img class="travel_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -236,7 +236,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img src="images/icons_03.jpg"/>
+            <img class="driver_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -292,7 +292,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img src="images/icons_03.jpg"/>
+            <img class="business_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -348,7 +348,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img src="images/icons_03.jpg"/>
+            <img class="table_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -413,7 +413,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img src="images/icons_03.jpg"/>
+            <img class="hand_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -469,7 +469,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img src="images/icons_03.jpg"/>
+            <img class="bank_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -547,13 +547,42 @@
     });
     //上传进度
     uploader.on( 'uploadProgress', function( file,percentage  ) {});
-    uploader.on( 'startUpload', function( file ) {
-
+    uploader.on( 'fileQueued', function( file ) {
+        index = layer.load(1);
         uploader.makeThumb( file, function( error, ret ) {
+            var type = uploader.options.formData.dis_type;
             if ( error ) {
                 $li.text('预览错误');
             } else {
-                $li.append('&lt;img alt="" src="' + ret + '" />');
+                switch (type) {
+                    case 1:
+                        $li = $(".currency_img");
+                        break;
+                    case 2:
+                        $li = $(".cart_img");
+                        break;
+                    case 3:
+                        $li = $(".travel_img");
+                        break;
+                    case 4:
+                        $li = $(".driver_img");
+                        break;
+                    case 5:
+                        $li = $(".business_img");
+                        break;
+                    case 6:
+                        $li = $(".table_img");
+                        break;
+                    case 7:
+                        $li = $(".hand_img");
+                        break;
+                    case 8:
+                        $li = $(".bank_img");
+                        break;
+                    default:
+                        $li = "";
+                }
+                $li.attr("src",ret).css({"width":"100%","height":"100%"});
             }
         });
     });
@@ -561,7 +590,7 @@
 
     //上传成功
     uploader.on( 'uploadSuccess', function( file,response ) {
-
+        layer.close(index);
         switch (parseInt(response["type"])) {
             case 1:
                 var res = response.data.words_result,str="";
