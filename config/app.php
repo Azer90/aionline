@@ -177,7 +177,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Stevenyangecho\UEditor\UEditorServiceProvider::class,
         Yansongda\LaravelPay\PayServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,

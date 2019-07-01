@@ -35,7 +35,7 @@ class VoiceController extends Controller
         if($request->isMethod("post")){
               $data = $request->input();
 
-               $file_info =$this->file_upload->fileSave(storage_path('app/uploads/'));
+               $file_info =$this->file_upload->fileSave(storage_path('app/uploads'));
                $upload_res = $this->file_upload->msg;
                if($file_info){
                    if(isset($data["chunks"])){
@@ -66,7 +66,7 @@ class VoiceController extends Controller
         );
         $ffmpeg = FFMpeg::create($a);
         $audio = $ffmpeg->open($path);
-        $info = $ffmpeg-> getFile($path);
+        $info = $ffmpeg->getFile($path);
         $duration = $info["duration"];//时长
 
         $format = new \FFMpeg\Format\Audio\Wav();
