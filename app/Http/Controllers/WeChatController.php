@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\WechatUsers;
 use EasyWeChat;
 use Illuminate\Support\Facades\Log;
 class WeChatController extends Controller
@@ -23,9 +24,16 @@ class WeChatController extends Controller
             if(isset($message['Event'])){
                 switch ($message['Event']){
                     case 'subscribe':
+                        $data=[
+                            'toUserName'=>$message['ToUserName'],
+                            'openid'=>$message['FromUserName'],
+                            'createTime'=>$message['CreateTime'],
+                        ];
+                        WechatUsers::insert($data);
                         return "登录成功";
                         break;
                     case 'unsubscribe':
+                        WechatUsers::where('openid',$message['FromUserName'])->delete();
                         return "注销成功";
                         break;
 
