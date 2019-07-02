@@ -59,7 +59,7 @@ class WeChatController extends Controller
 
 
         });
-        $this->menu();
+       // $this->menu();
         $response = $this->app->server->serve();
 
 // 将响应输出
