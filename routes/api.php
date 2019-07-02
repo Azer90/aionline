@@ -30,6 +30,8 @@ Route::group($attributes,function (Router $router) {
     $router->any('fileDownload', "VoiceController@fileDownload")->name('fileDownload');
     $router->any('ImageEnlarge', "ImageProcessController@ImageEnlarge")->name('ImageEnlarge');
     $router->any('word', "WordsDistinguishController@wordUpload")->name('word');
+    $router->any('webDis', "WordsDistinguishController@webDis")->name('webDis');
+    $router->any('createFileName', "WordsDistinguishController@createFileName")->name('createFileName');
 
 });
 //Route::get('/voice', function(){

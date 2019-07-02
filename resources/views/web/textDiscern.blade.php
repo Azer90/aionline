@@ -33,7 +33,7 @@
     <div class="main_left">
         <h2>文字在线识别</h2>
         <ul>
-            <li class="on" data-type="1"><a href="#">通用识别</a></li>
+            <li class="on" data-type="1"><a href="javascript:">通用识别</a></li>
             <li data-type="2"><a href="javascript:">身份证识别</a></li>
             <li data-type="3"><a href="javascript:">行驶证</a></li>
             <li data-type="4"><a href="javascript:">驾驶证</a></li>
@@ -53,15 +53,15 @@
                 <ul>
                     <li>当前位置:</li>
                     <li>
-                        <a href="#">首页</a>
+                        <a href="javascript:">首页</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">文字在线识别</a>
+                        <a href="javascript:">文字在线识别</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#" class="name">通用识别</a>
+                        <a href="javascript:" class="name">通用识别</a>
                     </li>
                 </ul>
             </div>
@@ -71,8 +71,8 @@
             <img class="currency_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
-                    <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
-                    <div class="jc"><a href="#">检测</a></div>
+                    <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
+                    <div class="jc"><a class="sub_test" href="javascript:">检测</a></div>
                     <p>或</p>
                     <div class="jcs"><div class="upload" >本地上传</div></div>
                 </div>
@@ -109,15 +109,15 @@
                 <ul>
                     <li>当前位置:</li>
                     <li>
-                        <a href="#">首页</a>
+                        <a href="javascript:">首页</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">文字在线识别</a>
+                        <a href="javascript:">文字在线识别</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#" class="name">身份证识别</a>
+                        <a href="javascript:" class="name">身份证识别</a>
                     </li>
                 </ul>
             </div>
@@ -127,8 +127,8 @@
             <img class="cart_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
-                    <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
-                    <div class="jc"><a href="#">检测</a></div>
+                    <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
+                    <div class="jc"><a class="sub_test" href="javascript:">检测</a></div>
                     <p>或</p>
                     <div class="jcs"><div class="upload" >本地上传</div></div>
                 </div>
@@ -165,15 +165,15 @@
                 <ul>
                     <li>当前位置:</li>
                     <li>
-                        <a href="#">首页</a>
+                        <a href="javascript:">首页</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">文字在线识别</a>
+                        <a href="javascript:">文字在线识别</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#" class="name">行驶证</a>
+                        <a href="javascript:" class="name">行驶证</a>
                     </li>
                 </ul>
             </div>
@@ -183,8 +183,8 @@
             <img class="travel_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
-                    <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
-                    <div class="jc"><a href="#">检测</a></div>
+                    <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
+                    <div class="jc"><a href="javascript:" class="sub_test">检测</a></div>
                     <p>或</p>
                     <div class="jcs"><div class="upload" >本地上传</div></div>
                 </div>
@@ -221,15 +221,15 @@
                 <ul>
                     <li>当前位置:</li>
                     <li>
-                        <a href="#">首页</a>
+                        <a href="javascript:">首页</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">文字在线识别</a>
+                        <a href="javascript:">文字在线识别</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#" class="name">驾驶证</a>
+                        <a href="javascript:" class="name">驾驶证</a>
                     </li>
                 </ul>
             </div>
@@ -239,8 +239,8 @@
             <img class="driver_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
-                    <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
-                    <div class="jc"><a href="#">检测</a></div>
+                    <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
+                    <div class="jc"><a class="sub_test" href="javascript:">检测</a></div>
                     <p>或</p>
                     <div class="jcs"><div class="upload" >本地上传</div></div>
                 </div>
@@ -277,15 +277,15 @@
                 <ul>
                     <li>当前位置:</li>
                     <li>
-                        <a href="#">首页</a>
+                        <a href="javascript:">首页</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">文字在线识别</a>
+                        <a href="javascript:">文字在线识别</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#" class="name">营业执照</a>
+                        <a href="javascript:" class="name">营业执照</a>
                     </li>
                 </ul>
             </div>
@@ -295,8 +295,8 @@
             <img class="business_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
-                    <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
-                    <div class="jc"><a href="#">检测</a></div>
+                    <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
+                    <div class="jc"><a class="sub_test" href="javascript:">检测</a></div>
                     <p>或</p>
                     <div class="jcs"><div class="upload" >本地上传</div></div>
                 </div>
@@ -333,15 +333,15 @@
                 <ul>
                     <li>当前位置:</li>
                     <li>
-                        <a href="#">首页</a>
+                        <a href="javascript:">首页</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">文字在线识别</a>
+                        <a href="javascript:">文字在线识别</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#" class="name">表格文字识别</a>
+                        <a href="javascript:" class="name">表格文字识别</a>
                     </li>
                 </ul>
             </div>
@@ -351,8 +351,8 @@
             <img class="table_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
-                    <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
-                    <div class="jc"><a href="#">检测</a></div>
+                    <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
+                    <div class="jc"><a class="sub_test" href="javascript:">检测</a></div>
                     <p>或</p>
                     <div class="jcs"><div class="upload" >本地上传</div></div>
                 </div>
@@ -361,19 +361,10 @@
         </div>
         <div class="jgs">
             <h2>识别结果</h2>
-            <ul>
-                <li>号牌号码：京AA5599</li>
-                <li>品牌型号：讴歌牌GHA7150JAD5B</li>
-                <li>车辆类型：小型轿车</li>
-                <li>车辆识别代号：HHGHH555778802669</li>
-                <li>所有人：王京</li>
-                <li>发动机号码：1122444</li>
-                <li>住址：北京市石景山区</li>
-                <li>注册日期：20180614</li>
-                <li>使用性质：非营运</li>
-                <li>发证日期：20180614</li>
+            <ul class="table_ul">
+
             </ul>
-            <div class="copy">复制</div>
+            <div class="copy" style='margin-right:20px'>点击下载</div>
         </div>
         <div class="item_dis">
             <div>
@@ -398,15 +389,15 @@
                 <ul>
                     <li>当前位置:</li>
                     <li>
-                        <a href="#">首页</a>
+                        <a href="javascript:">首页</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">文字在线识别</a>
+                        <a href="javascript:">文字在线识别</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#" class="name">手写文字识别</a>
+                        <a href="javascript:" class="name">手写文字识别</a>
                     </li>
                 </ul>
             </div>
@@ -416,8 +407,8 @@
             <img class="hand_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
-                    <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
-                    <div class="jc"><a href="#">检测</a></div>
+                    <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
+                    <div class="jc"><a class="sub_test" href="javascript:">检测</a></div>
                     <p>或</p>
                     <div class="jcs"><div class="upload" >本地上传</div></div>
                 </div>
@@ -454,15 +445,15 @@
                 <ul>
                     <li>当前位置:</li>
                     <li>
-                        <a href="#">首页</a>
+                        <a href="javascript:">首页</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#">文字在线识别</a>
+                        <a href="javascript:">文字在线识别</a>
                     </li>
                     <li>></li>
                     <li>
-                        <a href="#" class="name">银行卡识别</a>
+                        <a href="javascript:" class="name">银行卡识别</a>
                     </li>
                 </ul>
             </div>
@@ -472,8 +463,8 @@
             <img class="bank_img" src="images/icons_03.jpg"/>
             <div class="url">
                 <div class="url_box">
-                    <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
-                    <div class="jc"><a href="#">检测</a></div>
+                    <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
+                    <div class="jc"><a class="sub_test" href="javascript:">检测</a></div>
                     <p>或</p>
                     <div class="jcs"><div class="upload" >本地上传</div></div>
                 </div>
@@ -587,7 +578,6 @@
         });
     });
 
-
     //上传成功
     uploader.on( 'uploadSuccess', function( file,response ) {
         layer.close(index);
@@ -629,7 +619,9 @@
 
                 break;
             case 6:
-
+                console.log(response);
+                var str=response.message;
+                $(".table_ul").html("表格识别成功");
                 break;
             case 7:
                 var res = response.data.words_result,str="";
@@ -658,11 +650,9 @@
         }
     });
 
-
     /**
      * 选项卡切换
      */
-
     $(".main_left li").on("click",function () {
 
         var type = $(this).data("type");
@@ -673,5 +663,90 @@
         $(".main_right:eq("+$(this).index()+")").show().siblings().hide()
     })
 
+    /**
+     * 检测
+     */
+    $(".sub_test").on("click",function () {
+        var value = $(this).parent().prev().val();
+        var dis_type = uploader.options.formData.dis_type;
+        var index="";
+        $.ajax({
+            url:host+"/api/webDis",
+            dataType:"json",
+            type:"post",
+            data:{url:value},
+            beforeSend:function(){
+                index = layer.load(1);
+                switch (dis_type) {
+                    case 1:
+                        $li = $(".currency_img");
+                        break;
+                    case 2:
+                        $li = $(".cart_img");
+                        break;
+                    case 3:
+                        $li = $(".travel_img");
+                        break;
+                    case 4:
+                        $li = $(".driver_img");
+                        break;
+                    case 5:
+                        $li = $(".business_img");
+                        break;
+                    case 6:
+                        $li = $(".table_img");
+                        break;
+                    case 7:
+                        $li = $(".hand_img");
+                        break;
+                    case 8:
+                        $li = $(".bank_img");
+                        break;
+                    default:
+                        $li = "";
+                }
+                $li.attr("src",value).css({"width":"100%","height":"100%"});
+            },
+            success:function (res) {
+                layer.close(index);
+                var result = res.words_result,str="";
+                $.each(result,function (index,item) {
+                    str+="<li>"+item.words+"</li>";
+                });
+
+                switch (dis_type) {
+                    case 1:
+                        curr_class = "currency";
+                        break;
+                    case 2:
+                        curr_class = "id_cart";
+                        break;
+                    case 3:
+                        curr_class = "driving";
+                        break;
+                    case 4:
+                        curr_class = "driver";
+                        break;
+                    case 5:
+                        curr_class = "business";
+                        break;
+                    case 6:
+                        curr_class = "table_ul";
+                        break;
+                    case 7:
+                        curr_class = "handwriting";
+                        break;
+                    case 8:
+                        curr_class ="bank";
+                        break;
+                    default :
+                        curr_class = "";
+                }
+
+                $("."+curr_class).html(str);
+
+            }
+        })
+    })
 </script>
 
