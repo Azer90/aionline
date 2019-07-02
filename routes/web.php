@@ -31,5 +31,6 @@ Route::get('search/{tag}', 'TutorialsController@search')->name('search'); //å…¨æ
 Route::group( ['prefix'=> 'wechat'], function (Router $router) {
     $router->any('/', 'WeChatController@serve');
     $router->any('/menu', 'WeChatController@menu');
+    $router->any('/qrcode', 'WeChatController@qrcode');
 
 });

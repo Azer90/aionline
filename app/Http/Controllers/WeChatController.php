@@ -24,17 +24,29 @@ class WeChatController extends Controller
             if(isset($message['Event'])){
                 switch ($message['Event']){
                     case 'subscribe':
+                        $eventKey=explode('_',$message['EventKey']);
                         $data=[
                             'toUserName'=>$message['ToUserName'],
                             'openid'=>$message['FromUserName'],
                             'createTime'=>$message['CreateTime'],
+                            'user_id'=>$eventKey[1],
                         ];
                         WechatUsers::insert($data);
-                        return "登录成功";
+                        return "您好！欢迎关注";
                         break;
                     case 'unsubscribe':
                         WechatUsers::where('openid',$message['FromUserName'])->delete();
                         return "注销成功";
+                        break;
+                    case 'SCAN':
+                        $data=[
+                            'toUserName'=>$message['ToUserName'],
+                            'openid'=>$message['FromUserName'],
+                            'createTime'=>$message['CreateTime'],
+                            'user_id'=>$message['EventKey'],
+                        ];
+                        WechatUsers::insert($data);
+                        return "登录成功";
                         break;
 
                     default:
@@ -87,6 +99,13 @@ class WeChatController extends Controller
     }
 
 
+    public function qrcode(){
+        $user_id=date('YmdHis').uniqid();
+        $result =  $this->app->qrcode->temporary($user_id, 6 * 24 * 3600);
+        $url = $this->app->qrcode->url($result['ticket']);
+
+        dd($url);
+    }
 
 
 }
