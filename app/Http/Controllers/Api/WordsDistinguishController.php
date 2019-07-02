@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Api\fileHandle\FileUploadClass;
+use Illuminate\Support\Facades\DB;
 use Lib\imageProcessSdk\AipOcr;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -94,6 +95,7 @@ class WordsDistinguishController extends Controller
         $options["probability"] = "true";
         $res = $this->client->basicAccurate($image,$options);
 
+        $res["file_name"]=$this->createFileName($res["words_result"]);
         return $res;
     }
 
@@ -113,6 +115,7 @@ class WordsDistinguishController extends Controller
         $image = file_get_contents($path);
         $res = $this->client->idcard($image, $idCardSide);
         $res["message"] = $this->idcardRes($res["image_status"]);
+        $res["file_name"]=$this->createFileName($res["words_result"]);
         return $res;
     }
 
@@ -153,7 +156,7 @@ class WordsDistinguishController extends Controller
         $image = file_get_contents($path);
 
         $res = $this->client->drivingLicense($image);
-
+        $res["file_name"]=$this->createFileName($res["words_result"]);
         return $res;
     }
 
@@ -165,7 +168,7 @@ class WordsDistinguishController extends Controller
         $image = file_get_contents($path);
 
         $res = $this->client->vehicleLicense($image);
-
+        $res["file_name"]=$this->createFileName($res["words_result"]);
         return $res;
     }
 
@@ -177,6 +180,7 @@ class WordsDistinguishController extends Controller
         $image = file_get_contents($path);
 
         $res = $this->client->businessLicense($image);
+        $res["file_name"]=$this->createFileName($res["words_result"]);
         return $res;
     }
 
@@ -191,6 +195,7 @@ class WordsDistinguishController extends Controller
         $options["recognize_granularity"] = "big";
 
         $res = $this->client->handwriting($image, $options);
+        $res["file_name"]=$this->createFileName($res["words_result"]);
         return $res;
     }
 
@@ -202,6 +207,7 @@ class WordsDistinguishController extends Controller
     {
         $image = file_get_contents($path);
         $res = $this->client->bankcard($image);
+        $res["file_name"]=$this->createFileName($res["words_result"]);
         return $res;
     }
     /**
@@ -210,7 +216,70 @@ class WordsDistinguishController extends Controller
     public function form($path)
     {
         $image = file_get_contents($path);
-        $res = $this->client->form($image);
+        $dis = $this->client->tableRecognitionAsync($image);
+
+        $res = $this->getDisRes($dis["result"][0]["request_id"]);
+        $flag = true;
+        while ($flag){
+            sleep(1);
+            if($res["result"]["ret_code"]==3){
+                $flag = false;
+            }else{
+                $res = $this->getDisRes($dis["result"][0]["request_id"]);
+            }
+        }
+        DB::table("ai_dis")->insert(["path"=>$res["result"]["result_data"],"file_name"=>$res["result"]["request_id"],"create_time"=>date("Y-m-d H:i:s",time())]);
+        $res["file_name"] = $res["result"]["request_id"];
         return $res;
     }
+
+    /**
+     * @param $dis_id
+     * @return array
+     * 获取识别结果
+     */
+    public function getDisRes($dis_id)
+    {
+        $dis_res = $this->client->getTableRecognitionResult($dis_id);
+        return $dis_res;
+    }
+    /**
+     * @param Request $request
+     * @return array
+     * 网络图文识别
+     */
+    public function webDis(Request $request)
+    {
+        $url= $request->input("url");
+
+// 带参数调用网络图片文字识别, 图片参数为远程url图片
+        $res = $this->client->webImageUrl($url);
+        $res["file_name"]=$this->createFileName($res["words_result"]);
+        return $res;
+    }
+
+    /**
+     * 文件生成
+     */
+    public function createFileName($info)
+    {
+        $chars = '0123456789';
+        $hash = '';
+        $max = strlen($chars) - 1;
+        for($i = 0; $i < 5; $i++) {
+            $hash .= $chars[mt_rand(0, $max)];
+        }
+        $hash = date("Ymd",time()).$hash.uniqid();
+
+        if(!file_exists( storage_path()."/app/txt")){
+            mkdir(storage_path()."/app/txt",0777);
+        }
+        $txt = storage_path()."/app/txt/".$hash;
+        foreach ($info as $v){
+            file_put_contents($txt,$v["words"].PHP_EOL,FILE_APPEND);
+        }
+        DB::table("ai_dis")->insert(["path"=>$txt,"file_name"=>$hash,"create_time"=>date("Y-m-d H:i:s",time())]);
+        return $txt;
+    }
+
 }
