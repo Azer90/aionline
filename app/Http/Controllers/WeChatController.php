@@ -24,14 +24,17 @@ class WeChatController extends Controller
             if(isset($message['Event'])){
                 switch ($message['Event']){
                     case 'subscribe':
-                        $eventKey=explode('_',$message['EventKey']);
-                        $data=[
-                            'toUserName'=>$message['ToUserName'],
-                            'openid'=>$message['FromUserName'],
-                            'createTime'=>$message['CreateTime'],
-                            'user_id'=>$eventKey[1],
-                        ];
-                        WechatUsers::insert($data);
+                        if(!empty($message['EventKey'])){
+                            $eventKey=explode('_',$message['EventKey']);
+                            $data=[
+                                'toUserName'=>$message['ToUserName'],
+                                'openid'=>$message['FromUserName'],
+                                'createTime'=>$message['CreateTime'],
+                                'user_id'=>$eventKey[1],
+                            ];
+                            WechatUsers::insert($data);
+                        }
+
                         return "您好！欢迎关注";
                         break;
                     case 'unsubscribe':
