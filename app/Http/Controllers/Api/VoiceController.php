@@ -75,7 +75,7 @@ class VoiceController extends Controller
 //            echo "$percentage % transcoded";
         });
         $num = ceil($duration/30);
-        set_time_limit(120);
+        set_time_limit(300);
 
         //文件
         $file_name = date("Ymd",time()).uniqid().".txt";
