@@ -103,8 +103,11 @@ class WeChatController extends Controller
         $user_id=date('YmdHis').uniqid();
         $result =  $this->app->qrcode->temporary($user_id, 6 * 24 * 3600);
         $url = $this->app->qrcode->url($result['ticket']);
-
-        dd($url);
+        $data=[
+            'user_id'=>$user_id,
+            'qrcode_url'=>$url,
+        ];
+        return response()->json($data);
     }
 
 
