@@ -10,7 +10,6 @@ class WeChatController extends Controller
     private $app;
     public function __construct()
     {
-
         $this->app = EasyWeChat::officialAccount();
     }
 

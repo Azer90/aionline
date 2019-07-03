@@ -15,6 +15,20 @@
     .hide{
         display: none;
     }
+    .qr{
+        display: none;
+        width: 100%;
+        position: absolute;
+        top:0;
+        left: 0;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, .4);
+    }
+    .qr img{
+        margin: 50% 50%;
+        transform: translateX(-50%);
+        /*transform: translateY(-50%);*/
+    }
 </style>
 <body>
 @include('web.layouts.nav')
@@ -495,10 +509,13 @@
     </div>
     </div>
 </div>
+<div class="qr">
+    <img src="" alt="">
+</div>
 @extends('web.layouts.footer')
 <script type="text/javascript" src="{{asset('js/home/layer.js')}}" ></script>
 <script>
-
+    var file_name ="",user_id="";
     var uploader = WebUploader.create({
         swf: 'swf/Uploader.swf',
         server: host+'/api/word',     // 服务端地址
@@ -588,6 +605,7 @@
                     str+="<li>"+item.words+"</li>";
                 });
                 $(".currency").html(str);
+                file_name =  response.data.file_name
                 break;
             case 2:
                 var res = response.data.words_result,str="";
@@ -595,6 +613,7 @@
                     str+="<li>"+index+"："+item.words+"</li>";
                 });
                 $(".id_cart").html(str);
+                file_name =  response.data.file_name
                 break;
             case 3:
                 var res = response.data.words_result,str="";
@@ -602,6 +621,7 @@
                     str+="<li>"+index+"："+item.words+"</li>";
                 });
                 $(".driving").html(str);
+                file_name =  response.data.file_name
                 break;
             case 4:
                 var res = response.data.words_result,str="";
@@ -609,6 +629,7 @@
                     str+="<li>"+index+"："+item.words+"</li>";
                 });
                 $(".driver").html(str);
+                file_name =  response.data.file_name
                 break;
             case 5:
                 var res = response.data.words_result,str="";
@@ -616,12 +637,14 @@
                     str+="<li>"+index+"："+item.words+"</li>";
                 });
                 $(".business").html(str);
+                file_name =  response.data.file_name
 
                 break;
             case 6:
                 console.log(response);
                 var str=response.message;
                 $(".table_ul").html("表格识别成功");
+                file_name =  response.data.file_name
                 break;
             case 7:
                 var res = response.data.words_result,str="";
@@ -629,6 +652,7 @@
                     str+="<li>"+item.words+"</li>";
                 });
                 $(".handwriting").html(str);
+                file_name =  response.data.file_name
                 break;
             case 8:
                 var res = response.data.result,str="";
@@ -646,6 +670,7 @@
                         break;
                 }
                 $(".bank").html(str);
+                file_name =  response.data.file_name
                 break;
         }
     });
@@ -748,5 +773,52 @@
             }
         })
     })
+
+
+    $(".copy").on("click",function () {
+
+        $.ajax({
+            url:host+"/api/download_check",
+            type:"post",
+            dataType: "json",
+            data:{file_name:file_name,user_id:user_id},
+            success:function (res) {
+                user_id = res.user_id;
+                if(res.download_code==1){
+                    location.href=host+"/api/word_download?file_name="+file_name;
+                }else{
+                    $(".qr img").attr("src",res.qrcode_url);
+                    $(".qr").show();
+                    polling();
+                }
+            }
+        })
+    })
+
+    /**
+     * 轮询
+     */
+    function polling() {
+        var con = 0;
+        var time = setTimeout(function () {
+            $.ajax({
+                url:host+"/api/download_check",
+                type:"post",
+                dataType: "json",
+                data:{user_id:user_id},
+                success:function (res) {
+                    con++;
+                    if(res.code==1){
+                        location.href=host+"/api/word_download?file_name="+file_name;
+                    }else{
+                        if(con<100){
+                            time;
+                        }
+                    }
+                }
+            })
+        },100)
+    }
+
 </script>
 

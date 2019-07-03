@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Api\fileHandle\FileUploadClass;
+use App\Http\Controllers\WeChatController;
+use App\WechatUsers;
 use Illuminate\Support\Facades\DB;
 use Lib\imageProcessSdk\AipOcr;
 use App\Http\Controllers\Controller;
@@ -269,17 +271,64 @@ class WordsDistinguishController extends Controller
         for($i = 0; $i < 5; $i++) {
             $hash .= $chars[mt_rand(0, $max)];
         }
-        $hash = date("Ymd",time()).$hash.uniqid();
+        $hash = date("Ymd",time()).$hash.uniqid().".txt";
 
         if(!file_exists( storage_path()."/app/txt")){
             mkdir(storage_path()."/app/txt",0777);
         }
         $txt = storage_path()."/app/txt/".$hash;
-        foreach ($info as $v){
-            file_put_contents($txt,$v["words"].PHP_EOL,FILE_APPEND);
+        foreach ($info as $k=> $v){
+            file_put_contents($txt,$k."：".$v["words"].PHP_EOL,FILE_APPEND);
         }
         DB::table("ai_dis")->insert(["path"=>$txt,"file_name"=>$hash,"create_time"=>date("Y-m-d H:i:s",time())]);
-        return $txt;
+        return $hash;
+    }
+
+    /**
+     * 下载检测
+     */
+    public function download_check(Request $request)
+    {
+        $info= $request->input();
+
+        if(empty($info["user_id"])){
+            $wechat = new WeChatController();
+            $res = $wechat->qrcode();
+            $res["download_code"]=0;
+            return $res;
+        }else{
+              $res["download_code"]=1;
+              $res["user_id"]="";
+              $res["qrcode_url"]="";
+              return  $res;
+        }
+    }
+
+    /**
+     * 关注轮训
+     */
+    public function follow(Request $request)
+    {
+        $user_id = $request->input("user_id");
+        $res = WechatUsers::where("user_id",$user_id)->first();
+        if(empty($res)){
+            return array("code"=>0);
+        }else{
+            return array("code"=>1);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * 下载
+     */
+    public function word_download(Request $request)
+    {
+        $file_name = $request->input("file_name");
+        $file_info =DB::table("ai_dis")->where("file_name",$file_name)->first();
+        $file_info = json_encode($file_info,true);
+        $file_info = json_decode($file_info,true);
+        $this->file_upload->fileDownload($file_info["path"]);
     }
 
 }

@@ -32,7 +32,8 @@ Route::group($attributes,function (Router $router) {
     $router->any('word', "WordsDistinguishController@wordUpload")->name('word');
     $router->any('webDis', "WordsDistinguishController@webDis")->name('webDis');
     $router->any('createFileName', "WordsDistinguishController@createFileName")->name('createFileName');
-
+    $router->any('download_check', "WordsDistinguishController@download_check")->name('download_check');
+    $router->any('word_download', "WordsDistinguishController@word_download")->name('word_download');
 });
 //Route::get('/voice', function(){
 //    dump(32);
