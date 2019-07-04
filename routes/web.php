@@ -34,3 +34,5 @@ Route::group( ['prefix'=> 'wechat'], function (Router $router) {
     $router->any('/qrcode', 'WeChatController@qrcode');
 
 });
+
+Route::any('Api_getVoice', 'VoiceComposeController@Api_getVoice')->name('Api_getVoice');

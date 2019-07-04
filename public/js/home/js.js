@@ -51,7 +51,8 @@ $('.slide_img img').click(function() {
 $('.slide_gem .slide_top .slide_navbar ul li').click(function(){
 	var n = $(this).index();
 	$(this).addClass('on').siblings().removeClass('on');
-	$('.fadines .itemg').eq(n).show().siblings().hide()
+	$('.fadines .itemg').eq(n).show().siblings().hide();
+	$('.slide_gem .slide_top .fadines ul li').siblings().removeClass('on');
 });
 
 

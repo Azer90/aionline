@@ -112,7 +112,7 @@
 </div>
 @extends('web.layouts.footer')
 
-<script type="text/javascript" src="{{asset('js/home/layer.js')}}" ></script>
+
 <script>
     var uploader = WebUploader.create({
         swf: 'swf/Uploader.swf',
