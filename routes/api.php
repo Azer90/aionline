@@ -28,11 +28,13 @@ Route::group($attributes,function (Router $router) {
     $router->any('voice', "VoiceController@voiceDistinguish")->name('voice');
     $router->any('formatConversion', "VoiceController@formatConversion")->name('formatConversion');
     $router->any('fileDownload', "VoiceController@fileDownload")->name('fileDownload');
-    $router->any('ImageEnlarge', "ImageProcessController@ImageEnlarge")->name('ImageEnlarge');
     $router->any('word', "WordsDistinguishController@wordUpload")->name('word');
     $router->any('webDis', "WordsDistinguishController@webDis")->name('webDis');
     $router->any('createFileName', "WordsDistinguishController@createFileName")->name('createFileName');
-
+    $router->any('download_check', "WordsDistinguishController@download_check")->name('download_check');
+    $router->any('word_download', "WordsDistinguishController@word_download")->name('word_download');
+    $router->any('follow', "WordsDistinguishController@follow")->name('follow');
+    $router->any('wordUpload', "ImageProcessController@wordUpload")->name('wordUpload');
 });
 //Route::get('/voice', function(){
 //    dump(32);

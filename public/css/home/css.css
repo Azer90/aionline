@@ -604,8 +604,8 @@ footer {
   height: 543px;
   position: relative; }
 
-.src .src_box{ width: 50%; height: 100%; right: 0; top: 0; background: rgba(255,255,255,0.6); position: absolute;}
-.src .src_box #dragIcon{height: 100%; width: 42px; background:url(../../images/imgs_03.png); transform: translateX(-50%); top: 0;}
+.src .src_box{ width: 50%; height: 100%; right: 0; top: 0; background: rgba(255,255,255,0.3); position: absolute;}
+.src .src_box .dragIcon{height: 100%; width: 42px; background:url(../../images/imgs_03.png); transform: translateX(-50%); top: 0;}
   
   .src .imgs {
     width: 100%;
