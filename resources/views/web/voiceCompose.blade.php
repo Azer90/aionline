@@ -310,7 +310,7 @@
             var speech_rate=$('#spans').text();
             var token="{{csrf_token()}}";
             var voice=$('.slide_gem .slide_top .fadines ul .on').data('value');
-            //console.log();
+
             $.ajax({
                 url:host+"/Api_getVoice",
                 dataType:"json",

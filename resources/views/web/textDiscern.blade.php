@@ -798,26 +798,33 @@
     /**
      * 轮询
      */
+
     function polling() {
         var con = 0;
+
         var time = setTimeout(function () {
             $.ajax({
-                url:host+"/api/download_check",
+                url:host+"/api/follow",
                 type:"post",
                 dataType: "json",
-                data:{user_id:user_id},
+                data:{user_id:user_id,file_name:file_name},
                 success:function (res) {
                     con++;
                     if(res.code==1){
-                        location.href=host+"/api/word_download?file_name="+file_name;
+                        $(".qr").hide();
+                        if(uploader.options.formData.dis_type==6){
+                            location.href=res.path;
+                        }else{
+                            location.href=host+"/api/word_download?file_name="+file_name;
+                        }
                     }else{
                         if(con<100){
-                            time;
+                            polling();
                         }
                     }
                 }
             })
-        },100)
+        },500)
     }
 
 </script>

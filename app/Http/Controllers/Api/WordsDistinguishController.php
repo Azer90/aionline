@@ -293,7 +293,12 @@ class WordsDistinguishController extends Controller
 
         if(empty($info["user_id"])){
             $wechat = new WeChatController();
-            $res = $wechat->qrcode();
+            $qr_info = $wechat->qrcode();
+            $qr_info = $qr_info->getData();
+            $res=json_encode($qr_info,true);
+            $res=json_decode($res,true);
+
+
             $res["download_code"]=0;
             return $res;
         }else{
@@ -312,9 +317,13 @@ class WordsDistinguishController extends Controller
         $user_id = $request->input("user_id");
         $res = WechatUsers::where("user_id",$user_id)->first();
         if(empty($res)){
-            return array("code"=>0);
+            return array("code"=>0,"path"=>"");
         }else{
-            return array("code"=>1);
+            $file_name = $request->input("file_name");
+            $file_info =DB::table("ai_dis")->where("file_name",$file_name)->first();
+            $file_info = json_encode($file_info,true);
+            $file_info = json_decode($file_info,true);
+            return array("code"=>1,"path"=>$file_info["path"]);
         }
     }
 
@@ -326,9 +335,15 @@ class WordsDistinguishController extends Controller
     {
         $file_name = $request->input("file_name");
         $file_info =DB::table("ai_dis")->where("file_name",$file_name)->first();
+
         $file_info = json_encode($file_info,true);
         $file_info = json_decode($file_info,true);
-        $this->file_upload->fileDownload($file_info["path"]);
+        if(preg_match('/(http:\/\/)|(https:\/\/)/i', $file_info["path"])){
+            return $file_info["path"];
+        }else{
+            $this->file_upload->fileDownload($file_info["path"]);
+        };
+
     }
 
 }

@@ -25,84 +25,120 @@ class ImageProcessController extends Controller
     {
         $this->file_upload = new FileUploadClass();
     }
+
+
     /**
-     * 图片无损放大
+     * 图片处理上传
      */
-    public function ImageEnlarge(Request $request)
+    public function wordUpload(Request $request)
     {
+        $handle = $request->input("handle");
         $this->file_upload->fileSave(storage_path('app/uploads/'));
         $upload_info = $this->file_upload->msg;
+        if($upload_info["status"]=="ok"){
+            $res = $this->imgSwitch($handle,$upload_info["info"]);
 
-        $client = new AipImageProcess( $this->app_id, $this->api_key, $this->secret_key);
-        $image = file_get_contents($upload_info["info"]);
-
-        $res = $client->imageQualityEnhance($image);
-        if(isset($res["image"])){
-            $img = $this->base64_image_content($res["image"],storage_path()."/app/tem_img");
-            if($img){
-                return response()->json(["code"=>0,"message"=>"放大成功","data"=>$img]);
+            if(isset($res["error_code"])){
+                return response()->json(["code"=>0,"message"=>$res["error_msg"]]);
             }else{
-                return response()->json(["code"=>0,"message"=>"放大失败"]);
+                return response()->json(["code"=>1,"message"=>"文字识别成功","data"=>$res,"type"=>$handle]);
             }
+        }else{
+            return response()->json(["code"=>0,"message"=>$upload_info["info"]]);
         }
     }
+
+    /**
+     * 图片处理类型选择
+     */
+    public function imgSwitch($handle,$path)
+    {
+        switch ($handle){
+            case 1:
+                $res = $this->removeFog($path);
+                break;
+            case 2:
+                $res = $this->ImageEnlarge($path);
+                break;
+            case 3:
+                $res = $this->coloring($path);
+                break;
+            case 4:
+                $res = $this->stretching($path);
+                break;
+            default: $res = "";
+        }
+        return $res;
+    }
+
 
     /**
      * 图像去雾
      */
-    public function removeFog(Request $request)
+    public function removeFog($path)
     {
-
-        $this->file_upload->fileSave(storage_path('app/uploads/'));
-        $upload_info = $this->file_upload->msg;
-
         $client = new AipImageProcess( $this->app_id, $this->api_key, $this->secret_key);
-        $image = file_get_contents($upload_info["info"]);
+        $image = file_get_contents($path);
 
         $res = $client->dehaze($image);
+
         if(isset($res["image"])) {
+
             $img = $this->base64_image_content($res["image"], storage_path() . "/app/tem_img");
+
             if ($img) {
-                return response()->json(["code" => 0, "message" => "去雾成功", "data" => $img]);
+                return ["code" => 0, "message" => "去雾成功", "data" => $img];
             } else {
-                return response()->json(["code" => 0, "message" => "去雾失败"]);
+                return ["code" => 0, "message" => "去雾失败"];
+            }
+        }
+    }
+
+    /**
+     * 图片无损放大
+     */
+    public function ImageEnlarge($path)
+    {
+        $client = new AipImageProcess( $this->app_id, $this->api_key, $this->secret_key);
+        $image = file_get_contents($path);
+        $res = $client->imageQualityEnhance($image);
+
+        if(isset($res["image"])){
+            $img = $this->base64_image_content($res["image"],storage_path()."/app/tem_img");
+            if($img){
+                return ["code"=>0,"message"=>"放大成功","data"=>$img];
+            }else{
+                return ["code"=>0,"message"=>"放大失败"];
             }
         }
     }
     /**
-     * 上色
+     * 黑白上色
      */
-    public function coloring(Request $request)
+    public function coloring($path)
     {
-        $this->file_upload->fileSave(storage_path('app/uploads/'));//上传图片
-        $upload_info = $this->file_upload->msg;
-        if($upload_info["status"]=="ok"){
-            $base_img = $this->base64EncodeImage($upload_info["info"]);//图片base64转码
-            $token = $this->getAccessToken();
-            $url="https://aip.baidubce.com/rest/2.0/image-process/v1/colourize?access_token=".$token;
-            $data = ["image"=>$base_img];
-            $res = $this->request_post($url,$data);
-            if (isset($res["image"])){
-                $img = $this->base64_image_content($res["image"], storage_path() . "/app/tem_img");//base64还原图片
-                if($img){
-                    return response()->json(["code" => 0, "message" => "上色成功", "data" => $img]);
-                }else{
-                    return response()->json(["code" => 0, "message" => "上色失败"]);
-                }
+        $base_img = $this->base64EncodeImage($path);//图片base64转码
+        $token = $this->getAccessToken();
+        $url="https://aip.baidubce.com/rest/2.0/image-process/v1/colourize?access_token=".$token;
+        $data = ["image"=>$base_img];
+        $res = $this->request_post($url,$data);
+        if (isset($res["image"])){
+            $img = $this->base64_image_content($res["image"], storage_path() . "/app/tem_img");//base64还原图片
+            if($img){
+                return ["code" => 1, "message" => "上色成功", "data" => $img];
+            }else{
+                return ["code" => 0, "message" => "上色失败"];
             }
-        }else{
-            return response()->json(["code" => 0, "message" => $upload_info["info"]]);
         }
+
     }
     /**
      * 拉伸
      */
-    public function stretching(Request $request)
+    public function stretching($path)
     {
-        $this->file_upload->fileSave(storage_path('app/uploads/'));//上传图片
-        $upload_info = $this->file_upload->msg;
-        if($upload_info["status"]=="ok"){
-            $base_img = $this->base64EncodeImage($upload_info["info"]);//图片base64转码
+
+            $base_img = $this->base64EncodeImage($path);//图片base64转码
             $token = $this->getAccessToken();
             $url='https://aip.baidubce.com/rest/2.0/image-process/v1/stretch_restore?access_token=' . $token;
             $data = ["image"=>$base_img];
@@ -110,14 +146,12 @@ class ImageProcessController extends Controller
             if (isset($res["image"])){
                 $img = $this->base64_image_content($res["image"], storage_path() . "/app/tem_img");//base64还原图片
                 if($img){
-                    return response()->json(["code" => 0, "message" => "拉伸修复成功", "data" => $img]);
+                    return ["code" => 1, "message" => "拉伸修复成功", "data" => $img];
                 }else{
-                    return response()->json(["code" => 0, "message" => "拉伸修复失败"]);
+                    return ["code" => 0, "message" => "拉伸修复失败"];
                 }
             }
-        }else{
-            return response()->json(["code" => 0, "message" => $upload_info["info"]]);
-        }
+
     }
     /**
      * 获取accessToken
@@ -149,7 +183,6 @@ class ImageProcessController extends Controller
         if (empty($url) || empty($param)) {
             return false;
         }
-
         $postUrl = $url;
         $curlPost = $param;
         // 初始化curl
@@ -187,16 +220,17 @@ class ImageProcessController extends Controller
         if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_image_content, $result)){
             $type = $result[2];
             $new_file = $path."/".date('Ymd',time())."/";
-        if(!file_exists($new_file)){
-        //检查是否有该文件夹，如果没有就创建，并给予最高权限
-            mkdir($new_file, 0700);
-        }
-        $new_file = $new_file.time().".{$type}";
-        if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $base64_image_content)))){
-            return '/'.$new_file;
-        }else{
-            return false;
-        }
+
+            if(!file_exists($new_file)){
+            //检查是否有该文件夹，如果没有就创建，并给予最高权限
+                mkdir($new_file, 0700);
+            }
+            $new_file = $new_file.time().".{$type}";
+            if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $base64_image_content)))){
+                return '/'.$new_file;
+            }else{
+                return false;
+            }
         }else{
             return false;
         }
