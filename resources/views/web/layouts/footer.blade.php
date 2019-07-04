@@ -43,7 +43,7 @@
 
 <script type="text/javascript" src="{{asset('js/home/swiper.min.js')}}" ></script>
 <script type="text/javascript" src="{{asset('js/home/js.js')}}" ></script>
-
+<script type="text/javascript" src="{{asset('js/home/layer.js')}}" ></script>
 <script>
     document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
     window.onresize = function() {

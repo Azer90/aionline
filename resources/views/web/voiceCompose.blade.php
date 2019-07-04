@@ -42,10 +42,10 @@
             </div>
         </div>
         <img src="images/line_03.jpg" class="line" />
-        <textarea class="gem" name="" rows="" cols="">革命、移动互联网革命尚末落幕,智能革命又像头大象—样撞进人类的生活,激荡着整个世界</textarea>
+        <textarea class="gem" name="" rows="" cols="" placeholder="请输入你需要转换的文字"></textarea>
 
         <div class="ge_ti">
-            <p>体验版最多可输入<span>300</span>个字,超出部分合成将被截断</p>
+            <p>最多可输入<span>300</span>个字,超出部分合成将被截断</p>
         </div>
         <div class="ge_line"></div>
         <div class="slide_gem">
@@ -57,142 +57,134 @@
                         <li>声场景</li>
                         <li>英文场景</li>
                         <li>方言场景</li>
-                        <li>预览版</li>
                     </ul>
                 </div>
                 <div class="fadines">
                     <div class="itemg">
                         <ul>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音A</p>
+                            <li class="on" data-value="Aiqi"><img src="images/yuyin_07.png" />
+                                <p>艾琪，温柔女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音B</p>
+                            <li data-value="Aicheng"><img src="images/yuyin_07.png" />
+                                <p>艾诚，标准男声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音C</p>
+                            <li data-value="Aida"><img src="images/yuyin_07.png" />
+                                <p>艾达，标准男声</p>
                             </li>
-                            <li class="on"><img src="images/yuyin_07.png" />
-                                <p>预览版声音D</p>
+                            <li data-value="Aijia"><img src="images/yuyin_07.png" />
+                                <p>艾佳，标准女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音E</p>
+                            <li data-value="Siqi"><img src="images/yuyin_07.png" />
+                                <p>思琪，温柔女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音F</p>
+                            <li data-value="Sijia"><img src="images/yuyin_07.png" />
+                                <p>思佳，标准女声</p>
                             </li>
-                        </ul>
-                    </div>
-                    <div class="itemg hide">
-                        <ul>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音A1</p>
+                            <li data-value="Sicheng"><img src="images/yuyin_07.png" />
+                                <p>思诚，标准男声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音B</p>
+                            <li data-value="Ruoxi"><img src="images/yuyin_07.png" />
+                                <p>若兮，温柔女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音C</p>
+                            <li data-value="Ninger"><img src="images/yuyin_07.png" />
+                                <p>宁儿，温柔女声</p>
                             </li>
-                            <li class="on"><img src="images/yuyin_07.png" />
-                                <p>预览版声音D</p>
+                            <li data-value="Ruilin"><img src="images/yuyin_07.png" />
+                                <p>瑞琳，标准女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音E</p>
+                            <li data-value="Xiaomeng"><img src="images/yuyin_07.png" />
+                                <p>小梦，标准女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音F</p>
+                            <li data-value="Xiaowei"><img src="images/yuyin_07.png" />
+                                <p>小威，标准男声</p>
                             </li>
-                        </ul>
-                    </div>
-                    <div class="itemg hide">
-                        <ul>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音A2</p>
+                            <li data-value="Xiaoyun"><img src="images/yuyin_07.png" />
+                                <p>小云，标准女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音B</p>
-                            </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音C</p>
-                            </li>
-                            <li class="on"><img src="images/yuyin_07.png" />
-                                <p>预览版声音D</p>
-                            </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音E</p>
-                            </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音F</p>
+                            <li data-value="Xiaogang"><img src="images/yuyin_07.png" />
+                                <p>小刚，标准男声</p>
                             </li>
                         </ul>
                     </div>
                     <div class="itemg hide">
                         <ul>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音A3</p>
+                            <li  data-value="Aixia"><img src="images/yuyin_07.png" />
+                                <p>艾夏，自然女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音B</p>
+                            <li data-value="Aiyue"><img src="images/yuyin_07.png" />
+                                <p>艾悦，温柔女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音C</p>
+                            <li data-value="Aijing"><img src="images/yuyin_07.png" />
+                                <p>艾婧，严厉女声</p>
                             </li>
-                            <li class="on"><img src="images/yuyin_07.png" />
-                                <p>预览版声音D</p>
+                            <li data-value="Aimei"><img src="images/yuyin_07.png" />
+                                <p>艾美，甜美女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音E</p>
+                            <li data-value="Siyue"><img src="images/yuyin_07.png" />
+                                <p>思悦，温柔女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音F</p>
+                            <li data-value="Aiyu"><img src="images/yuyin_07.png" />
+                                <p>艾雨，自然女声</p>
+                            </li>
+                            <li data-value="Xiaomei"><img src="images/yuyin_07.png" />
+                                <p>小美，甜美女声</p>
+                            </li>
+                            <li data-value="Yina"><img src="images/yuyin_07.png" />
+                                <p>伊娜，浙普女声</p>
+                            </li>
+                            <li data-value="Sijing"><img src="images/yuyin_07.png" />
+                                <p>思婧，严厉女声</p>
+                            </li>
+                            <li data-value="Xiaoxue"><img src="images/yuyin_07.png" />
+                                <p>小雪，温柔女声</p>
+                            </li>
+                            <li data-value="Amei"><img src="images/yuyin_07.png" />
+                                <p>阿美，甜美女声</p>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="itemg hide">
+                        <ul>
+                            <li data-value="Aibao"><img src="images/yuyin_07.png" />
+                                <p>艾宝，萝莉女声</p>
+                            </li>
+                            <li data-value="Xiaobei"><img src="images/yuyin_07.png" />
+                                <p>小北，萝莉女声</p>
+                            </li>
+                            <li data-value="Sitong"><img src="images/yuyin_07.png" />
+                                <p>思彤，儿童音</p>
                             </li>
                         </ul>
                     </div>
                     <div class="itemg hide">
                         <ul>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音A</p>
+                            <li  data-value="Olivia"><img src="images/yuyin_07.png" />
+                                <p>Olivia，英音女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音B</p>
+                            <li data-value="William"><img src="images/yuyin_07.png" />
+                                <p>William，英音男声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音C</p>
+                            <li data-value="Wendy"><img src="images/yuyin_07.png" />
+                                <p>Wendy，英音女声</p>
                             </li>
-                            <li class="on"><img src="images/yuyin_07.png" />
-                                <p>预览版声音D</p>
+                            <li  data-value="Halen"><img src="images/yuyin_07.png" />
+                                <p>Halen，英音女声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音E</p>
+                            <li data-value="Harry"><img src="images/yuyin_07.png" />
+                                <p>Harry，英音男声</p>
                             </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音F</p>
-                            </li>
+
                         </ul>
                     </div>
                     <div class="itemg hide">
                         <ul>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音A</p>
-                            </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音B</p>
-                            </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音C</p>
-                            </li>
-                            <li class="on"><img src="images/yuyin_07.png" />
-                                <p>预览版声音D</p>
-                            </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音E</p>
-                            </li>
-                            <li><img src="images/yuyin_07.png" />
-                                <p>预览版声音F</p>
+                            <li data-value="Shanshan"><img src="images/yuyin_07.png" />
+                                <p>姗姗，粤语女声</p>
                             </li>
                         </ul>
                     </div>
+
                 </div>
             </div>
             <div class="yins">
@@ -211,16 +203,15 @@
             </div>
             <div class="plays">
                 <div class="fl">
-                    <div>
+                    <div class="bofan">
                         <img src="images/yuyin_11.jpg" />
-                        <p>播放</p>
+                        <p>立即合成</p>
                     </div>
                     <div>
                         <img src="images/yuyin_10.jpg" />
                         <p>下载</p>
                     </div>
                 </div>
-                <span>语音合成声音定制</span>
             </div>
         </div>
         <div class="item_dis">
@@ -264,7 +255,7 @@
         var pro = new Progress('.progress', {
             val: 0, //初始值 取值范围：0-100
             size: 4, //控件大小默认值为10，可结合css自行修改样式
-            precision: 2, //val精度配置，默认保留0位小数,最多配位4位
+            precision: 0, //val精度配置，默认保留0位小数,最多配位4位
             drag: true, //默认开启拖拽，关闭设为false，不配置默认为true
             direction: 'horizontal', //方向 默认水平 vertical 垂直
             tip: {
@@ -273,9 +264,9 @@
             },
             //获取val回调方法
             getVal: function(el) {
-                // console.log(el) //这个进度条对象
-                console.log(el.val);
-                $('#span').html(el.val + '%')
+                 //console.log(el) //这个进度条对象
+                //console.log(el.val);
+                $('#span').html(el.val)
             }
         });
 
@@ -283,7 +274,7 @@
         var pro1 = new Progress('.progress1', {
             val: 0, //初始值 取值范围：0-100
             size: 4, //控件大小默认值为10，可结合css自行修改样式
-            precision: 2, //val精度配置，默认保留0位小数,最多配位4位
+            precision: 0, //val精度配置，默认保留0位小数,最多配位4位
             drag: true, //默认开启拖拽，关闭设为false，不配置默认为true
             direction: 'horizontal', //方向 默认水平 vertical 垂直
 
@@ -303,12 +294,36 @@
             //获取val回调方法
             getVal: function(el) {
                 // console.log(el) //这个进度条对象
-                console.log(el.val);
+                //console.log(el.val);
                 $('#spans').html(el.val * 3)
             }
         });
 
-        pro1.onLoad(false)
+        pro1.onLoad(false);
+
+        $(".bofan").on("click",function () {
+            var content=$('.gem').val();
+            if(content==''){
+                layer.alert('请输入你要转换的文字');
+            }
+            var volume=$('#span').text();
+            var speech_rate=$('#spans').text();
+            var token="{{csrf_token()}}";
+            var voice=$('.slide_gem .slide_top .fadines ul .on').data('value');
+            //console.log();
+            $.ajax({
+                url:host+"/Api_getVoice",
+                dataType:"json",
+                type:"post",
+                data:{'content':content,'volume':volume,'speech_rate':speech_rate,'voice':voice,'_token':token},
+                beforeSend:function(){
+
+                },
+                success:function (res) {
+                    console.log(res);
+                }
+            })
+        })
     </script>
 
 @endsection
