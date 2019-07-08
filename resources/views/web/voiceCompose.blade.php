@@ -45,7 +45,7 @@
         <textarea class="gem" name="" rows="" cols="" placeholder="请输入你需要转换的文字"></textarea>
 
         <div class="ge_ti">
-            <p>最多可输入<span>300</span>个字,超出部分合成将被截断</p>
+            <p>最多可输入<span>300</span>个字,已输入<span class="lets">0</span>个字,超出部分合成将被截断</p>
         </div>
         <div class="ge_line"></div>
         <div class="slide_gem">
@@ -204,7 +204,7 @@
             <div class="plays">
                 <div class="fl">
                     <div class="bofan">
-                        <img src="images/yuyin_11.jpg" />
+                        <img width="22" height="22" src="images/yuyin_11.jpg" />
                         <p>立即合成</p>
                     </div>
                     <div>
@@ -301,10 +301,16 @@
 
         pro1.onLoad(false);
 
+        $('.gem').on('input propertychange',function () {
+            var resultStr = $(this).val().replace(/[\r\n\s]/g, ""); //去掉回车换行
+           var lent=resultStr.length;
+           $('.lets').text(lent);
+        });
         $(".bofan").on("click",function () {
             var content=$('.gem').val();
             if(content==''){
                 layer.alert('请输入你要转换的文字');
+                return false;
             }
             var volume=$('#span').text();
             var speech_rate=$('#spans').text();
@@ -317,7 +323,7 @@
                 type:"post",
                 data:{'content':content,'volume':volume,'speech_rate':speech_rate,'voice':voice,'_token':token},
                 beforeSend:function(){
-
+                    $('.bofan img').attr('src','images/loading1.gif');
                 },
                 success:function (res) {
                     console.log(res);

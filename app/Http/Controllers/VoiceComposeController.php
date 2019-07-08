@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Link;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VoiceComposeController extends Controller
 {
@@ -33,15 +34,39 @@ class VoiceComposeController extends Controller
     public function Api_getVoice(Request $request){
         $voice_data=$request->all();
         $url='118.31.225.109:8088/getVoice';
+        $content=$voice_data['content'];
+        $content=myTrim($content);
+        $str_len=mb_strlen($content,'utf-8');
+        if($str_len>300){
+            $content= mb_substr($content,0,300,'utf-8');
+        }
+        if(in_array($voice_data['voice'],['Olivia','William','Wendy','Halen','Harry'])){
+            if(!preg_match("/^[a-zA-Z\s]+$/",$content)){
+                return response()->json(["code"=>101,"message"=>"请输入英文"]);
+            }
+        }
+
         $data=[
             'format'=>'mp3',
             'voice'=>$voice_data['voice'],
             'pitchRate'=>$voice_data['volume'],
             'speechRate'=>$voice_data['speech_rate'],
-            'text'=>$voice_data['content'],
+            'text'=>$content,
         ];
+        //文件
+        $file_name = date("YmdHis").uniqid().".mp3";
+        if(!file_exists(public_path("/voice/"))){
+            mkdir(public_path("/voice/"),0777);
+        }
+        $path = public_path("/voice/").$file_name;
         $result=curl_post($url,$data,$https=false);
-        file_put_contents(storage_path('app/voice/test.mp3'), $result);
-        return response()->json(["code"=>200,"message"=>"识别失败","data"=>'123123']);
+        $rest=file_put_contents($path, $result);
+        if($rest){
+            DB::table("ai_dis")->insert(["path"=>$path,"file_name"=>$file_name,"create_time"=>date("Y-m-d H:i:s",time())]);
+            return response()->json(["code"=>200,"message"=>"语音合成成功","data"=>['file_name'=>$file_name,'str_len'=>$str_len]]);
+        }else{
+            return response()->json(["code"=>100,"message"=>"语音合成失败"]);
+        }
+
     }
 }

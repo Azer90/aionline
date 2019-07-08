@@ -52,7 +52,7 @@ $('.slide_gem .slide_top .slide_navbar ul li').click(function(){
 	var n = $(this).index();
 	$(this).addClass('on').siblings().removeClass('on');
 	$('.fadines .itemg').eq(n).show().siblings().hide();
-	$('.slide_gem .slide_top .fadines ul li').siblings().removeClass('on');
+	$('.slide_gem .slide_top .fadines ul li').removeClass('on');
 });
 
 

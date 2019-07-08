@@ -43,3 +43,11 @@ function curl_post($url,$data=array(),$https=true)
     curl_close($curl);                                     //关闭CURL 并且释放系统资源
     return $result;
 }
+
+
+function myTrim($str)
+{
+    $search = array(" ","　","\n","\r","\t");
+    $replace = array("","","","","");
+    return str_replace($search, $replace, $str);
+}
