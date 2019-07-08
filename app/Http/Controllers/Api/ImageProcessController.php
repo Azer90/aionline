@@ -21,10 +21,12 @@ class ImageProcessController extends Controller
     private $api_key = 'Mwi5PAfF3Wkn025z3qyAAXtF';
     private $secret_key = 'Xx8081FEtLFMTfCW1BFtVDfIhI6mqdIQ';
     private $file_upload = "";
+    private $client = "";
 
     public function __construct()
     {
         $this->file_upload = new FileUploadClass();
+        $this->client = new AipImageProcess( $this->app_id, $this->api_key, $this->secret_key);
     }
 
 
@@ -34,7 +36,7 @@ class ImageProcessController extends Controller
     public function wordUpload(Request $request)
     {
         $handle = $request->input("handle");
-        $this->file_upload->fileSave(storage_path('app/uploads/'));
+        $this->file_upload->fileSave(storage_path('app/uploads/'),4*1024*1024);
         $upload_info = $this->file_upload->msg;
         if($upload_info["status"]=="ok"){
             set_time_limit(120);
@@ -84,10 +86,9 @@ class ImageProcessController extends Controller
      */
     public function removeFog($path)
     {
-        $client = new AipImageProcess( $this->app_id, $this->api_key, $this->secret_key);
         $image = file_get_contents($path);
 
-        $res = $client->dehaze($image);
+        $res = $this->client->dehaze($image);
 
         if(isset($res["image"])) {
 
@@ -106,9 +107,9 @@ class ImageProcessController extends Controller
      */
     public function ImageEnlarge($path)
     {
-        $client = new AipImageProcess( $this->app_id, $this->api_key, $this->secret_key);
+
         $image = file_get_contents($path);
-        $res = $client->imageQualityEnhance($image);
+        $res = $this->client->imageQualityEnhance($image);
 
         if(isset($res["image"])){
             $img = $this->base64_image_content($res["image"],storage_path()."/app/tem_img");
@@ -125,18 +126,10 @@ class ImageProcessController extends Controller
      */
     public function coloring($path)
     {
-        $base_img = $this->base64EncodeImage($path);//图片base64转码
-
-        $token = $this->getAccessToken();
-        $url="https://aip.baidubce.com/rest/2.0/image-process/v1/colourize?access_token=".$token["access_token"];
-
-        $data = ["image"=>$base_img];
-        $res = $this->request_post($url,$data);
-        $res = json_decode($res,true);
-dump($res);
+        $image = file_get_contents($path);
+        $res = $this->client->colouring($image);
         if (isset($res["image"])){
             $img = $this->base64_image_content($res["image"], storage_path() . "/app/tem_img");//base64还原图片
-
             @unlink($path);
             if($img){
                 return ["code" => 1, "message" => "上色成功", "data" => $img];
@@ -152,21 +145,18 @@ dump($res);
      */
     public function stretching($path)
     {
+        $image = file_get_contents($path);
+        $res = $this->client->stretching($image);
 
-            $base_img = $this->base64EncodeImage($path);//图片base64转码
-            $token = $this->getAccessToken();
-            $url='https://aip.baidubce.com/rest/2.0/image-process/v1/stretch_restore?access_token=' . $token;
-            $data = ["image"=>$base_img];
-            $res = $this->request_post($url,$data);
-            if (isset($res["image"])){
-                $img = $this->base64_image_content($res["image"], storage_path() . "/app/tem_img");//base64还原图片
-                @unlink($path);
-                if($img){
-                    return ["code" => 1, "message" => "拉伸修复成功", "data" => $img];
-                }else{
-                    return ["code" => 0, "message" => "拉伸修复失败"];
-                }
+        if (isset($res["image"])){
+            $img = $this->base64_image_content($res["image"], storage_path() . "/app/tem_img");//base64还原图片
+            @unlink($path);
+            if($img){
+                return ["code" => 1, "message" => "拉伸修复成功", "data" => $img];
+            }else{
+                return ["code" => 0, "message" => "拉伸修复失败"];
             }
+        }
 
     }
 
@@ -209,7 +199,7 @@ dump($res);
         // 初始化curl
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $postUrl);
-        curl_setopt($curl, CURLOPT_HEADER, []);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
         // 要求结果为字符串且输出到屏幕上
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
@@ -219,7 +209,6 @@ dump($res);
         // 运行curl
         $data = curl_exec($curl);
         curl_close($curl);
-
         return $data;
     }
 

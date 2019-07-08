@@ -6,6 +6,25 @@
     .btns_grow a:hover{
         color: white;
     }
+    .qr{
+        display: none;
+        width: 100%;
+        position: absolute;
+        top:0;
+        left: 0;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, .4);
+    }
+    .qr div{
+        margin: 40% 50%;
+        transform: translateX(-50%);
+        /*transform: translateY(-50%);*/
+        width: 200px;
+        background: #fff;
+    }
+    .qr img{
+        width: 200px;
+    }
 </style>
 <body>
 @include('web.layouts.nav')
@@ -53,7 +72,7 @@
         <div class="gem1">
             <div class="btns_grow">
                 <div class="fl" id="select">点击选择文件</div>
-                <a href="#" class="fr download" style="display: none;margin-left: 20px">立即下载</a>
+                <div class="fr download" style="display: none;margin-left: 20px">立即下载</div>
             </div>
             <p>请上传需要转换的语音文件，最大支持20M，<br />支持的文件格式：<span>MP3，MAV，M4A，WMA，AAC，FLAC，AC3，M4R，APE，OGG，WAV格式</span></p>
         </div>
@@ -110,6 +129,12 @@
         </div>
     </div>
 </div>
+<div class="qr">
+    <div>
+        <p style="padding-left: 10px">扫描二维码关注公众号后即可下载</p>
+        <img src="" alt="">
+    </div>
+</div>
 @extends('web.layouts.footer')
 
 
@@ -156,7 +181,8 @@
 
     });
 
-
+    var file_name = "";
+    var user_id = "";
 //上传成功
     uploader.on( 'uploadSuccess', function( file,response  ) {
 
@@ -174,7 +200,7 @@
                         if(res.code==1){
                             $(".sl_zh1:eq(0)").attr("class","sl_zh")
                             $(".download").show();
-                            $(".fr").attr("href","/api/fileDownload?file="+res.data);
+                            file_name = res.data;
                         }else{
                             layer.alert(res.message);
                         }
@@ -186,16 +212,73 @@
             }
     });
 
+    $(".download").on("click",function () {
+
+        $.ajax({
+            url:host+"/api/download_check",
+            type:"post",
+            dataType: "json",
+            data:{file_name:file_name,user_id:user_id},
+            success:function (res) {
+                user_id = res.user_id;
+                if(res.download_code==1){
+                    location.href=host+"/api/word_download?file_name="+file_name;
+                }else{
+                    $(".qr img").attr("src",res.qrcode_url);
+                    $(".qr").show();
+                    polling();
+                }
+            }
+        })
+    })
+
+    /**
+     * 轮询
+     */
+
+    function polling() {
+        var con = 0;
+
+        var time = setTimeout(function () {
+            $.ajax({
+                url:host+"/api/follow",
+                type:"post",
+                dataType: "json",
+                data:{user_id:user_id,file_name:file_name},
+                success:function (res) {
+                    con++;
+                    if(res.code==1){
+                        $(".qr").hide();
+                        if(uploader.options.formData.dis_type==6){
+                            location.href=res.path;
+                        }else{
+                            location.href=host+"/api/word_download?file_name="+file_name;
+                        }
+                    }else{
+                        if(con<100){
+                            polling();
+                        }
+                    }
+                }
+            })
+        },500)
+    }
+
+
+
+
     /**
      * 计时
      * @constructor
      */
     function time() {
         count_down();
+        var conversion_time ="";
         var minute_ind = 0;
         // var minute_ten = 0;
         var second_ind = 0;
         var second_ten = 0;
+        clearTimeout(conversion_time);
          conversion_time=setInterval(function () {
             $(".conversion_time").text(minute_ind+"："+second_ten+second_ind)
             if(second_ind<9){

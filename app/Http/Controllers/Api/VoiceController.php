@@ -65,6 +65,7 @@ class VoiceController extends Controller
             'ffmpeg.threads' => 12,   // The number of threads that FFMpeg should use
         );
         $ffmpeg = FFMpeg::create($a);
+
         $audio = $ffmpeg->open($path);
         $info = $ffmpeg->getFile($path);
         $duration = $info["duration"];//时长
@@ -135,13 +136,6 @@ class VoiceController extends Controller
 
     }
 
-    /**
-     * 是否关注
-     */
-    public function isFollow()
-    {
-        
-    }
     /**
      * 文件下载
      */

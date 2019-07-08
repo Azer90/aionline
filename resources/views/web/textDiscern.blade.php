@@ -24,10 +24,15 @@
         z-index: 10;
         background-color: rgba(0, 0, 0, .4);
     }
-    .qr img{
-        margin: 50% 50%;
+    .qr div{
+        margin: 40% 50%;
         transform: translateX(-50%);
         /*transform: translateY(-50%);*/
+        width: 200px;
+        background: #fff;
+    }
+    .qr img{
+        width: 200px;
     }
 </style>
 <body>
@@ -510,7 +515,10 @@
     </div>
 </div>
 <div class="qr">
-    <img src="" alt="">
+    <div>
+        <p style="padding-left: 10px">扫描二维码关注公众号后即可下载</p>
+        <img src="" alt="">
+    </div>
 </div>
 @extends('web.layouts.footer')
 <script type="text/javascript" src="{{asset('js/home/layer.js')}}" ></script>
