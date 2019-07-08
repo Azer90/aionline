@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Lib\imageProcessSdk\AipImageProcess;
 use App\Http\Controllers\Api\fileHandle\FileUploadClass;
 
@@ -36,12 +37,18 @@ class ImageProcessController extends Controller
         $this->file_upload->fileSave(storage_path('app/uploads/'));
         $upload_info = $this->file_upload->msg;
         if($upload_info["status"]=="ok"){
+            set_time_limit(120);
             $res = $this->imgSwitch($handle,$upload_info["info"]);
 
             if(isset($res["error_code"])){
-                return response()->json(["code"=>0,"message"=>$res["error_msg"]]);
+                return $res;
             }else{
-                return response()->json(["code"=>1,"message"=>"文字识别成功","data"=>$res,"type"=>$handle]);
+                if($res["code"]==1){
+                    return response()->json(["code"=>1,"message"=>$res["message"],"data"=>$res["data"],"type"=>$handle]);
+                }else{
+                    return response()->json(["code"=>0,"message"=>$res["message"]]);
+                }
+
             }
         }else{
             return response()->json(["code"=>0,"message"=>$upload_info["info"]]);
@@ -85,9 +92,9 @@ class ImageProcessController extends Controller
         if(isset($res["image"])) {
 
             $img = $this->base64_image_content($res["image"], storage_path() . "/app/tem_img");
-
+            @unlink($path);
             if ($img) {
-                return ["code" => 0, "message" => "去雾成功", "data" => $img];
+                return ["code" => 1, "message" => "去雾成功", "data" => $img];
             } else {
                 return ["code" => 0, "message" => "去雾失败"];
             }
@@ -105,8 +112,9 @@ class ImageProcessController extends Controller
 
         if(isset($res["image"])){
             $img = $this->base64_image_content($res["image"],storage_path()."/app/tem_img");
+            @unlink($path);
             if($img){
-                return ["code"=>0,"message"=>"放大成功","data"=>$img];
+                return ["code"=>1,"message"=>"放大成功","data"=>$img];
             }else{
                 return ["code"=>0,"message"=>"放大失败"];
             }
@@ -118,19 +126,26 @@ class ImageProcessController extends Controller
     public function coloring($path)
     {
         $base_img = $this->base64EncodeImage($path);//图片base64转码
+
         $token = $this->getAccessToken();
-        $url="https://aip.baidubce.com/rest/2.0/image-process/v1/colourize?access_token=".$token;
+        $url="https://aip.baidubce.com/rest/2.0/image-process/v1/colourize?access_token=".$token["access_token"];
+
         $data = ["image"=>$base_img];
         $res = $this->request_post($url,$data);
+        $res = json_decode($res,true);
+dump($res);
         if (isset($res["image"])){
             $img = $this->base64_image_content($res["image"], storage_path() . "/app/tem_img");//base64还原图片
+
+            @unlink($path);
             if($img){
                 return ["code" => 1, "message" => "上色成功", "data" => $img];
             }else{
                 return ["code" => 0, "message" => "上色失败"];
             }
+        }else{
+            return ["code" => 0, "message" => "上色失败"];
         }
-
     }
     /**
      * 拉伸
@@ -145,6 +160,7 @@ class ImageProcessController extends Controller
             $res = $this->request_post($url,$data);
             if (isset($res["image"])){
                 $img = $this->base64_image_content($res["image"], storage_path() . "/app/tem_img");//base64还原图片
+                @unlink($path);
                 if($img){
                     return ["code" => 1, "message" => "拉伸修复成功", "data" => $img];
                 }else{
@@ -153,6 +169,11 @@ class ImageProcessController extends Controller
             }
 
     }
+
+
+
+
+
     /**
      * 获取accessToken
      */
@@ -188,7 +209,7 @@ class ImageProcessController extends Controller
         // 初始化curl
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $postUrl);
-        curl_setopt($curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl, CURLOPT_HEADER, []);
         // 要求结果为字符串且输出到屏幕上
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
@@ -202,6 +223,7 @@ class ImageProcessController extends Controller
         return $data;
     }
 
+
     /**
      * @param $image_file
      * @return string
@@ -211,28 +233,34 @@ class ImageProcessController extends Controller
         $base64_image = '';
         $image_info = getimagesize($image_file);
         $image_data = fread(fopen($image_file, 'r'), filesize($image_file));
-        $base64_image = 'data:' . $image_info['mime'] . ';base64,' . chunk_split(base64_encode($image_data));
+//        $base64_image = 'data:' . $image_info['mime'] . ';base64,' . base64_encode($image_data);
+        $base64_image = base64_encode($image_data);
         return $base64_image;
     }
     /* base64格式编码转换为图片并保存对应文件夹 */
     function base64_image_content($base64_image_content,$path){
+
         //匹配出图片的格式
-        if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_image_content, $result)){
-            $type = $result[2];
+
+//        if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_image_content, $result)){
+//            $type = $result[2];
+            $type = 'jpg';
             $new_file = $path."/".date('Ymd',time())."/";
 
             if(!file_exists($new_file)){
             //检查是否有该文件夹，如果没有就创建，并给予最高权限
-                mkdir($new_file, 0700);
+                mkdir($new_file, 777);
             }
-            $new_file = $new_file.time().".{$type}";
-            if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $base64_image_content)))){
-                return '/'.$new_file;
+            $new_file_name = time().".{$type}";
+            $new_file = $new_file.$new_file_name;
+            if (file_put_contents($new_file, base64_decode($base64_image_content))){
+                DB::table("ai_dis")->insert(["path"=>$new_file,"file_name"=>$new_file_name,"create_time"=>date("Y-m-d H:i:s",time())]);
+                return $new_file_name;
             }else{
                 return false;
             }
-        }else{
-            return false;
-        }
+//        }else{
+//            return false;
+//        }
     }
 }
