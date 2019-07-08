@@ -203,13 +203,14 @@
             </div>
             <div class="plays">
                 <div class="fl">
-                    <div class="bofan">
+                    <div class="bofan" style="cursor: pointer;">
                         <img width="22" height="22" src="images/yuyin_11.jpg" />
-                        <p>立即合成</p>
+                        <p class="compose">立即合成</p>
                     </div>
-                    <div>
+
+                    <div class="download">
                         <img src="images/yuyin_10.jpg" />
-                        <p>下载</p>
+                        <p >下载</p>
                     </div>
                 </div>
             </div>
@@ -246,12 +247,19 @@
         </div>
     </div>
 </div>
+<audio id="myMusic">
+    <source src="" type="audio/mpeg" />
+</audio>
+<div class="qr">
+    <img src="" alt="">
+</div>
 @extends('web.layouts.footer')
 
 @section('script')
     <script type="text/javascript" src="{{asset('js/home/progressjs.js')}}"></script>
     <script>
         var timeID;
+        var file_name ="",user_id="";
         var pro = new Progress('.progress', {
             val: 0, //初始值 取值范围：0-100
             size: 4, //控件大小默认值为10，可结合css自行修改样式
@@ -264,9 +272,16 @@
             },
             //获取val回调方法
             getVal: function(el) {
-                 //console.log(el) //这个进度条对象
-                //console.log(el.val);
-                $('#span').html(el.val)
+                $('#span').html(el.val);
+                $('.bofan img').attr('src','images/yuyin_11.jpg');
+                $('.compose').text('立即合成');
+                var audio = document.getElementById('myMusic');
+                if(audio!==null){
+                    //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+                    if(!audio.paused) {
+                        audio.pause();// 这个就是暂停
+                    }
+                }
             }
         });
 
@@ -293,9 +308,16 @@
             },
             //获取val回调方法
             getVal: function(el) {
-                // console.log(el) //这个进度条对象
-                //console.log(el.val);
-                $('#spans').html(el.val * 3)
+                $('#spans').html(el.val * 3);
+                $('.bofan img').attr('src','images/yuyin_11.jpg');
+                $('.compose').text('立即合成');
+                var audio = document.getElementById('myMusic');
+                if(audio!==null){
+                    //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+                    if(!audio.paused) {
+                        audio.pause();// 这个就是暂停
+                    }
+                }
             }
         });
 
@@ -305,8 +327,50 @@
             var resultStr = $(this).val().replace(/[\r\n\s]/g, ""); //去掉回车换行
            var lent=resultStr.length;
            $('.lets').text(lent);
+            $('.bofan img').attr('src','images/yuyin_11.jpg');
+            $('.compose').text('立即合成');
+            var audio = document.getElementById('myMusic');
+            if(audio!==null){
+                //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+                if(!audio.paused) {
+                    audio.pause();// 这个就是暂停
+                }
+            }
         });
         $(".bofan").on("click",function () {
+           var compose= $('.compose').text();
+            var audio = document.getElementById('myMusic');
+            if(compose=='播放'||compose=='继续播放'){
+
+                if(audio!==null){
+                    //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+                    if(audio.paused) {
+                        $('.bofan img').attr('src','images/zt.jpg');
+                        $('.compose').text('暂停');
+                        audio.play();//audio.play();// 这个就是播放
+                        audio.onended = function()
+                        {
+                            $('.bofan img').attr('src','images/yuyin_11.jpg');
+                            $('.compose').text('播放');
+                        };
+                    }else{
+                        audio.pause();// 这个就是暂停
+                    }
+                }
+                return false;
+            }
+            if(compose=='暂停'){
+
+                if(audio!==null){
+                    //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+                    if(!audio.paused) {
+                        $('.bofan img').attr('src','images/yuyin_11.jpg');
+                        $('.compose').text('继续播放');
+                        audio.pause();// 这个就是暂停
+                    }
+                }
+                return false;
+            }
             var content=$('.gem').val();
             if(content==''){
                 layer.alert('请输入你要转换的文字');
@@ -316,17 +380,67 @@
             var speech_rate=$('#spans').text();
             var token="{{csrf_token()}}";
             var voice=$('.slide_gem .slide_top .fadines ul .on').data('value');
-
+            if(!voice){
+                layer.alert('请选择发音人');
+                return false;
+            }
             $.ajax({
                 url:host+"/Api_getVoice",
                 dataType:"json",
                 type:"post",
                 data:{'content':content,'volume':volume,'speech_rate':speech_rate,'voice':voice,'_token':token},
                 beforeSend:function(){
+                    $('.bofan').css('pointer-events','none');
                     $('.bofan img').attr('src','images/loading1.gif');
                 },
                 success:function (res) {
-                    console.log(res);
+                    $('.bofan').css('pointer-events','auto');
+                   if(res.code==200){
+                       $('.bofan img').attr('src','images/zt.jpg');
+                        $('.compose').text('暂停');
+                       $('#myMusic').attr('src','/voice/'+res.data.file_name);
+                       file_name = res.data.file_name;
+                       var audio = document.getElementById('myMusic');
+                       if(audio!==null){
+                           //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+                           if(audio.paused) {
+                               audio.play();//audio.play();// 这个就是播放
+                               audio.onended = function()
+                               {
+                                   $('.bofan img').attr('src','images/yuyin_11.jpg');
+                                   $('.compose').text('播放');
+                               };
+                           }else{
+                               audio.pause();// 这个就是暂停
+                           }
+                       }
+                   }else {
+                       $('.bofan img').attr('src','images/yuyin_11.jpg');
+                       layer.alert(res.message);
+                       return false;
+                   }
+                }
+            })
+        });
+        $(".download").on("click",function () {
+            if(file_name==''){
+                layer.alert('请先点击立即合成');
+                return false;
+            }
+            $.ajax({
+                url:host+"/api/download_check",
+                type:"post",
+                dataType: "json",
+                data:{file_name:file_name,user_id:user_id},
+                success:function (res) {
+                    user_id = res.user_id;
+                    if(res.download_code==1){
+                        location.href=host+"/api/word_download?file_name="+file_name;
+                    }else{
+                        $(".qr img").attr("src",res.qrcode_url);
+                        $(".qr").show();
+                        //polling();
+                    }
                 }
             })
         })

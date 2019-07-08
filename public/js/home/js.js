@@ -53,6 +53,15 @@ $('.slide_gem .slide_top .slide_navbar ul li').click(function(){
 	$(this).addClass('on').siblings().removeClass('on');
 	$('.fadines .itemg').eq(n).show().siblings().hide();
 	$('.slide_gem .slide_top .fadines ul li').removeClass('on');
+    $('.bofan img').attr('src','images/yuyin_11.jpg');
+    $('.compose').text('立即合成');
+    var audio = document.getElementById('myMusic');
+    if(audio!==null){
+        //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+        if(!audio.paused) {
+            audio.pause();// 这个就是暂停
+        }
+    }
 });
 
 
@@ -60,5 +69,14 @@ $(document).on("click","input[type=range]",function(e){
 	$(this).next().html($(this).val())
 });
 $('.slide_gem .slide_top .fadines ul li').click(function(){
-	$(this).addClass('on').siblings().removeClass('on')
+	$(this).addClass('on').siblings().removeClass('on');
+    $('.bofan img').attr('src','images/yuyin_11.jpg');
+    $('.compose').text('立即合成');
+    var audio = document.getElementById('myMusic');
+    if(audio!==null){
+        //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+        if(!audio.paused) {
+            audio.pause();// 这个就是暂停
+        }
+    }
 });
