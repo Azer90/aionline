@@ -36,3 +36,5 @@ Route::group( ['prefix'=> 'wechat'], function (Router $router) {
 });
 
 Route::any('Api_getVoice', 'VoiceComposeController@Api_getVoice')->name('Api_getVoice');
+
+Route::get("auto_delete","AutoController@auto_delete")->name("auto_delete");

@@ -12,15 +12,21 @@
     .hide{
         display: none;
     }
+    .tips{
+        display: none;
+        color: red;
+        font-size: 17px;
+    }
     .download{
+        display: inline-block;
         width: 110px;
         height: 40px;
         line-height: 40px;
         background: #0F6FE0;
-        font-size: 20px;
+        font-size: 15px;
         color: #fff;
         text-align: center;
-        margin-top: .1rem;
+        margin: .1rem .3rem;
     }
     .qr{
         display: none;
@@ -36,10 +42,12 @@
         transform: translateX(-50%);
         /*transform: translateY(-50%);*/
         width: 200px;
+        background: #fff;
     }
     .qr img{
         width: 200px;
     }
+
 </style>
 <body>
 @include('web.layouts.nav')
@@ -88,20 +96,16 @@
             </div>
             <img src="images/line_03.jpg" class="line" />
             <div class="src" >
-                <img src="images/imgs_16.jpg" class="imgs" />
+                <img src="images/imgs_16.jpg" class="imgs fog_removal" />
                 <div class="src_box panel" ><div class="dragIcon"></div></div>
-                <div class="url">
-                    <div class="url_box">
-                        <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
-                        <div class="jc">
-                            <a href="#">检测</a>
-                        </div>
-                        <p>或</p>
-                        <div class="jcs">
+                <div class="url" style="height:90px;padding: 0px 0 25px 17px;">
+                    <span class="url_box">
+                        <div class="jcs" style="display: inline-block;margin-right: 20px">
                             <div href="#" class="upload">本地上传</div>
                         </div>
-                    </div>
-                    <span>图片文件类型支持jpg、png、jpeg、bmp、图片大小不超过2M。</span>
+                           <span>图片文件类型支持jpg、png、jpeg、bmp、图片大小不超过2M。</span>
+                    </span>
+
                 </div>
                 <div class="youhua fl">优化后</div>
                 <div class="youhua fr">优化前</div>
@@ -113,7 +117,7 @@
                 {{--<img src="images/imgs_11.jpg" />--}}
                 {{--<img src="images/imgs_13.jpg" />--}}
             {{--</div>--}}
-                <div class="download" style="cursor: pointer">点击下载</div>
+                <div class="tips"><span>图片处理成功</span><span class="download" style="cursor: pointer">点击下载</span></div>
             <div class="item_dis">
                 <div>
                     <img src="images/icons_07.jpg" />
@@ -168,20 +172,17 @@
             </div>
             <img src="images/line_03.jpg" class="line" />
             <div class="src" >
-                <img src="images/imgs_16.jpg" class="imgs" />
-                <div class="src_box panel" ><div class="dragIcon"></div></div>
-                <div class="url">
-                    <div class="url_box">
-                        <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
-                        <div class="jc">
-                            <a href="#">检测</a>
-                        </div>
-                        <p>或</p>
-                        <div class="jcs">
+                <img src="images/imgs_16.jpg" class="imgs enlarge" />
+                <div class="src_box panel">
+                    <span class="dragIcon"></span>
+                </div>
+                <div class="url" style="height:90px;padding: 0px 0 25px 17px;">
+                    <span class="url_box">
+                        <div class="jcs" style="display: inline-block;margin-right: 20px">
                             <div href="#" class="upload">本地上传</div>
                         </div>
-                    </div>
-                    <span>图片文件类型支持jpg、png、jpeg、bmp、图片大小不超过2M。</span>
+                       <span>图片文件类型支持jpg、png、jpeg、bmp、图片大小不超过2M。</span>
+                    </span>
                 </div>
                 <div class="youhua fl">优化后</div>
                 <div class="youhua fr">优化前</div>
@@ -193,6 +194,8 @@
             {{--<img src="images/imgs_11.jpg" />--}}
             {{--<img src="images/imgs_13.jpg" />--}}
             {{--</div>--}}
+            <div class="tips"><span>图片处理成功</span><span class="download" style="cursor: pointer">点击下载</span></div>
+
             <div class="item_dis">
                 <div>
                     <img src="images/icons_07.jpg" />
@@ -247,20 +250,16 @@
             </div>
             <img src="images/line_03.jpg" class="line" />
             <div class="src" >
-                <img src="images/imgs_16.jpg" class="imgs" />
+                <img src="images/imgs_16.jpg" class="imgs coloring" />
                 <div class="src_box panel" ><div class="dragIcon"></div></div>
-                <div class="url">
-                    <div class="url_box">
-                        <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
-                        <div class="jc">
-                            <a href="#">检测</a>
-                        </div>
-                        <p>或</p>
-                        <div class="jcs">
+                <div class="url" style="height:90px;padding: 0px 0 25px 17px;">
+                    <span class="url_box">
+                        <div class="jcs" style="display: inline-block;margin-right: 20px">
                             <div href="#" class="upload">本地上传</div>
                         </div>
-                    </div>
-                    <span>图片文件类型支持jpg、png、jpeg、bmp、图片大小不超过2M。</span>
+                           <span>图片文件类型支持jpg、png、jpeg、bmp、图片大小不超过2M。</span>
+                    </span>
+
                 </div>
                 <div class="youhua fl">优化后</div>
                 <div class="youhua fr">优化前</div>
@@ -272,6 +271,8 @@
             {{--<img src="images/imgs_11.jpg" />--}}
             {{--<img src="images/imgs_13.jpg" />--}}
             {{--</div>--}}
+            <div class="tips"><span>图片处理成功</span><span class="download" style="cursor: pointer">点击下载</span></div>
+
             <div class="item_dis">
                 <div>
                     <img src="images/icons_07.jpg" />
@@ -326,20 +327,16 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src" >
-            <img src="images/imgs_16.jpg" class="imgs" />
+            <img src="images/imgs_16.jpg" class="imgs repair" />
             <div class="src_box panel"  ><div class="dragIcon"></div></div>
-            <div class="url">
-                <div class="url_box">
-                    <input type="text" placeholder="请输入网络图片URL" name="" id="" value="" />
-                    <div class="jc">
-                        <a href="#">检测</a>
-                    </div>
-                    <p>或</p>
-                    <div class="jcs">
-                        <div href="#" class="upload">本地上传</div>
-                    </div>
-                </div>
-                <span>图片文件类型支持jpg、png、jpeg、bmp、图片大小不超过2M。</span>
+            <div class="url" style="height:90px;padding: 0px 0 25px 17px;">
+                    <span class="url_box">
+                        <div class="jcs" style="display: inline-block;margin-right: 20px">
+                            <div href="#" class="upload">本地上传</div>
+                        </div>
+                           <span>图片文件类型支持jpg、png、jpeg、bmp、图片大小不超过2M。</span>
+                    </span>
+
             </div>
             <div class="youhua fl">优化后</div>
             <div class="youhua fr">优化前</div>
@@ -351,7 +348,9 @@
         {{--<img src="images/imgs_11.jpg" />--}}
         {{--<img src="images/imgs_13.jpg" />--}}
         {{--</div>--}}
-        <div class="item_dis">
+            <div class="tips"><span>图片处理成功</span><span class="download" style="cursor: pointer">点击下载</span></div>
+
+            <div class="item_dis">
             <div>
                 <img src="images/icons_07.jpg" />
                 <p>拉伸图片修复 功能介绍</p>
@@ -386,7 +385,7 @@
 </div>
 <div class="qr">
     <div>
-        <p>扫描二维码关注公众号后即可下载</p>
+        <p style="padding-left: 10px">扫描二维码关注公众号后即可下载</p>
         <img src="" alt="">
     </div>
 </div>
@@ -394,14 +393,14 @@
 @section('script')
     <script>
         var on_index = 0;
-
+//切换
         $(".main_left li").on("click",function () {
             var type = $(this).data("type");
             uploader.options.formData.handle = type;
             $(this).attr("class","on").siblings().removeClass("on");
             $(".main_right:eq("+$(this).index()+")").show().siblings().hide();
             on_index = $(this).index();
-
+            $(".tips").hide();
             drag(on_index);
         });
         window.onload = function () {
@@ -418,7 +417,7 @@
             chunkSize: 1024*1024*2,  //每一片的大小
             chunkRetry: 100,         // 如果遇到网络错误,重新上传次数
             threads: 3,              //上传并发数。允许同时最大上传进程数。
-            fileSizeLimit:20*1024*1024,
+            fileSizeLimit:4*1024*1024,
             duplicate :true,
             formData:{handle:1},
             // 只允许选择图片文件。
@@ -436,7 +435,7 @@
             if (type == "Q_TYPE_DENIED") {
                 layer.msg("请上传音频文件");
             } else if (type == "Q_EXCEED_SIZE_LIMIT") {
-                layer.msg("文件大小不能超过20M");
+                layer.msg("文件大小不能超过4M");
             }else {
                 layer.msg("上传出错！请检查后重新上传！错误代码"+type);
             }
@@ -447,15 +446,43 @@
         });
         var user_id="";
         var file_name="";
-        uploader.on( 'startUpload', function( ) {
+        uploader.on( 'startUpload', function( file) {
             index = layer.load(1);
         });
+
+        uploader.on('fileQueued',function (file) {
+            uploader.makeThumb( file, function( error, ret ) {
+                var type = uploader.options.formData.handle;
+                if ( error ) {
+                    $li.text('预览错误');
+                } else {
+                    switch (type) {
+                        case 1:
+                            $li = $(".fog_removal");
+                            break;
+                        case 2:
+                            $li = $(".enlarge");
+                            break;
+                        case 3:
+                            $li = $(".coloring");
+                            break;
+                        case 4:
+                            $li = $(".repair");
+                            break;
+                        default:
+                            $li = "";
+                    }
+                    $li.attr("src",ret).css({"width":"100%","height":"100%"});
+                }
+            });
+        })
 
         uploader.on('uploadSuccess',function (file,response) {
             console.log(response);
             layer.close(index);
             if(response.code==1){
-                layer.msg("处理成功")
+                layer.msg("处理成功");
+                $(".tips").show();
                 file_name = response.data
             }else{
                 layer.msg("处理失败")
@@ -470,7 +497,7 @@
                 data:{file_name:file_name,user_id:user_id},
                 success:function (res) {
                     user_id = res.user_id;
-                    if(res.download_code==1&&qrcode_url==""){
+                    if(res.download_code==1&&res.qrcode_url==""){
                         location.href=host+"/api/word_download?file_name="+file_name;
                     }else{
                         $(".qr img").attr("src",res.qrcode_url);
