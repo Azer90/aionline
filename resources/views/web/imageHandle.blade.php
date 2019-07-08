@@ -12,6 +12,34 @@
     .hide{
         display: none;
     }
+    .download{
+        width: 110px;
+        height: 40px;
+        line-height: 40px;
+        background: #0F6FE0;
+        font-size: 20px;
+        color: #fff;
+        text-align: center;
+        margin-top: .1rem;
+    }
+    .qr{
+        display: none;
+        width: 100%;
+        position: absolute;
+        top:0;
+        left: 0;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, .4);
+    }
+    .qr div{
+        margin: 40% 50%;
+        transform: translateX(-50%);
+        /*transform: translateY(-50%);*/
+        width: 200px;
+    }
+    .qr img{
+        width: 200px;
+    }
 </style>
 <body>
 @include('web.layouts.nav')
@@ -85,6 +113,7 @@
                 {{--<img src="images/imgs_11.jpg" />--}}
                 {{--<img src="images/imgs_13.jpg" />--}}
             {{--</div>--}}
+                <div class="download" style="cursor: pointer">点击下载</div>
             <div class="item_dis">
                 <div>
                     <img src="images/icons_07.jpg" />
@@ -355,6 +384,12 @@
     </div>
     </div>
 </div>
+<div class="qr">
+    <div>
+        <p>扫描二维码关注公众号后即可下载</p>
+        <img src="" alt="">
+    </div>
+</div>
 @extends('web.layouts.footer')
 @section('script')
     <script>
@@ -410,13 +445,69 @@
         uploader.on( 'uploadProgress', function( file,percentage  ) {
             // console.log(percentage);
         });
+        var user_id="";
+        var file_name="";
         uploader.on( 'startUpload', function( ) {
-
+            index = layer.load(1);
         });
 
         uploader.on('uploadSuccess',function (file,response) {
             console.log(response);
+            layer.close(index);
+            if(response.code==1){
+                layer.msg("处理成功")
+                file_name = response.data
+            }else{
+                layer.msg("处理失败")
+            }
+        });
+
+        $(".download").on("click",function () {
+            $.ajax({
+                url:host+"/api/download_check",
+                type:"post",
+                dataType: "json",
+                data:{file_name:file_name,user_id:user_id},
+                success:function (res) {
+                    user_id = res.user_id;
+                    if(res.download_code==1&&qrcode_url==""){
+                        location.href=host+"/api/word_download?file_name="+file_name;
+                    }else{
+                        $(".qr img").attr("src",res.qrcode_url);
+                        $(".qr").show();
+                        polling();
+                    }
+                }
+            })
         })
+        /**
+         * 轮询
+         */
+
+        function polling() {
+            var con = 0;
+
+            var time = setTimeout(function () {
+                $.ajax({
+                    url:host+"/api/follow",
+                    type:"post",
+                    dataType: "json",
+                    data:{user_id:user_id,file_name:file_name},
+                    success:function (res) {
+                        con++;
+                        if(res.code==1){
+                            $(".qr").hide();
+                            location.href=host+"/api/word_download?file_name="+file_name;
+
+                        }else{
+                            if(con<100){
+                                polling();
+                            }
+                        }
+                    }
+                })
+            },500)
+        }
         //拖动
         function drag(on_index) {
             // 1. 获取两个大小div
