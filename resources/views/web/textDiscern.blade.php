@@ -15,25 +15,25 @@
     .hide{
         display: none;
     }
-    .qr{
-        display: none;
-        width: 100%;
-        position: absolute;
-        top:0;
-        left: 0;
-        z-index: 10;
-        background-color: rgba(0, 0, 0, .4);
-    }
-    .qr div{
-        margin: 40% 50%;
-        transform: translateX(-50%);
-        /*transform: translateY(-50%);*/
-        width: 200px;
-        background: #fff;
-    }
-    .qr img{
-        width: 200px;
-    }
+    /*.qr{*/
+        /*display: none;*/
+        /*width: 100%;*/
+        /*position: absolute;*/
+        /*top:0;*/
+        /*left: 0;*/
+        /*z-index: 10;*/
+        /*background-color: rgba(0, 0, 0, .4);*/
+    /*}*/
+    /*.qr div{*/
+        /*margin: 40% 50%;*/
+        /*transform: translateX(-50%);*/
+        /*!*transform: translateY(-50%);*!*/
+        /*width: 200px;*/
+        /*background: #fff;*/
+    /*}*/
+    /*.qr img{*/
+        /*width: 200px;*/
+    /*}*/
 </style>
 <body>
 @include('web.layouts.nav')

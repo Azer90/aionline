@@ -28,25 +28,25 @@
         text-align: center;
         margin: .1rem .3rem;
     }
-    .qr{
-        display: none;
-        width: 100%;
-        position: absolute;
-        top:0;
-        left: 0;
-        z-index: 10;
-        background-color: rgba(0, 0, 0, .4);
-    }
-    .qr div{
-        margin: 40% 50%;
-        transform: translateX(-50%);
-        /*transform: translateY(-50%);*/
-        width: 200px;
-        background: #fff;
-    }
-    .qr img{
-        width: 200px;
-    }
+    /*.qr{*/
+        /*display: none;*/
+        /*width: 100%;*/
+        /*position: absolute;*/
+        /*top:0;*/
+        /*left: 0;*/
+        /*z-index: 10;*/
+        /*background-color: rgba(0, 0, 0, .4);*/
+    /*}*/
+    /*.qr div{*/
+        /*margin: 40% 50%;*/
+        /*transform: translateX(-50%);*/
+        /*!*transform: translateY(-50%);*!*/
+        /*width: 200px;*/
+        /*background: #fff;*/
+    /*}*/
+    /*.qr img{*/
+        /*width: 200px;*/
+    /*}*/
 
     /*拖动*/
     .container{
@@ -573,7 +573,6 @@
         })
 
         uploader.on('uploadSuccess',function (file,response) {
-            console.log(response);
             var type = uploader.options.formData.handle;
             layer.close(index);
             if(response.code==1){
