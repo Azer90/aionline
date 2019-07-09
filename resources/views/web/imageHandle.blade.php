@@ -48,6 +48,62 @@
         width: 200px;
     }
 
+    /*拖动*/
+    .container{
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    .before_div{
+        height: 100%;
+    }
+    .base{
+        /*width: 100%;*/
+        width: 940px;
+        height: 100%;
+        -webkit-user-drag: none;
+    }
+    .cover_img{
+        /*width: 100%;*/
+        width: 940px;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        -webkit-user-drag: none;
+    }
+    .cover{
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        z-index: 1;
+    }
+    .drag_img{
+        width: 30px;
+        height:100%;
+        transform:translateX(-50%);
+        position: absolute;
+        top: 0;
+        left: 100px;
+        user-select: none;
+        -webkit-user-drag: none;
+        z-index: 3;
+    }
+
+    .font_before{
+        width: 100px;
+        position: absolute;
+        right:10px;
+        top:0;
+        z-index: 1;
+    }
+    .font_after{
+        position: absolute;
+        left:10px;
+        top:0;
+        z-index: 1;
+    }
 </style>
 <body>
 @include('web.layouts.nav')
@@ -172,9 +228,23 @@
             </div>
             <img src="images/line_03.jpg" class="line" />
             <div class="src" >
-                <img src="images/imgs_16.jpg" class="imgs enlarge" />
-                <div class="src_box panel">
-                    <span class="dragIcon"></span>
+                {{--<img src="images/imgs_16.jpg" class="imgs enlarge" />--}}
+                {{--<div class="src_box panel">--}}
+                    {{--<span class="dragIcon"></span>--}}
+                {{--</div>--}}
+                <div class="container">
+                    <div class="before_div">
+                        <div class="youhua fr">优化前</div>
+                        <img class="base enlarge_before" src="images/xiao.jpg" alt="">
+                    </div>
+                    <div class="cover">
+                        <div class="youhua fl">优化后</div>
+                        <img class="cover_img enlarge_after" style="width: 1080px" src="images/da.jpg" alt="">
+                    </div>
+                    <img class="drag_img" src="images/imgs_03.png" alt="">
+                    {{--<div class="drag_line">--}}
+                        {{--<img class="drag_img" src="images/imgs_03.png" alt="">--}}
+                    {{--</div>--}}
                 </div>
                 <div class="url" style="height:90px;padding: 0px 0 25px 17px;">
                     <span class="url_box">
@@ -184,8 +254,8 @@
                        <span>图片文件类型支持jpg、png、jpeg、bmp、图片大小不超过2M。</span>
                     </span>
                 </div>
-                <div class="youhua fl">优化后</div>
-                <div class="youhua fr">优化前</div>
+
+
             </div>
             {{--<div class="slide_img">--}}
             {{--<img src="images/imgs_13.jpg" class="on" />--}}
@@ -250,8 +320,20 @@
             </div>
             <img src="images/line_03.jpg" class="line" />
             <div class="src" >
-                <img src="images/imgs_16.jpg" class="imgs coloring" />
-                <div class="src_box panel" ><div class="dragIcon"></div></div>
+                <div class="container">
+                    <div class="before_div">
+                        <div class="youhua fr">优化前</div>
+                        <img class="base coloring_before" src="images/1.jpg" alt="">
+                    </div>
+                    <div class="cover">
+                        <div class="youhua fl">优化后</div>
+                        <img class="cover_img coloring_after" src="images/2.jpg" alt="">
+                    </div>
+                    <img class="drag_img" src="images/imgs_03.png" alt="">
+                    {{--<div class="drag_line">--}}
+                    {{--<img class="drag_img" src="images/imgs_03.png" alt="">--}}
+                    {{--</div>--}}
+                </div>
                 <div class="url" style="height:90px;padding: 0px 0 25px 17px;">
                     <span class="url_box">
                         <div class="jcs" style="display: inline-block;margin-right: 20px">
@@ -261,8 +343,7 @@
                     </span>
 
                 </div>
-                <div class="youhua fl">优化后</div>
-                <div class="youhua fr">优化前</div>
+
             </div>
             {{--<div class="slide_img">--}}
             {{--<img src="images/imgs_13.jpg" class="on" />--}}
@@ -327,8 +408,20 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src" >
-            <img src="images/imgs_16.jpg" class="imgs repair" />
-            <div class="src_box panel"  ><div class="dragIcon"></div></div>
+            <div class="container">
+                <div class="before_div">
+                    <div class="youhua fr">优化前</div>
+                    <img class="base repair_before" style="width: 1080px" src="images/la.jpg" alt="">
+                </div>
+                <div class="cover">
+                    <div class="youhua fl">优化后</div>
+                    <img class="cover_img repair_after" src="images/la_you.jpg" alt="">
+                </div>
+                <img class="drag_img" src="images/imgs_03.png" alt="">
+                {{--<div class="drag_line">--}}
+                {{--<img class="drag_img" src="images/imgs_03.png" alt="">--}}
+                {{--</div>--}}
+            </div>
             <div class="url" style="height:90px;padding: 0px 0 25px 17px;">
                     <span class="url_box">
                         <div class="jcs" style="display: inline-block;margin-right: 20px">
@@ -338,8 +431,8 @@
                     </span>
 
             </div>
-            <div class="youhua fl">优化后</div>
-            <div class="youhua fr">优化前</div>
+            {{--<div class="youhua fl">优化后</div>--}}
+            {{--<div class="youhua fr">优化前</div>--}}
         </div>
         {{--<div class="slide_img">--}}
         {{--<img src="images/imgs_13.jpg" class="on" />--}}
@@ -401,10 +494,11 @@
             $(".main_right:eq("+$(this).index()+")").show().siblings().hide();
             on_index = $(this).index();
             $(".tips").hide();
-            drag(on_index);
+            new_drag(on_index);
         });
         window.onload = function () {
             drag(on_index);
+            new_drag(on_index);
         }
 
         var uploader = WebUploader.create({
@@ -432,6 +526,7 @@
          * 验证文件格式以及文件大小
          */
         uploader.on("error", function (type) {
+            layer.close(index);
             if (type == "Q_TYPE_DENIED") {
                 layer.msg("请上传音频文件");
             } else if (type == "Q_EXCEED_SIZE_LIMIT") {
@@ -461,13 +556,13 @@
                             $li = $(".fog_removal");
                             break;
                         case 2:
-                            $li = $(".enlarge");
+                            $li = $(".enlarge_before");
                             break;
                         case 3:
-                            $li = $(".coloring");
+                            $li = $(".coloring_before");
                             break;
                         case 4:
-                            $li = $(".repair");
+                            $li = $(".repair_before");
                             break;
                         default:
                             $li = "";
@@ -479,11 +574,30 @@
 
         uploader.on('uploadSuccess',function (file,response) {
             console.log(response);
+            var type = uploader.options.formData.handle;
             layer.close(index);
             if(response.code==1){
                 layer.msg("处理成功");
                 $(".tips").show();
-                file_name = response.data
+                console.log(response);
+                file_name = response.data.file_name
+                switch (type) {
+                    case 1:
+                        $li = $(".fog_removal");
+                        break;
+                    case 2:
+                        $li = $(".enlarge_after");
+                        break;
+                    case 3:
+                        $li = $(".coloring_after");
+                        break;
+                    case 4:
+                        $li = $(".repair_after");
+                        break;
+                    default:
+                        $li = "";
+                }
+                $li.attr("src", response.data.base_64).css({"width":"940px","height":"100%"});
             }else{
                 layer.msg("处理失败")
             }
@@ -535,6 +649,52 @@
                 })
             },500)
         }
+
+/*新拖动*/
+        function new_drag(on_index) {
+            on_index = on_index-1;
+            var line = $(".drag_img:eq("+on_index+")").css("left");
+            var drag_img = $(".drag_img:eq("+on_index+")").width();
+            var half = parseInt(drag_img/2);
+
+            $(".cover").width(parseInt(line));
+            $(".drag_img:eq("+on_index+")").on("mousedown",function (e) {
+                var container = $(".container:eq("+on_index+")") ;
+                var container_off = container.offset();
+                var startX = container_off.left;
+                $(document).on("mousemove",function (e) {
+
+                    $(".cover:eq("+on_index+")").width(e.pageX-startX-half);
+                    $(".drag_img:eq("+on_index+")").css({
+                        left:e.pageX-startX-half
+                    });
+
+                    if(e.pageX-startX>=container.width()-half-80){
+                        var end_x = container.width()-half-80;
+                        $(".cover:eq("+on_index+")").width(end_x);
+                        $(".drag_img:eq("+on_index+")").css({
+                            left:end_x
+                        })
+                    }
+
+                    if(e.pageX-startX<=100+half){
+                        $(".cover:eq("+on_index+")").width(100);
+                        $(".drag_img:eq("+on_index+")").css({
+                            left:100
+                        })
+                    }
+                });
+                $(document).on("mouseup",function (e) {
+                    $(document).off("mousemove");
+                })
+            })
+        }
+
+
+
+
+
+
         //拖动
         function drag(on_index) {
             // 1. 获取两个大小div

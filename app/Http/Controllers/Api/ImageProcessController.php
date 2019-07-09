@@ -244,7 +244,7 @@ class ImageProcessController extends Controller
             $new_file = $new_file.$new_file_name;
             if (file_put_contents($new_file, base64_decode($base64_image_content))){
                 DB::table("ai_dis")->insert(["path"=>$new_file,"file_name"=>$new_file_name,"create_time"=>date("Y-m-d H:i:s",time())]);
-                return $new_file_name;
+                return ["file_name"=>$new_file_name,"base_64"=>'data:image/jpeg;base64,'.$base64_image_content];
             }else{
                 return false;
             }
