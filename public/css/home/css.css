@@ -1498,3 +1498,113 @@ white-space: nowrap;}
 }
 
 
+/*二维码*/
+.qr{
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, .4);
+}
+.qr div{
+  position: relative;
+  top:25%;
+  left:50%;
+  transform: translateX(-50%);
+  width: 200px;
+  background: #fff;
+}
+.qr img{
+  width: 200px;
+}
+/*支付*/
+.buy-step {
+  width: 90%;
+  margin: 0 auto;
+}
+.payment {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.payment a {
+  display: inline-block;
+  overflow: hidden;
+  margin: 0 5px;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+}
+
+.payment a .icon {
+  position: absolute;
+  width: 38px;
+  height: 30px;
+  bottom: 6px;
+  right: 0;
+  display: none;
+}
+.payment a .icon-tag{
+  background: url(../../images/icon-tab-blue.png) bottom right no-repeat;
+}
+.payment a.current .icon-tag{
+  display: block;
+}
+
+.payment a > img {
+  height: 50px;
+  border: solid 2px transparent;
+}
+.payment a.current img{
+  border-color: #008c8c;
+  border-radius: 4px;
+}
+.pay-now {
+  display: block;
+  font-size: 24px;
+  line-height: 56px;
+  height: 56px;
+  width: 260px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  border-radius: 56px;
+  margin: 30px auto 0;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+  border: none;
+  padding: 0 3em;
+  background-color: #008c8c;
+  filter:alpha(opacity=100 finishopacity=50 syle=1 startx=0, stary=0) progid:DXImageTransform.Microsoft.gradient(startColorstr=#008c8c, endColorstr=#42b9fe, gradientType=1) ;
+  background: -webkit-linear-gradient( left, #008c8c 15%,#008c8c 100%);
+  background: -moz-linear-gradient( left, #008c8c 15%,#008c8c 100%);
+  background: linear-gradient( left, #008c8c 15%,#008c8c 100%);
+  zoom: 1\9;
+}
+
+.buy-step{
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+.payment-wrapper{
+  position: relative;
+  top:25%;
+  left:0;
+  z-index: 99;
+}
+.zhifu{
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, .4);
+}

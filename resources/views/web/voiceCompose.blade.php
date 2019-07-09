@@ -250,8 +250,24 @@
 <audio id="myMusic">
     <source src="" type="audio/mpeg" />
 </audio>
+
 <div class="qr">
-    <img src="" alt="">
+    <div>
+        <p style="padding-left: 10px">扫描二维码关注公众号后即可下载</p>
+        <img src="" alt="">
+    </div>
+</div>
+<div class="zhifu">
+    <ul class="payment-wrapper">
+        <div class="buy-step">请选择付款方式</div>
+        <div class="payment">
+            <a value="alipay" id="aliPay" class="pay-ali current" ><span class="icon icon-tag"></span><img src="{{ asset('images/pay-ali.png') }}"></a>
+            <a value="wechat" id="wechatPay" class="pay-wechat"><span class="icon icon-tag"></span><img src="{{ asset('images/pay-wechat.png') }}"></a>
+        </div>
+        <div class="pay-now" id="payNow">
+           去支付
+        </div>
+    </ul>
 </div>
 @extends('web.layouts.footer')
 
@@ -259,7 +275,7 @@
     <script type="text/javascript" src="{{asset('js/home/progressjs.js')}}"></script>
     <script>
         var timeID;
-        var file_name ="",user_id="";
+        var file_name ="",user_id="",str_len=0;
         var pro = new Progress('.progress', {
             val: 0, //初始值 取值范围：0-100
             size: 4, //控件大小默认值为10，可结合css自行修改样式
@@ -400,6 +416,7 @@
                         $('.compose').text('暂停');
                        $('#myMusic').attr('src','/voice/'+res.data.file_name);
                        file_name = res.data.file_name;
+                       str_len=res.data.str_len;
                        var audio = document.getElementById('myMusic');
                        if(audio!==null){
                            //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
@@ -427,23 +444,113 @@
                 layer.alert('请先点击立即合成');
                 return false;
             }
-            $.ajax({
-                url:host+"/api/download_check",
-                type:"post",
-                dataType: "json",
-                data:{file_name:file_name,user_id:user_id},
-                success:function (res) {
-                    user_id = res.user_id;
-                    if(res.download_code==1){
-                        location.href=host+"/api/word_download?file_name="+file_name;
-                    }else{
-                        $(".qr img").attr("src",res.qrcode_url);
-                        $(".qr").show();
-                        //polling();
+            if(str_len>100){
+                $(".zhifu").show();
+            }else {
+                $.ajax({
+                    url:host+"/api/download_check",
+                    type:"post",
+                    dataType: "json",
+                    data:{file_name:file_name,user_id:user_id},
+                    success:function (res) {
+                        user_id = res.user_id;
+                        if(res.download_code==1){
+                            location.href=host+"/api/word_download?file_name="+file_name;
+                        }else{
+                            $(".qr img").attr("src",res.qrcode_url);
+                            $(".qr").show();
+                            polling();
+                        }
                     }
+                })
+            }
+
+        });
+        function polling() {
+            var con = 0;
+
+            var time = setTimeout(function () {
+                $.ajax({
+                    url:host+"/api/follow",
+                    type:"post",
+                    dataType: "json",
+                    data:{user_id:user_id,file_name:file_name},
+                    success:function (res) {
+                        con++;
+                        if(res.code==1){
+                            $(".qr").hide();
+                            location.href=host+"/api/word_download?file_name="+file_name;
+                        }else{
+                            if(con<100){
+                                polling();
+                            }
+                        }
+                    }
+                })
+            },500)
+        }
+
+        $('.payment a').click(function () {
+            $(this).addClass("current").siblings().removeClass("current");
+        });
+
+        $('#payNow').click(function () {
+            payWay();
+        });
+
+        /**
+         * 购买商品
+         */
+        function isIE(){
+            var theUA = window.navigator.userAgent.toLowerCase();
+            if ((theUA.match(/msie\s\d+/) && theUA.match(/msie\s\d+/)[0]) || (theUA.match(/trident\s?\d+/) && theUA.match(/trident\s?\d+/)[0])) {
+                var ieVersion = theUA.match(/msie\s\d+/)[0].match(/\d+/)[0] || theUA.match(/trident\s?\d+/)[0];
+                if (ieVersion < 9) {
+                    return true;
+                }
+            }
+        }
+        function payWay() {
+            var paymethod = $('.payment a.current').attr('value');
+
+            /*  if ( $('#aliPay').hasClass('current')) {
+                  var newTab = window.open('/loading','_blank');
+              }*/
+            $.ajax({
+                url: host+"/pay",
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    "paymethod": paymethod,
+                    '_token':"{{csrf_token()}}",
+                },
+                success: function (data) {
+                    /*console.log(data.order_no);*/
+                    if (data.code == 1000) {
+                        $('.order_no').html(data.order_no);
+                        if (paymethod == 'alipay') {
+                            // newTab.location = data.message;
+                            window.open(data.message,'_self');
+                        } else if (paymethod == 'wechat') {
+                            var render;
+                            if (isIE()) {
+                                render = 'table';
+                            }else{
+                                render = 'canvas';
+                            };
+                            weChatDialogShow();
+                            $('.qr-code-wrapper').empty();
+                            $('.qr-code-wrapper').qrcode({
+                                render: render,
+                                width: 120,
+                                height: 120,
+                                text: data.message
+                            });
+                        };
+                    };
                 }
             })
-        })
+        }
     </script>
 
 @endsection
