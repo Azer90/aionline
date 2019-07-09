@@ -1608,3 +1608,111 @@ white-space: nowrap;}
   z-index: 10;
   background-color: rgba(0, 0, 0, .4);
 }
+
+.wechat-pay-dialog {
+  position: fixed;
+  z-index: 1002;
+  top: 20%;
+  left: 50%;
+  margin-left:-18%;
+  padding: 20px 0;
+  border: solid 1px #ccc;
+  background: #fff;
+  box-shadow: 0 0 24px rgba(0,0,0,.2);
+}
+
+.wechat-pay-dialog ul {
+  overflow: hidden;
+}
+
+.wechat-pay-dialog li {
+  float: left;
+}
+
+.wechat-pay-dialog .close {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  top: -15px;
+  right: -15px;
+  z-index: 2;
+  cursor: pointer;
+  display: block;
+  background: url(../../images/icon-close.png) center no-repeat;
+}
+
+
+.wechat-pay-dialog .li-02 {
+  width: 220px;
+  text-align: center;
+}
+
+.wechat-pay-dialog .li-02 h1 {
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 28px;
+  margin: 10px 0;
+  padding: 0;
+  color: #f60;
+}
+
+.wechat-pay-dialog .qr-code-wrapper {
+  overflow: hidden;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto;
+  border: solid 1px #ccc;
+  background: url(../../images/loading.gif) center no-repeat;
+  padding-top: 25px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+}
+
+.wechat-pay-dialog .qr-code-wrapper table {
+  margin: 0 auto;
+}
+
+.wechat-pay-dialog .li-02 .tips {
+  overflow: hidden;
+  width: 100%;
+  height: 66px;
+  margin: 20px 0 0;
+  color: #fff;
+  background: #006fa8;
+}
+
+.wechat-pay-dialog .li-02 .tips img {
+  display: block;
+  float: left;
+  margin: 15px 0 0 15px;
+}
+
+.wechat-pay-dialog .li-02 p {
+  line-height: 1;
+  float: left;
+  width: 148px;
+  margin: 13px 0 0;
+  padding: 0;
+}
+
+.wechat-pay-dialog .li-03 {
+  width: 220px;
+}
+
+.wechat-pay-dialog .li-03 img {
+  margin: 50px auto 0;
+}
+.wechat-pay-dialog-bg{
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, .4);
+}

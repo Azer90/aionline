@@ -92,9 +92,9 @@ class LinkController extends Controller
         $grid->show(trans('admin.show'))->switch($states);
         $grid->created_at(trans('admin.created_at'));
         $grid->updated_at(trans('admin.updated_at'));
-        $grid->tools(function ($tools) {
+      /*  $grid->tools(function ($tools) {
             $tools->append(new ImportLink());
-        });
+        });*/
 
         $grid->disableExport();
         $grid->actions(function ($actions) {

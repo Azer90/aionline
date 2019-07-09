@@ -13,11 +13,12 @@ trait BaseController
     private $name;
     private $seo;
     private $system;
+    private $pay_config;
 
     protected $ali_config = [
         'app_id' => '',
-        'notify_url' => 'http://www.ipdftoword.net/alipay_notify',
-        'return_url' => 'http://www.ipdftoword.net/buy',
+        'notify_url' => 'http://ai.9889188.com/alipay_notify',
+        'return_url' => 'http://ai.9889188.com/buy',
         'ali_public_key' => '',
         // 加密方式： **RSA2**
         'private_key' => '',
@@ -36,7 +37,7 @@ trait BaseController
         'miniapp_id' => '', // 小程序 APPID
         'mch_id' => '',
         'key' => '',
-        'notify_url' => 'http://www.ipdftoword.net/wechat_notify',
+        'notify_url' => 'http://ai.9889188.com/wechat_notify',
         'cert_client' => '../config/wechatcert/apiclient_cert.pem', // optional，退款等情况时用到
         'cert_key' => '../config/wechatcert/apiclient_key.pem',// optional，退款等情况时用到
         'log' => [ // optional
@@ -58,7 +59,7 @@ trait BaseController
         $this->system= array_column($system,'value','name');
 
         $system=Config::select('name','value')->where(['type'=>'pay'])->get()->toArray();
-        $pay_config= array_column($system,'value','name');
+        $this->pay_config= $pay_config= array_column($system,'value','name');
         $this->ali_config['app_id']=$pay_config['ali_appid'];
         $this->ali_config['ali_public_key']=$pay_config['ali_public_key'];
         $this->ali_config['private_key']=$pay_config['private_key'];

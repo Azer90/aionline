@@ -269,10 +269,40 @@
         </div>
     </ul>
 </div>
+
+<div class="wechat-pay-dialog-bg">
+<div class="wechat-pay-dialog" id="show">
+    <a class="close"></a>
+    <ul>
+
+        <li class="li-02">
+            <h3>微信扫码支付</h3>
+            <h1 class="price-wechat">￥<span class="thePlanPrice">{{$pay_config['price']}}</span></h1>
+            <div class="qr-code-wrapper" id="qrcode">
+
+            </div>
+            <div class="tips">
+                <img src="{{ asset('images/icon-scan.png') }}">
+                <p>请使用微信扫一扫</p>
+                <p>扫描二维码支付</p>
+            </div>
+        </li>
+        <li class="li-03">
+            <img src="{{ asset('images/code-tips.png') }}">
+        </li>
+    </ul>
+</div>
+</div>
+<p class="wechatUrl" style="display:none;">{{ route('wechat_find') }}</p>
+<p class="aliUrl" style="display:none;">{{ route('ali_find') }}</p>
+<p class="order_no" style="display:none;">{{ request()->out_trade_no }}</p>
 @extends('web.layouts.footer')
 
 @section('script')
     <script type="text/javascript" src="{{asset('js/home/progressjs.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/home/jquery.qrcode.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/home/qrcode.js')}}"></script>
+
     <script>
         var timeID;
         var file_name ="",user_id="",str_len=0;
@@ -512,10 +542,6 @@
         }
         function payWay() {
             var paymethod = $('.payment a.current').attr('value');
-
-            /*  if ( $('#aliPay').hasClass('current')) {
-                  var newTab = window.open('/loading','_blank');
-              }*/
             $.ajax({
                 url: host+"/pay",
                 type: 'post',
@@ -525,11 +551,9 @@
                     '_token':"{{csrf_token()}}",
                 },
                 success: function (data) {
-                    /*console.log(data.order_no);*/
                     if (data.code == 1000) {
                         $('.order_no').html(data.order_no);
                         if (paymethod == 'alipay') {
-                            // newTab.location = data.message;
                             window.open(data.message,'_self');
                         } else if (paymethod == 'wechat') {
                             var render;
@@ -538,7 +562,7 @@
                             }else{
                                 render = 'canvas';
                             };
-                            weChatDialogShow();
+                            $(".wechat-pay-dialog-bg").css({ display: "block" });
                             $('.qr-code-wrapper').empty();
                             $('.qr-code-wrapper').qrcode({
                                 render: render,
@@ -550,6 +574,48 @@
                     };
                 }
             })
+        }
+
+        $(".close").click(function () {
+            $(".wechat-pay-dialog-bg").css("display", "none");
+        });
+        $(function () {
+            chaxun = setInterval(function () {
+                check()
+            }, 3000);
+        });
+
+        function check() {
+            var paymethod = $('.payment a.current').attr('value');
+            if (paymethod == 'alipay') {
+                var url =$('.aliUrl').text();
+            }
+            if (paymethod == 'wechat') {
+                var url =$('.wechatUrl').text();
+            }
+            var order_no = $('.order_no').text();
+            var param = {'order_no': order_no, '_token':"{{csrf_token()}}"};
+            if(order_no !=''){
+                $.post(url, param, function (data) {
+
+                    if(paymethod == 'alipay'){
+                        // console.log(data['trade_status']);
+                        if (data['trade_status'] == 'TRADE_SUCCESS') {
+                            clearInterval(chaxun);
+                            location.href=host+"/api/word_download?file_name="+file_name;
+                        }
+                    }else if(paymethod == 'wechat'){
+                        //console.log(data['trade_state']);
+                        if (data['trade_state'] == 'SUCCESS') {
+                            $(".wechat-pay-dialog-bg").css("display", "none");
+                            clearInterval(chaxun);
+                            location.href=host+"/api/word_download?file_name="+file_name;
+                        }
+                    }
+
+                });
+            }
+
         }
     </script>
 

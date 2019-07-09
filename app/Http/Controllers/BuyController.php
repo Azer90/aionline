@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Goods;
 use App\PayOrder;
-use dir\Dir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -35,22 +33,17 @@ class BuyController extends Controller
             $msg['message']='数据错误';
             return response()->json($msg);
         }
-        $goods=Goods::find($data['package']);
-        if(empty($goods)){
-            $msg['code']=1002;
-            $msg['message']='商品不存在';
-            return response()->json($msg);
-        }
+
         $ip=$request->getClientIp();
-       $order_no=$this->createOrder($goods['name'],$goods['price'],$ip,$data['paymethod']);
+       $order_no=$this->createOrder($this->pay_config['goods_name'],$this->pay_config['price'],$ip,$data['paymethod']);
 
         if($data['paymethod']=='alipay'){
 
             $order = [
                 'out_trade_no' => $order_no,
-                'total_amount' => $goods['price'],
+                'total_amount' => $this->pay_config['price'],
                 //'total_amount' => 0.01,
-                'subject'      => $goods['name'].'Ⅰ',
+                'subject'      => $this->pay_config['goods_name'],
                 'http_method'  => 'URL'
             ];
 
@@ -60,8 +53,8 @@ class BuyController extends Controller
         }else if($data['paymethod']=='wechat'){
             $order = [
                 'out_trade_no' => $order_no,
-                'body' =>  $goods['name'].'Ⅰ',
-                'total_fee'      => $goods['price']*100,
+                'body' =>  $this->pay_config['goods_name'],
+                'total_fee'      => $this->pay_config['price']*100,
                 //'total_fee'      =>1,
             ];
             $result = Pay::wechat($this->wechat_config)->scan($order);
@@ -91,7 +84,6 @@ class BuyController extends Controller
             'order_no' => $order_no,
             'goods_name' =>$goods_name,
             'amount' => $amount,
-            'email' => '',
             'ip' => $ip,
             'payway' => $payway,
             'updated_at' => $now_time,

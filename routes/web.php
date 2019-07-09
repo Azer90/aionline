@@ -40,3 +40,6 @@ Route::any('Api_getVoice', 'VoiceComposeController@Api_getVoice')->name('Api_get
 Route::get("auto_delete","AutoController@auto_delete")->name("auto_delete");
 
 Route::post('pay', 'BuyController@pay')->name('pay'); //支付
+
+Route::post('wechat_find', 'BuyController@wechat_find')->name('wechat_find');
+Route::post('ali_find', 'BuyController@ali_find')->name('ali_find');
