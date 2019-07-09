@@ -6,25 +6,25 @@
     .btns_grow a:hover{
         color: white;
     }
-    .qr{
-        display: none;
-        width: 100%;
-        position: absolute;
-        top:0;
-        left: 0;
-        z-index: 10;
-        background-color: rgba(0, 0, 0, .4);
-    }
-    .qr div{
-        margin: 40% 50%;
-        transform: translateX(-50%);
-        /*transform: translateY(-50%);*/
-        width: 200px;
-        background: #fff;
-    }
-    .qr img{
-        width: 200px;
-    }
+    /*.qr{*/
+        /*display: none;*/
+        /*width: 100%;*/
+        /*position: absolute;*/
+        /*top:0;*/
+        /*left: 0;*/
+        /*z-index: 10;*/
+        /*background-color: rgba(0, 0, 0, .4);*/
+    /*}*/
+    /*.qr div{*/
+        /*margin: 40% 50%;*/
+        /*transform: translateX(-50%);*/
+        /*!*transform: translateY(-50%);*!*/
+        /*width: 200px;*/
+        /*background: #fff;*/
+    /*}*/
+    /*.qr img{*/
+        /*width: 200px;*/
+    /*}*/
 </style>
 <body>
 @include('web.layouts.nav')
@@ -77,7 +77,7 @@
             <p>请上传需要转换的语音文件，最大支持20M，<br />支持的文件格式：<span>MP3，MAV，M4A，WMA，AAC，FLAC，AC3，M4R，APE，OGG，WAV格式</span></p>
         </div>
         <div class="data-list">
-            <p>预计剩余时间：<span class="down_time">2：00</span>    已经转换时间：<span class="conversion_time">0：00</span></p>
+            {{--<p>预计剩余时间：<span class="down_time">2：00</span>    已经转换时间：<span class="conversion_time">0：00</span></p>--}}
             <div class="box_sl">
                 <div class="box_sl_item">
                     <div class="sl_g1">1</div>
@@ -158,7 +158,8 @@
             mimeTypes: 'audio/*'
         }
     });
-
+    var conversion_time = "";
+    var down_time = "";
     /**
      * 验证文件格式以及文件大小
      */
@@ -176,16 +177,16 @@
         // console.log(percentage);
     });
     uploader.on( 'startUpload', function( ) {
-        time();
+        // clearTimeout(conversion_time);
+        // clearTimeout(down_time);
+        // time();
         $(".sl_g1:eq(0)").attr("class","sl_g")
-
     });
 
     var file_name = "";
     var user_id = "";
 //上传成功
     uploader.on( 'uploadSuccess', function( file,response  ) {
-
             if(response.code==1){
                 $(".sl_g1:eq(0)").attr("class","sl_g")
                 $.ajax({
@@ -204,9 +205,8 @@
                         }else{
                             layer.alert(res.message);
                         }
-
-                        clearTimeout(conversion_time);
-                        clearTimeout(down_time);
+                        // clearTimeout(conversion_time);
+                        // clearTimeout(down_time);
                     }
                 })
             }
@@ -273,7 +273,7 @@
      */
     function time() {
         count_down();
-        var conversion_time ="";
+
         var minute_ind = 0;
         // var minute_ten = 0;
         var second_ind = 0;
@@ -311,6 +311,8 @@
         var second_ind = 0;
         var second_ten = 0;
         var minute_ind = 2;
+
+        clearTimeout(down_time);
          down_time = setInterval(function () {
             $(".down_time").text(minute_ind+"："+second_ten+second_ind);
             if((second_ten+""+second_ind)=="00"){
