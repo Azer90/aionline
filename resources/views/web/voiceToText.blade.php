@@ -311,6 +311,7 @@
         var second_ind = 0;
         var second_ten = 0;
         var minute_ind = 2;
+        clearTimeout(conversion_time);
          down_time = setInterval(function () {
             $(".down_time").text(minute_ind+"："+second_ten+second_ind);
             if((second_ten+""+second_ind)=="00"){
