@@ -18,7 +18,7 @@ trait BaseController
     protected $ali_config = [
         'app_id' => '',
         'notify_url' => 'http://ai.9889188.com/alipay_notify',
-        'return_url' => 'http://ai.9889188.com/buy',
+        'return_url' => 'http://ai.9889188.com/voiceCompose',
         'ali_public_key' => '',
         // 加密方式： **RSA2**
         'private_key' => '',
