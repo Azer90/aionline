@@ -299,6 +299,7 @@
 <p class="wechatUrl" style="display:none;">{{ route('wechat_find') }}</p>
 <p class="aliUrl" style="display:none;">{{ route('ali_find') }}</p>
 <p class="order_no" style="display:none;">{{ request()->out_trade_no }}</p>
+<p class="file_name" style="display:none;">{{ request()->file_name }}</p>
 @extends('web.layouts.footer')
 
 @section('script')
@@ -603,7 +604,12 @@
             if (paymethod == 'wechat') {
                 var url =$('.wechatUrl').text();
             }
+            if(!file_name){
+                var file_name = $('.file_name').text();
+            }
             var order_no = $('.order_no').text();
+
+
             var param = {'order_no': order_no, '_token':"{{csrf_token()}}"};
             if(order_no !=''){
                 $.post(url, param, function (data) {
