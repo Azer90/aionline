@@ -231,7 +231,7 @@ class ImageProcessController extends Controller
 
         //匹配出图片的格式
           if(!file_exists(storage_path() . "/app/tem_img")){
-                mkdir(storage_path() . "/app/tem_img",777);
+                mkdir(storage_path() . "/app/tem_img",0777);
           }
 //        if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_image_content, $result)){
 //            $type = $result[2];
@@ -240,7 +240,7 @@ class ImageProcessController extends Controller
 
             if(!file_exists($new_file)){
             //检查是否有该文件夹，如果没有就创建，并给予最高权限
-                mkdir($new_file, 777);
+                mkdir($new_file, 0777);
             }
             $new_file_name = time().".{$type}";
             $new_file = $new_file.$new_file_name;
