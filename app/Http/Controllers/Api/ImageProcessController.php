@@ -36,7 +36,7 @@ class ImageProcessController extends Controller
     public function wordUpload(Request $request)
     {
         $handle = $request->input("handle");
-        $this->file_upload->fileSave(storage_path('app/uploads/'),4*1024*1024);
+        $this->file_upload->fileSave(storage_path('app/uploads/'),2*1024*1024);
         $upload_info = $this->file_upload->msg;
         if($upload_info["status"]=="ok"){
             set_time_limit(120);
@@ -230,7 +230,9 @@ class ImageProcessController extends Controller
     function base64_image_content($base64_image_content,$path){
 
         //匹配出图片的格式
-
+          if(!file_exists(storage_path() . "/app/tem_img")){
+                mkdir(storage_path() . "/app/tem_img",777);
+          }
 //        if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_image_content, $result)){
 //            $type = $result[2];
             $type = 'jpg';

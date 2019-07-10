@@ -782,6 +782,7 @@
         })
     })
 
+    $(document).bind("selectstart",function(){return false;});
 
     $(".copy").on("click",function () {
 
