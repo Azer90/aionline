@@ -548,6 +548,7 @@
                 dataType: 'json',
                 data: {
                     "paymethod": paymethod,
+                    "file_name": file_name,
                     '_token':"{{csrf_token()}}",
                 },
                 success: function (data) {
