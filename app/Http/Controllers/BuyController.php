@@ -41,7 +41,7 @@ class BuyController extends Controller
 
             $order = [
                 'out_trade_no' => $order_no,
-                'file_name' => $data['file_name'],
+                'passback_params' => $data['file_name'],
                 'total_amount' => $this->pay_config['price'],
                 //'total_amount' => 0.01,
                 'subject'      => $this->pay_config['goods_name'],
