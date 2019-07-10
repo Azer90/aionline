@@ -15,25 +15,12 @@
     .hide{
         display: none;
     }
-    /*.qr{*/
-        /*display: none;*/
-        /*width: 100%;*/
-        /*position: absolute;*/
-        /*top:0;*/
-        /*left: 0;*/
-        /*z-index: 10;*/
-        /*background-color: rgba(0, 0, 0, .4);*/
-    /*}*/
-    /*.qr div{*/
-        /*margin: 40% 50%;*/
-        /*transform: translateX(-50%);*/
-        /*!*transform: translateY(-50%);*!*/
-        /*width: 200px;*/
-        /*background: #fff;*/
-    /*}*/
-    /*.qr img{*/
-        /*width: 200px;*/
-    /*}*/
+
+    .src img{
+          width: 100%;
+    }
+
+
 </style>
 <body>
 @include('web.layouts.nav')
@@ -87,7 +74,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img class="currency_img" src="images/icons_03.jpg"/>
+            <img class="currency_img" src="images/default.jpg"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -143,7 +130,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img class="cart_img" src="images/icons_03.jpg"/>
+            <img class="cart_img" src="images/card.jpg"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -199,7 +186,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img class="travel_img" src="images/icons_03.jpg"/>
+            <img class="travel_img" src="images/driving.png"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -255,7 +242,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img class="driver_img" src="images/icons_03.jpg"/>
+            <img class="driver_img" src="images/driver.png"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -311,7 +298,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img class="business_img" src="images/icons_03.jpg"/>
+            <img class="business_img" src="images/business.png"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -367,7 +354,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img class="table_img" src="images/icons_03.jpg"/>
+            <img class="table_img" src="images/table.png"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -423,7 +410,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img class="hand_img" src="images/icons_03.jpg"/>
+            <img class="hand_img" src="images/handwriting.jpg"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -479,7 +466,7 @@
         </div>
         <img src="images/line_03.jpg" class="line" />
         <div class="src">
-            <img class="bank_img" src="images/icons_03.jpg"/>
+            <img class="bank_img" src="images/bank.jpg"/>
             <div class="url">
                 <div class="url_box">
                     <input type="text" class="web_url" placeholder="请输入网络图片URL" name="" id="" value="" />
@@ -534,8 +521,8 @@
         chunked: true,           //开启分片上传
         chunkSize: 1024*1024*2,  //每一片的大小
         chunkRetry: 100,         // 如果遇到网络错误,重新上传次数
-        threads: 3,              //上传并发数。允许同时最大上传进程数。
-        fileSingleSizeLimit:10*1024*1024,
+        threads: 1,              //上传并发数。允许同时最大上传进程数。
+        fileSizeLimit:2*1024*1024,
         duplicate :true,
         formData:{
             dis_type:1
@@ -543,7 +530,7 @@
         // 只允许选择图片文件。
         accept: {
             // title: 'Images',
-            extensions: 'jpg,png,bmp',
+            extensions: 'jpg,jpeg,png,bmp',
             mimeTypes: 'image/*'
         }
     });
@@ -552,7 +539,7 @@
      * 验证文件格式以及文件大小
      */
     uploader.on("error", function (type) {
-        alert(type);
+
         if (type == "Q_TYPE_DENIED") {
             layer.msg("请上传图片文件");
         } else if (type == "Q_EXCEED_SIZE_LIMIT") {
