@@ -1593,14 +1593,18 @@ white-space: nowrap;}
 
 .buy-step{
   font-size: 20px;
-  color: #ffffff;
   text-align: center;
 }
 .payment-wrapper{
-  position: relative;
-  top:25%;
-  left:0;
+  position: fixed;
   z-index: 99;
+  top: 20%;
+  left: 40%;
+  padding: 20px 0;
+  border: solid 1px #ccc;
+  background: #fff;
+  box-shadow: 0 0 24px rgba(0,0,0,.2);
+
 }
 .zhifu{
   display: none;
@@ -1612,7 +1616,19 @@ white-space: nowrap;}
   z-index: 10;
   background-color: rgba(0, 0, 0, .4);
 }
-
+.zhifu .close1 {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  top: -15px;
+  right: -15px;
+  z-index: 2;
+  cursor: pointer;
+  display: block;
+  background: url(../../images/icon-close.png) center no-repeat;
+}
 .wechat-pay-dialog {
   position: fixed;
   z-index: 1002;

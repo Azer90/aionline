@@ -259,7 +259,10 @@
 </div>
 <div class="zhifu">
     <ul class="payment-wrapper">
-        <div class="buy-step">请选择付款方式</div>
+        <a class="close1"></a>
+        <div class="buy-step">请选择付款方式
+        </div>
+        <p style="color: red;text-align: center">继续下载 需支付{{$pay_config['price']}}元</p>
         <div class="payment">
             <a value="alipay" id="aliPay" class="pay-ali current" ><span class="icon icon-tag"></span><img src="{{ asset('images/pay-ali.png') }}"></a>
             <a value="wechat" id="wechatPay" class="pay-wechat"><span class="icon icon-tag"></span><img src="{{ asset('images/pay-wechat.png') }}"></a>
@@ -305,6 +308,7 @@
 
     <script>
         var timeID;
+        var control="{{$pay_config['control']}}";
         var file_name ="",user_id="",str_len=0;
         var pro = new Progress('.progress', {
             val: 50, //初始值 取值范围：0-100
@@ -474,7 +478,7 @@
                 layer.alert('请先点击立即合成');
                 return false;
             }
-            if(str_len>100){
+            if(str_len>control){
                 $(".zhifu").show();
             }else {
                 $.ajax({
@@ -579,6 +583,9 @@
 
         $(".close").click(function () {
             $(".wechat-pay-dialog-bg").css("display", "none");
+        });
+        $(".close1").click(function () {
+            $(".zhifu").css("display", "none");
         });
         $(function () {
             chaxun = setInterval(function () {
