@@ -486,6 +486,7 @@
 @section('script')
     <script>
         var on_index = 0;
+        var index = 0;
 //切换
         $(".main_left li").on("click",function () {
             var type = $(this).data("type");
@@ -510,8 +511,8 @@
             chunked: true,           //开启分片上传
             chunkSize: 1024*1024*2,  //每一片的大小
             chunkRetry: 100,         // 如果遇到网络错误,重新上传次数
-            threads: 3,              //上传并发数。允许同时最大上传进程数。
-            fileSizeLimit:4*1024*1024,
+            threads: 1,              //上传并发数。允许同时最大上传进程数。
+            fileSizeLimit:2*1024*1024,
             duplicate :true,
             formData:{handle:1},
             // 只允许选择图片文件。
@@ -526,11 +527,12 @@
          * 验证文件格式以及文件大小
          */
         uploader.on("error", function (type) {
+
             layer.close(index);
             if (type == "Q_TYPE_DENIED") {
                 layer.msg("请上传音频文件");
             } else if (type == "Q_EXCEED_SIZE_LIMIT") {
-                layer.msg("文件大小不能超过4M");
+                layer.msg("文件大小不能超过2M");
             }else {
                 layer.msg("上传出错！请检查后重新上传！错误代码"+type);
             }
@@ -542,10 +544,11 @@
         var user_id="";
         var file_name="";
         uploader.on( 'startUpload', function( file) {
-            index = layer.load(1);
+
         });
 
         uploader.on('fileQueued',function (file) {
+            index = layer.load(1);
             uploader.makeThumb( file, function( error, ret ) {
                 var type = uploader.options.formData.handle;
                 if ( error ) {
