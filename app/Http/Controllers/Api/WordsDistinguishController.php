@@ -39,7 +39,7 @@ class WordsDistinguishController extends Controller
         $type = $request->input("dis_type");
         $ori = $request->input("ori");
 
-        $this->file_upload->fileSave(storage_path('app/uploads/'));
+        $this->file_upload->fileSave(storage_path('app/uploads/'),2*1024*1024);
         $upload_info = $this->file_upload->msg;
 
         $res = $this->word($type,$ori,$upload_info["info"]);
