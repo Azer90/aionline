@@ -307,7 +307,7 @@
         var timeID;
         var file_name ="",user_id="",str_len=0;
         var pro = new Progress('.progress', {
-            val: 0, //初始值 取值范围：0-100
+            val: 50, //初始值 取值范围：0-100
             size: 4, //控件大小默认值为10，可结合css自行修改样式
             precision: 0, //val精度配置，默认保留0位小数,最多配位4位
             drag: true, //默认开启拖拽，关闭设为false，不配置默认为true
