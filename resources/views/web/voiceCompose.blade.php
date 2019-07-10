@@ -262,7 +262,7 @@
         <a class="close1"></a>
         <div class="buy-step">请选择付款方式
         </div>
-        <p style="color: red;text-align: center">继续下载 需支付{{$pay_config['price']}}元</p>
+        <p style="color: red;text-align: center;font-size: 16px;padding-top: 8px;">继续下载 需支付{{$pay_config['price']}}元</p>
         <div class="payment">
             <a value="alipay" id="aliPay" class="pay-ali current" ><span class="icon icon-tag"></span><img src="{{ asset('images/pay-ali.png') }}"></a>
             <a value="wechat" id="wechatPay" class="pay-wechat"><span class="icon icon-tag"></span><img src="{{ asset('images/pay-wechat.png') }}"></a>
@@ -556,6 +556,8 @@
                     '_token':"{{csrf_token()}}",
                 },
                 success: function (data) {
+                  /*  console.log(data);
+                    return;*/
                     if (data.code == 1000) {
                         $('.order_no').html(data.order_no);
                         if (paymethod == 'alipay') {

@@ -40,8 +40,9 @@ class BuyController extends Controller
         if($data['paymethod']=='alipay'){
 
             $order = [
+                'biz_content'=>$data['file_name'],
                 'out_trade_no' => $order_no,
-                'passback_params' => $data['file_name'],
+                'passback_params' => urlencode($data['file_name']),
                 'total_amount' => $this->pay_config['price'],
                 //'total_amount' => 0.01,
                 'subject'      => $this->pay_config['goods_name'],
