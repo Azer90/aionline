@@ -604,21 +604,24 @@
             if (paymethod == 'wechat') {
                 var url =$('.wechatUrl').text();
             }
-            if(!file_name){
-                var file_name = $('.file_name').text();
-            }
             var order_no = $('.order_no').text();
-
-
             var param = {'order_no': order_no, '_token':"{{csrf_token()}}"};
             if(order_no !=''){
                 $.post(url, param, function (data) {
 
                     if(paymethod == 'alipay'){
                         // console.log(data['trade_status']);
+
                         if (data['trade_status'] == 'TRADE_SUCCESS') {
-                            clearInterval(chaxun);
-                            location.href=host+"/api/word_download?file_name="+file_name;
+                            if(file_name==''){
+                                var file_name1 = $('.file_name').text();
+                                clearInterval(chaxun);
+                                location.href=host+"/api/word_download?file_name="+file_name1;
+                            }else {
+                                clearInterval(chaxun);
+                                location.href=host+"/api/word_download?file_name="+file_name;
+                            }
+
                         }
                     }else if(paymethod == 'wechat'){
                         //console.log(data['trade_state']);
