@@ -97,14 +97,14 @@
                 <img src="images/icons_07.jpg"/>
                 <p class="introduce_title">通用识别 功能介绍</p>
             </div>
-            <span class="introduce_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="introduce_content">对手写字、照片等内容进行智能识别为可编辑内容。可应用于各行业的文字字符信息的提取识别</span>
         </div>
         <div class="item_dis">
             <div>
                 <img src="images/icons_07.jpg"/>
                 <p class="guide_title">通用识别 操作指南</p>
             </div>
-            <span class="guide_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="guide_content">可通过【复制网络图片链接-检测】或【本地上传】将需要识别的图片上传，等待智能在线AI系统处理后，点击【复制】可获取识别内容。</span>
         </div>
     </div>
     <div class="main_right hide">
@@ -153,14 +153,14 @@
                 <img src="images/icons_07.jpg"/>
                 <p class="introduce_title">身份证识别 功能介绍</p>
             </div>
-            <span class="introduce_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="introduce_content">对居民身份证进行智能精准识别,内容可复制。可应用于公安、安防等体系。</span>
         </div>
         <div class="item_dis">
             <div>
                 <img src="images/icons_07.jpg"/>
                 <p class="guide_title">身份证识别 操作指南</p>
             </div>
-            <span class="guide_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="guide_content">可通过【复制网络图片链接-检测】或【本地上传】将需要识别的身份证上传，等待智能在线AI系统处理后，点击【复制】可获取识别内容。</span>
         </div>
     </div>
     <div class="main_right hide">
@@ -209,14 +209,14 @@
                 <img src="images/icons_07.jpg"/>
                 <p class="introduce_title">行驶证 功能介绍</p>
             </div>
-            <span class="introduce_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="introduce_content">对行驶证进行智能精准识别,内容可复制。可应用于交通、安防等体系。</span>
         </div>
         <div class="item_dis">
             <div>
                 <img src="images/icons_07.jpg"/>
                 <p class="guide_title">行驶证 操作指南</p>
             </div>
-            <span class="guide_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="guide_content">可通过【复制网络图片链接-检测】或【本地上传】将需要识别的行驶证上传，等待智能在线AI系统处理后，点击【复制】可获取识别内容。</span>
         </div>
     </div>
     <div class="main_right hide">
@@ -265,14 +265,14 @@
                 <img src="images/icons_07.jpg"/>
                 <p class="introduce_title">驾驶证 功能介绍</p>
             </div>
-            <span class="introduce_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="introduce_content">对驾驶证进行智能精准识别,内容可复制。可应用于交通、安防等体系。</span>
         </div>
         <div class="item_dis">
             <div>
                 <img src="images/icons_07.jpg"/>
                 <p class="guide_title">驾驶证 操作指南</p>
             </div>
-            <span class="guide_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="guide_content">可通过【复制网络图片链接-检测】或【本地上传】将需要识别的驾驶证上传，等待智能在线AI系统处理后，点击【复制】可获取识别内容。</span>
         </div>
     </div>
     <div class="main_right hide">
@@ -321,14 +321,14 @@
                 <img src="images/icons_07.jpg"/>
                 <p class="introduce_title">营业执照 功能介绍</p>
             </div>
-            <span class="introduce_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="introduce_content">对营业执照进行智能精准识别,内容可复制。可应用于工信查验、认证等。</span>
         </div>
         <div class="item_dis">
             <div>
                 <img src="images/icons_07.jpg"/>
                 <p class="guide_title">营业执照 操作指南</p>
             </div>
-            <span class="guide_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="guide_content">可通过【复制网络图片链接-检测】或【本地上传】将需要识别的营业执照上传，等待智能在线AI系统处理后，点击【复制】可获取识别内容。</span>
         </div>
     </div>
     <div class="main_right hide">
@@ -377,14 +377,14 @@
                 <img src="images/icons_07.jpg"/>
                 <p class="introduce_title">表格文字识别 功能介绍</p>
             </div>
-            <span class="introduce_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="introduce_content">对表格图片进行智能精准识别,内容以Excel形式进行输出。可应用于财务、人事等报表处理。</span>
         </div>
         <div class="item_dis">
             <div>
                 <img src="images/icons_07.jpg"/>
                 <p class="guide_title">表格文字识别 操作指南</p>
             </div>
-            <span class="guide_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="guide_content">可通过【复制网络图片链接-检测】或【本地上传】将需要识别的表格图片上传，等待智能在线AI系统处理后，点击【复制】可获取识别内容。</span>
         </div>
     </div>
     <div class="main_right hide">
@@ -433,14 +433,14 @@
                 <img src="images/icons_07.jpg"/>
                 <p class="introduce_title">手写文字识别 功能介绍</p>
             </div>
-            <span class="introduce_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="introduce_content">对手写文字进行智能精准识别,内容可复制。可应用于试卷、笔记等识别。</span>
         </div>
         <div class="item_dis">
             <div>
                 <img src="images/icons_07.jpg"/>
                 <p class="guide_title">手写文字识别 操作指南</p>
             </div>
-            <span class="guide_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="guide_content">可通过【复制网络图片链接-检测】或【本地上传】将需要识别的手写图片上传，等待智能在线AI系统处理后，点击【复制】可获取识别内容。</span>
         </div>
     </div>
     <div class="main_right hide">
@@ -489,14 +489,14 @@
                 <img src="images/icons_07.jpg"/>
                 <p class="introduce_title">银行卡识别 功能介绍</p>
             </div>
-            <span class="introduce_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="introduce_content">对银行卡内容进行智能精准识别,内容可复制。可应用于金融验证等。</span>
         </div>
         <div class="item_dis">
             <div>
                 <img src="images/icons_07.jpg"/>
                 <p class="guide_title">银行卡识别 操作指南</p>
             </div>
-            <span class="guide_content">点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span class="guide_content">可通过【复制网络图片链接-检测】或【本地上传】将需要识别的银行卡图片上传，等待智能在线AI系统处理后，点击【复制】可获取识别内容。</span>
         </div>
     </div>
     </div>

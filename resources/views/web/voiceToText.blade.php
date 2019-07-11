@@ -43,8 +43,8 @@
     <div class="main_left">
         <h2>语音识别</h2>
         <ul>
-            <li class="on"> <a href="{{ route('voiceToText') }}">语音转文字</a></li>
             <li> <a href="{{ route('voiceCompose') }}">在线语音合成</a></li>
+            <li class="on"> <a href="{{ route('voiceToText') }}">语音转文字</a></li>
         </ul>
     </div>
     <div class="main_right">
@@ -102,14 +102,14 @@
                 <img src="images/icons_07.jpg" />
                 <p>文字转语音 功能介绍</p>
             </div>
-            <span>点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span>在线语音转文字，可以直接把语言文件转换为语音文件，支持主流的音频格式，将音频文件中的语音转换为文字内容。</span>
         </div>
         <div class="item_dis">
             <div>
                 <img src="images/icons_07.jpg" />
                 <p>文字转语音 操作指南</p>
             </div>
-            <span>点击选择文件加入待转换的语音文件，也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span>上传音频文件，等待在线AI智能处理，点击【立即下载】</span>
         </div>
         <div class="tiujian">
             <div class="t_top">
