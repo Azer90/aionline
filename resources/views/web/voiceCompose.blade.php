@@ -16,8 +16,8 @@
     <div class="main_left">
         <h2>语音识别</h2>
         <ul>
-            <li><a href="{{ route('voiceToText') }}">语音转文字</a></li>
             <li class="on"><a href="{{ route('voiceCompose') }}">在线语音合成</a></li>
+            <li><a href="{{ route('voiceToText') }}">语音转文字</a></li>
         </ul>
     </div>
     <div class="main_right">
@@ -54,7 +54,7 @@
                     <ul>
                         <li class="on">通用场景</li>
                         <li>客服场景</li>
-                        <li>声场景</li>
+                        <li>童声场景</li>
                         <li>英文场景</li>
                         <li>方言场景</li>
                     </ul>
@@ -220,14 +220,14 @@
                 <img src="images/icons_07.jpg" />
                 <p>文字转语音 功能介绍</p>
             </div>
-            <span>点击选择文件加入待转换的语音文件,也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span>将文本转化成真人语音的需求，提供多种音色选择，支持自定义音量、语速，为您提供个性化音色定制服务，让发音更自然、更专业、更符合场景需求。</span>
         </div>
         <div class="item_dis">
             <div>
                 <img src="images/icons_07.jpg" />
                 <p>文字转语音 操作指南</p>
             </div>
-            <span>点击选择文件加入待转换的语音文件，也可直接拖动语音文件添加，我们将自动上传转换文件，您只需稍等片刻将转换后的文件下载即可。</span>
+            <span>输入需要合成的文字内容，自定义音量、语速后点击【立即合成】,系统将智能合成转换，试听后可【下载】。</span>
         </div>
         <div class="tiujian">
             <div class="t_top">

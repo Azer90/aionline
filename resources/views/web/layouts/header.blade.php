@@ -7,7 +7,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-    <title></title>
+     <title>{{ $config['title'] }}</title>
+    <meta name="description" content="{{ !empty($seo['description']) ? $seo['description'] : 'pdf'  }}" />
+    <meta name="keywords" content="{{ !empty($seo['keywords']) ? $seo['keywords'] : 'pdf' }}" />
+    <link rel="icon" href="" />
     <link rel="stylesheet" type="text/css" href="{{asset('css/home/swiper.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('css/home/css.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('css/home/progressjs.css')}}" />
