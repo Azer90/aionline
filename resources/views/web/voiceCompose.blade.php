@@ -260,10 +260,12 @@
 
 <div class="qr">
     <div>
+        <img class="close" src="images/close.png" alt="">
         <p style="padding-left: 10px">扫描二维码关注公众号后即可下载</p>
-        <img src="" alt="">
+        <img class="qr_img" src="" alt="">
     </div>
 </div>
+
 <div class="zhifu">
     <ul class="payment-wrapper">
         <a class="close1"></a>
@@ -506,7 +508,7 @@
                         if(res.download_code==1){
                             location.href=host+"/api/word_download?file_name="+file_name;
                         }else{
-                            $(".qr img").attr("src",res.qrcode_url);
+                            $(".qr .qr_img").attr("src",res.qrcode_url);
                             $(".qr").show();
                             polling();
                         }
@@ -653,6 +655,10 @@
         $('.closesa').click(function(){
             $('.ggw').hide()
         })
+        $(document).on("click",".qr .close",function () {
+            $(".qr").hide();
+            user_id="";
+        });
 
     </script>
 
