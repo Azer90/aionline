@@ -503,8 +503,9 @@
 </div>
 <div class="qr">
     <div>
+        <img class="close" src="images/close.png" alt="">
         <p style="padding-left: 10px">扫描二维码关注公众号后即可下载</p>
-        <img src="" alt="">
+        <img class="qr_img" src="" alt="">
     </div>
 </div>
 @extends('web.layouts.footer')
@@ -783,7 +784,7 @@
                 if(res.download_code==1){
                     location.href=host+"/api/word_download?file_name="+file_name;
                 }else{
-                    $(".qr img").attr("src",res.qrcode_url);
+                    $(".qr .qr_img").attr("src",res.qrcode_url);
                     $(".qr").show();
                     polling();
                 }
@@ -822,6 +823,10 @@
             })
         },500)
     }
-
+    $(document).on("click",".qr .close",function () {
+        $(".qr").hide();
+        user_id="";
+        clearTimeout(time)
+    });
 </script>
 

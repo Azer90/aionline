@@ -1518,11 +1518,22 @@ white-space: nowrap;}
   top:25%;
   left:50%;
   transform: translateX(-50%);
-  width: 200px;
+  width: 230px;
   background: #fff;
+  padding-top: 30px;
+  text-align: center;
 }
 .qr img{
   width: 200px;
+}
+
+.qr .close{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height:30px;
+  cursor: pointer;
 }
 /*支付*/
 .buy-step {
