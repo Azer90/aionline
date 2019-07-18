@@ -247,6 +247,13 @@
         </div>
     </div>
 </div>
+<div class="ggw">
+    <div class="ggw_box">
+        <p>您需要通过以下验证</p>
+        <img src="images/close.png" class="closesa"/>
+        <div id="SlidingVerification"></div>
+    </div>
+</div>
 <audio id="myMusic">
     <source src="" type="audio/mpeg" />
 </audio>
@@ -306,6 +313,7 @@
     <script type="text/javascript" src="{{asset('js/home/progressjs.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/home/jquery.qrcode.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/home/qrcode.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/home/slidingverification.js')}}" ></script>
 
     <script>
         var timeID;
@@ -389,8 +397,12 @@
             }
         });
         $(".bofan").on("click",function () {
-           var compose= $('.compose').text();
+            var compose= $('.compose').text();
             var audio = document.getElementById('myMusic');
+            if(compose=='立即合成'){
+                SlidingVerification('#SlidingVerification');
+                $('.ggw').css('display','flex');
+            }
             if(compose=='播放'||compose=='继续播放'){
 
                 if(audio!==null){
@@ -422,6 +434,8 @@
                 }
                 return false;
             }
+        });
+      function bofan() {
             var content=$('.gem').val();
             if(content==''){
                 layer.alert('请输入你要转换的文字');
@@ -473,7 +487,7 @@
                    }
                 }
             })
-        });
+        };
         $(".download").on("click",function () {
             if(file_name==''){
                 layer.alert('请先点击立即合成');
@@ -636,6 +650,10 @@
             }
 
         }
+        $('.closesa').click(function(){
+            $('.ggw').hide()
+        })
+
     </script>
 
 @endsection

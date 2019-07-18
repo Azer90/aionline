@@ -2,7 +2,7 @@
     <div class="header_mid">
         <p>欢迎来到在线AI转换官网</p>
         <div>
-            <a href="#"><img src="{{asset('images/icon_03.jpg')}}" /><span>APP下载</span></a>
+            <a href="javascript:void(0)" class="addFavorite"><img src="{{asset('images/icon_03.jpg')}}" /><span>网页收藏</span></a>
         </div>
     </div>
 </div>
