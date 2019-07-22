@@ -607,6 +607,7 @@
             $(".zhifu").css("display", "none");
         });
         $(function () {
+            $('#span').html(50);
             chaxun = setInterval(function () {
                 check()
             }, 3000);

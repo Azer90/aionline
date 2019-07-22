@@ -4,7 +4,7 @@ $(document).on('click','.closes',function(){
 		'right':'-60%'
 	})
 });
-$(document).on('click','.menu',function(){
+$(document).on('click touchstart','.menu',function(){
 	$('.fadeinsaa').fadeIn();
 	$('.fadeinsaa ul').animate({
 		'right':'0'
