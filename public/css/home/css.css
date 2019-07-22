@@ -1750,7 +1750,7 @@ white-space: nowrap;}
 
 
 .ggw_box{
-  overflow: hidden;
+ /* overflow: hidden;*/
   padding: 30px 80px;
   position: relative;
   background: #fff;
