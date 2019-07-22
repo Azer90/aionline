@@ -1,4 +1,4 @@
-$(document).on('click','.closes',function(){
+$(document).on('click touchstart','.closes',function(){
 	$('.fadeinsaa').fadeOut();
 	$('.fadeinsaa ul').animate({
 		'right':'-60%'

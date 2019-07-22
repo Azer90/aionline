@@ -251,9 +251,12 @@
     <div class="ggw_box">
         <p>您需要通过以下验证</p>
         <img src="images/close.png" class="closesa"/>
-        <div id="SlidingVerification"></div>
+        <div class="selfDiv">
+            <div class="verify-wrap" id="verify-wrap"></div>
+        </div>
     </div>
 </div>
+
 <audio id="myMusic">
     <source src="" type="audio/mpeg" />
 </audio>
@@ -316,9 +319,12 @@
     <script type="text/javascript" src="{{asset('js/home/jquery.qrcode.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/home/qrcode.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/home/slidingverification.js')}}" ></script>
+    <script type="text/javascript" src="{{asset('js/home/jq-slideVerify.js')}}" ></script>
 
     <script>
+
         var timeID;
+        var slideVerify='';
         var control="{{$pay_config['control']}}";
         var file_name ="",user_id="",str_len=0;
         var pro = new Progress('.progress', {
@@ -402,7 +408,24 @@
             var compose= $('.compose').text();
             var audio = document.getElementById('myMusic');
             if(compose=='立即合成'){
-                SlidingVerification('#SlidingVerification');
+                //console.log(slideVerify);
+                if(slideVerify){
+                    slideVerify.resetVerify();
+                }
+
+                var SlideVerifyPlug = window.slideVerifyPlug;
+                 slideVerify = new SlideVerifyPlug('#verify-wrap',{
+                    wrapWidth:'350',//设置 容器的宽度 ,不设置的话，会设置成100%，需要自己在外层包层div,设置宽度，这是为了适应方便点；
+                    initText:'拖动滑块验证',  //设置  初始的 显示文字
+                    sucessText:'验证通过',//设置 验证通过 显示的文字
+                    getSuccessState:function(res){
+                        //当验证完成的时候 会 返回 res 值 true，只留了这个应该够用了
+                       if(res){
+                           $('.ggw').hide();
+                           bofan();
+                       }
+                    }
+                });
                 $('.ggw').css('display','flex');
             }
             if(compose=='播放'||compose=='继续播放'){
@@ -448,6 +471,7 @@
             var token="{{csrf_token()}}";
             var voice=$('.slide_gem .slide_top .fadines ul .on').data('value');
             if(!voice){
+                slideVerify.resetVerify();
                 layer.alert('请选择发音人');
                 return false;
             }
