@@ -354,7 +354,7 @@
 
         pro.onLoad(false);
         var pro1 = new Progress('.progress1', {
-            val: 0, //初始值 取值范围：0-100
+            val: 50, //初始值 取值范围：0-100
             size: 4, //控件大小默认值为10，可结合css自行修改样式
             precision: 0, //val精度配置，默认保留0位小数,最多配位4位
             drag: true, //默认开启拖拽，关闭设为false，不配置默认为true
@@ -375,7 +375,15 @@
             },
             //获取val回调方法
             getVal: function(el) {
-                $('#spans').html(el.val * 3);
+                console.log(el.val);
+                $('#spans').html(el.val);
+                if(el.val < 50){
+                    var ggw1 = 500 - el.val*10;
+                    $('#spans').html('-' + ggw1)
+                }else{
+                    var ggw1 = el.val - 50;
+                    $('#spans').html(ggw1 * 10)
+                }
                 $('.bofan img').attr('src','images/yuyin_11.jpg');
                 $('.compose').text('立即合成');
                 var audio = document.getElementById('myMusic');
