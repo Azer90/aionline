@@ -258,6 +258,7 @@ class WordsDistinguishController extends Controller
 
 // 带参数调用网络图片文字识别, 图片参数为远程url图片
         $res = $this->client->webImageUrl($url);
+
         $res["file_name"]=$this->createFileName($res["words_result"]);
         return $res;
     }
