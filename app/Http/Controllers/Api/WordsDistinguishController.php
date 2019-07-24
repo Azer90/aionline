@@ -232,6 +232,7 @@ class WordsDistinguishController extends Controller
         }
         DB::table("ai_dis")->insert(["path"=>$res["result"]["result_data"],"file_name"=>$res["result"]["request_id"],"create_time"=>date("Y-m-d H:i:s",time())]);
         $res["file_name"] = $res["result"]["request_id"];
+
         return $res;
     }
 

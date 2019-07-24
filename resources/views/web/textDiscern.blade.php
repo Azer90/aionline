@@ -19,8 +19,13 @@
     .src img{
           width: 100%;
     }
-
-
+    .copy{
+        display: none;
+    }
+    .table_ul td{
+       font-size: 16px;
+        width: 60px;
+    }
 </style>
 <body>
 @include('web.layouts.nav')
@@ -88,7 +93,13 @@
         <div class="jgs">
             <h2>识别结果</h2>
             <ul class="currency">
-
+                <li style="width: 100%">《演讲的力量》
+                任何一个人，只要拥有值得分享的思想，就能
+                发表精彩的演讲，在公共演讲中，唯一真正重要的
+                东西不是自信，不是舞台展示，也不是流利的语言。
+                而是有价值的思想。<br>
+                    <span style="float: right;display: inline-block;margin-right: 10px">——克里斯•安德森</span>
+                </li>
             </ul>
             <div class="copy">复制</div>
         </div>
@@ -144,6 +155,12 @@
         <div class="jgs">
             <h2>识别结果</h2>
             <ul class="id_cart">
+                <li>姓名   常涛</li>
+                <li>性别  男</li>
+                <li>民族  汉</li>
+                <li>出生 1997年6月01日</li>
+                <li>住址 河北省邯郸市肥乡县肥乡</li>
+                <li>公民身份号码 411526199706013217</li>
 
             </ul>
             <div class="copy">复制</div>
@@ -200,6 +217,17 @@
         <div class="jgs">
             <h2>识别结果</h2>
             <ul class="driving">
+                <li>中华人民共和国机动车行驶证</li>
+                <li>号牌号码  豫A99RR9</li>
+                <li>车辆类型  小型普通客车</li>
+                <li>所有人  郑昆</li>
+                <li>住址  中牟县三刘寨村</li>
+                <li>使用性质  非营运</li>
+                <li>品牌型号  大众汽车牌SVW6474DFD</li>
+                <li>车辆识别代号  SSVUDDTT2J2022558</li>
+                <li>发动机号码  111533</li>
+                <li>注册日期  2018-03-12</li>
+                <li>发证日期  2018-03-13</li>
 
             </ul>
             <div class="copy">复制</div>
@@ -256,6 +284,15 @@
         <div class="jgs">
             <h2>识别结果</h2>
             <ul class="driver">
+                <li>中华人民共和国机动车驾驶证</li>
+                <li>姓名 谢乐桃</li>
+                <li>性别 女</li>
+                <li>国籍 中国</li>
+                <li>住址  内蒙古自治区赤峰市33号</li>
+                <li>出生日期  1999-02-22</li>
+                <li>初次领证日期  2015-06-18</li>
+                <li>准驾车型  C1</li>
+                <li>有效期限  2015-06-18至2021-06-18</li>
 
             </ul>
             <div class="copy">复制</div>
@@ -312,6 +349,14 @@
         <div class="jgs">
             <h2>识别结果</h2>
             <ul class="business">
+                <li>企业法人营业执照 （副本）</li>
+                <li>注册号 887330921837540</li>
+                <li>社会信用代码  8111102033223410559</li>
+                <li>名        称  北京仕达医疗有限公司</li>
+                <li>类        型  医疗器械</li>
+                <li>住        所  北京市丰台区三环新城</li>
+                <li>法 定 代表人  朱胜贤</li>
+                <li>有效 日期 至  2016年2月20日</li>
 
             </ul>
             <div class="copy">复制</div>
@@ -368,6 +413,38 @@
         <div class="jgs">
             <h2>识别结果</h2>
             <ul class="table_ul">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>语文</td>
+                        <td>数学</td>
+                        <td>英语</td>
+                    </tr>
+                    <tr>
+                        <td>张三</td>
+                        <td>95</td>
+                        <td>96</td>
+                        <td>97</td>
+                    </tr>
+                    <tr>
+                        <td>李四</td>
+                        <td>85</td>
+                        <td>87</td>
+                        <td>48</td>
+                    </tr>
+                    <tr>
+                        <td>王二</td>
+                        <td>88</td>
+                        <td>87</td>
+                        <td>67</td>
+                    </tr>
+                    <tr>
+                        <td>麻子</td>
+                        <td>98</td>
+                        <td>88</td>
+                        <td>78</td>
+                    </tr>
+                </table>
 
             </ul>
             <div class="copy" style='margin-right:20px'>点击下载</div>
@@ -424,6 +501,9 @@
         <div class="jgs">
             <h2>识别结果</h2>
             <ul class="handwriting">
+                <li>周二下午三点</li>
+                <li>需求评审会。</li>
+                <li>提前备好文档。</li>
 
             </ul>
             <div class="copy">复制</div>
@@ -480,6 +560,14 @@
         <div class="jgs">
             <h2>识别结果</h2>
             <ul class="bank">
+                <li>ICBC    中国工商银行 GOLD</li>
+                <li>CREDIT  环球旅行卡Global Travel</li>
+                <li>6225 9700 7000 3000</li>
+                <li>6225             月/年</li>
+                <li>02   有效期限     07/22</li>
+                <li>MR.CHENTA</li>
+                <li>UnionPay</li>
+                <li>银联</li>
 
             </ul>
             <div class="copy">复制</div>
@@ -594,6 +682,7 @@
     //上传成功
     uploader.on( 'uploadSuccess', function( file,response ) {
         layer.close(index);
+        $(".copy").show();
         switch (parseInt(response["type"])) {
             case 1:
                 var res = response.data.words_result,str="";
@@ -682,7 +771,7 @@
         uploader.options.formData.dis_type = type;
         $(".name").text(name);
         $(".main_right:eq("+$(this).index()+")").show().siblings().hide()
-    })
+    });
 
     /**
      * 检测
