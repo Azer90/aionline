@@ -853,7 +853,7 @@
                     default :
                         curr_class = "";
                 }
-
+                file_name =  res.file_name
                 $("."+curr_class).html(str);
 
             }
