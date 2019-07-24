@@ -611,7 +611,7 @@
         chunkSize: 1024*1024*2,  //每一片的大小
         chunkRetry: 100,         // 如果遇到网络错误,重新上传次数
         threads: 1,              //上传并发数。允许同时最大上传进程数。
-        fileSizeLimit:2*1024*1024,
+        fileSizeLimit:10*1024*1024,
         duplicate :true,
         formData:{
             dis_type:1
@@ -819,6 +819,7 @@
             },
             success:function (res) {
                 layer.close(index);
+                $(".copy").show();
                 var result = res.words_result,str="";
                 $.each(result,function (index,item) {
                     str+="<li>"+item.words+"</li>";
