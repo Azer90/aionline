@@ -5,9 +5,9 @@
 <div class="acticle_bannera">
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="{{asset('images/active_banner_03.jpg')}}" /></div>
-            <div class="swiper-slide"><img src="{{asset('images/active_banner_03.jpg')}}" /></div>
-            <div class="swiper-slide"><img src="{{asset('images/active_banner_03.jpg')}}" /></div>
+            <div class="swiper-slide"><a href="{{ route('voiceCompose') }}"><img src="{{asset('images/active_banner_03.jpg')}}" /></a></div>
+            <div class="swiper-slide"><a href="{{ route('voiceCompose') }}"><img src="{{asset('images/active_banner_03.jpg')}}" /></a></div>
+            <div class="swiper-slide"><a href="{{ route('voiceCompose') }}"><img src="{{asset('images/active_banner_03.jpg')}}" /></a></div>
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
