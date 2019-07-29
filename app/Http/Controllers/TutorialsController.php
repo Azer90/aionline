@@ -59,7 +59,7 @@ class TutorialsController extends Controller
         $name=$this->name;
 
         $config=$this->system;
-        $seo=['title'=>$config['title'].'-'.$article['title'],'keywords'=>$article['keywords'],'description'=>$article['description']];
+        $seo=['title'=>$article['title'].'-'.$config['title'],'keywords'=>$article['keywords'],'description'=>$article['description']];
 
         return view('web.detail')->with(compact('nav','name','seo','config','article','common','new','up','down','link'));
     }
