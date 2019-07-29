@@ -42,7 +42,7 @@ class VoiceComposeController extends Controller
             $content= mb_substr($content,0,300,'utf-8');
         }
         if(in_array($voice_data['voice'],['Olivia','William','Wendy','Halen','Harry'])){
-            if(!preg_match("/^[a-zA-Z\s]+$/",$content)){
+            if(preg_match_all("/([\x{4e00}-\x{9fa5}]+)/u", $content, $match)){
                 return response()->json(["code"=>101,"message"=>"请输入英文"]);
             }
         }
