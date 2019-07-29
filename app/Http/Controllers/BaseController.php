@@ -54,7 +54,7 @@ trait BaseController
     {
         $this->nav=Nav::select('name','url')->where('show',1)->get();
         $this->name = Route::currentRouteName();
-        $this->seo=Seo::select('keywords','description')->join('nav', 'nav.id', '=', 'seo.nav_id')->where('url',$this->name )->first();
+        $this->seo=Seo::select('title','keywords','description')->join('nav', 'nav.id', '=', 'seo.nav_id')->where('url',$this->name )->first();
         $system=Config::select('name','value')->where(['type'=>'system'])->get()->toArray();
         $this->system= array_column($system,'value','name');
 

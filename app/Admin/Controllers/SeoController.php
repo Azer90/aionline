@@ -83,6 +83,7 @@ class SeoController extends Controller
         $grid = new Grid(new Seo);
 
         $grid->id('ID')->sortable();
+        $grid->column('nav.title', '标题');
         $grid->column('nav.name', trans('admin.name'));
         $grid->column('keywords', trans('admin.keywords'))->style('max-width:200px;word-break:break-all;');
         $grid->description(trans('admin.description'))->style('max-width:200px;word-break:break-all;');
@@ -123,6 +124,7 @@ class SeoController extends Controller
         $nav=array_column($nav,'name','id');
         $form->display('id', 'ID');
 
+        $form->text('title', '标题')->placeholder('标题')->rules('required');
         $form->text('keywords', trans('admin.keywords'))->placeholder('多关键词之间用英文逗号隔开')->rules('required');
         $form->text('description', trans('admin.description'))->placeholder('网站页面描述')->rules('required|max:100');
         $form->select('nav_id','页面选择')->options($nav)->rules('required');

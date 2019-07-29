@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-     <title>{{ $config['title'] }}</title>
+     <title>{{ $seo['title'] }}</title>
     <meta name="description" content="{{ !empty($seo['description']) ? $seo['description'] : 'pdf'  }}" />
     <meta name="keywords" content="{{ !empty($seo['keywords']) ? $seo['keywords'] : 'pdf' }}" />
     <link rel="icon" href="" />

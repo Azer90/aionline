@@ -23,11 +23,11 @@
             </li>
             <li>></li>
             <li>
-                <a href="#">服务定制</a>
+                <a href="#">服务支持</a>
             </li>
             <li>></li>
             <li>
-                <a href="#">服务定制l列表</a>
+                <a href="#">{{ $article['title'] }}</a>
             </li>
         </ul>
     </div>
