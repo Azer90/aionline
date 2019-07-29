@@ -57,9 +57,9 @@ class TutorialsController extends Controller
         //$article['time']= date('Y-m-d',strtotime($article['created_at']));
         $nav=$this->nav;
         $name=$this->name;
-        $seo=['title'=>$article['title'],'keywords'=>$article['keywords'],'description'=>$article['description']];
-        $config=$this->system;
 
+        $config=$this->system;
+        $seo=['title'=>$config['title'].'-'.$article['title'],'keywords'=>$article['keywords'],'description'=>$article['description']];
 
         return view('web.detail')->with(compact('nav','name','seo','config','article','common','new','up','down','link'));
     }
