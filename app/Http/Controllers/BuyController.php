@@ -41,7 +41,7 @@ class BuyController extends Controller
 
             $order = [
                 'out_trade_no' => $order_no,
-                'return_url' => 'http://ai.9889188.com/voiceCompose?file_name='.$data['file_name'],
+                'return_url' => 'http://www.zaixianai.cn/voiceCompose?file_name='.$data['file_name'],
                 'total_amount' => $this->pay_config['price'],
                 //'total_amount' => 0.01,
                 'subject'      => $this->pay_config['goods_name'],
