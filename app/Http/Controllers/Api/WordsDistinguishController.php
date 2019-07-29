@@ -39,7 +39,7 @@ class WordsDistinguishController extends Controller
         $type = $request->input("dis_type");
         $ori = $request->input("ori");
 
-        $this->file_upload->fileSave(storage_path('app/uploads/'),2*1024*1024);
+        $this->file_upload->fileSave(storage_path('app/uploads/'),10*1024*1024);
         $upload_info = $this->file_upload->msg;
 
         $res = $this->word($type,$ori,$upload_info["info"]);
@@ -209,7 +209,8 @@ class WordsDistinguishController extends Controller
     {
         $image = file_get_contents($path);
         $res = $this->client->bankcard($image);
-        $res["file_name"]=$this->createFileName($res["words_result"]);
+
+        $res["file_name"]=$this->createFileName($res["result"],1);
         return $res;
     }
     /**
@@ -232,6 +233,7 @@ class WordsDistinguishController extends Controller
         }
         DB::table("ai_dis")->insert(["path"=>$res["result"]["result_data"],"file_name"=>$res["result"]["request_id"],"create_time"=>date("Y-m-d H:i:s",time())]);
         $res["file_name"] = $res["result"]["request_id"];
+
         return $res;
     }
 
@@ -256,6 +258,7 @@ class WordsDistinguishController extends Controller
 
 // 带参数调用网络图片文字识别, 图片参数为远程url图片
         $res = $this->client->webImageUrl($url);
+
         $res["file_name"]=$this->createFileName($res["words_result"]);
         return $res;
     }
@@ -263,7 +266,7 @@ class WordsDistinguishController extends Controller
     /**
      * 文件生成
      */
-    public function createFileName($info)
+    public function createFileName($info,$is_bank=0)
     {
         $chars = '0123456789';
         $hash = '';
@@ -277,8 +280,14 @@ class WordsDistinguishController extends Controller
             mkdir(storage_path()."/app/txt",0777);
         }
         $txt = storage_path()."/app/txt/".$hash;
+
         foreach ($info as $k=> $v){
-            file_put_contents($txt,$k."：".$v["words"].PHP_EOL,FILE_APPEND);
+            if($is_bank){
+                file_put_contents($txt,$k."：".$v.PHP_EOL,FILE_APPEND);
+            }else{
+                file_put_contents($txt,$k."：".$v["words"].PHP_EOL,FILE_APPEND);
+            }
+
         }
         DB::table("ai_dis")->insert(["path"=>$txt,"file_name"=>$hash,"create_time"=>date("Y-m-d H:i:s",time())]);
         return $hash;
