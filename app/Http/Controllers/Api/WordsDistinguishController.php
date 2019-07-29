@@ -255,7 +255,9 @@ class WordsDistinguishController extends Controller
     public function webDis(Request $request)
     {
         $url= $request->input("url");
-
+        if(empty($url)){
+            return "网络链接为空";
+        }
 // 带参数调用网络图片文字识别, 图片参数为远程url图片
         $res = $this->client->webImageUrl($url);
 

@@ -779,6 +779,10 @@
     $(".sub_test").on("click",function () {
         var value = $(this).parent().prev().val();
         var dis_type = uploader.options.formData.dis_type;
+        if(!value){
+            layer.alert("请输入图片链接后再检测");
+            return;
+        }
         var index="";
         $.ajax({
             url:host+"/api/webDis",
