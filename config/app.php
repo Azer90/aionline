@@ -182,7 +182,7 @@ return [
         Laravel\Scout\ScoutServiceProvider::class,
         Vanry\Scout\TNTSearchScoutServiceProvider::class,
         Encore\Chartjs\ChartjsServiceProvider::class,
-
+        Stevenyangecho\UEditor\UEditorServiceProvider::class,
     ],
 
     /*
