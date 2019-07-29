@@ -83,7 +83,7 @@ class SeoController extends Controller
         $grid = new Grid(new Seo);
 
         $grid->id('ID')->sortable();
-        $grid->column('nav.title', '标题');
+        $grid->column('title', '标题');
         $grid->column('nav.name', trans('admin.name'));
         $grid->column('keywords', trans('admin.keywords'))->style('max-width:200px;word-break:break-all;');
         $grid->description(trans('admin.description'))->style('max-width:200px;word-break:break-all;');
