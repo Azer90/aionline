@@ -50,7 +50,8 @@ class VoiceComposeController extends Controller
         $data=[
             'format'=>'mp3',
             'voice'=>$voice_data['voice'],
-            'pitchRate'=>$voice_data['volume'],
+            'volume'=>$voice_data['volume'],
+            'pitchRate'=>0,
             'speechRate'=>$voice_data['speech_rate'],
             'text'=>$content,
         ];
