@@ -1,4 +1,8 @@
-
+<style>
+    .list_page a{
+        color: #fff;
+    }
+</style>
 
 @if ($paginator->hasPages())
     <div class="list_page">
