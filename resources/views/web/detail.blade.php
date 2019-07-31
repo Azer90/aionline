@@ -21,19 +21,19 @@
             <ul>
                 <li>当前位置:</li>
                 <li>
-                    <a href="#">首页</a>
+                    <a href="{{ route('/') }}">首页</a>
                 </li>
                 <li>></li>
                 <li>
-                    <a href="#">使用教程</a>
+                    <a href="{{ route('tutorials') }}">使用教程</a>
                 </li>
                 <li>></li>
                 <li>
-                    <a href="#">{{ $article->classify->name }}</a>
+                    <a href="{{ route('tutorials',['classify_id'=>$article['classify_id']]) }}">{{ $article->classify->name }}</a>
                 </li>
                 <li>></li>
                 <li>
-                    <a href="#">{{ $article['title'] }}</a>
+                    <a href="{{ route('detail',['id'=>$article['id']]) }}">{{ $article['title'] }}</a>
                 </li>
             </ul>
         </div>

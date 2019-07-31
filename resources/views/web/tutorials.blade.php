@@ -28,15 +28,15 @@
             <ul>
                 <li>当前位置:</li>
                 <li>
-                    <a href="#">首页</a>
+                    <a href="{{ route('/') }}">首页</a>
                 </li>
                 <li>></li>
                 <li>
-                    <a href="#">使用教程</a>
+                    <a href="{{ route('tutorials') }}">使用教程</a>
                 </li>
                 <li>></li>
                 <li>
-                    <a href="#">{{ $classify_name }}</a>
+                    <a href="{{ route('tutorials',['classify_id'=>$classify_id]) }}">{{ $classify_name }}</a>
                 </li>
             </ul>
         </div>
