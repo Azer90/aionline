@@ -42,7 +42,9 @@
             </div>
         </div>
         <img src="images/line_03.jpg" class="line" />
-        <textarea class="gem" name="" rows="" cols="" placeholder="请输入你需要转换的文字"></textarea>
+        <textarea class="gem" name="" rows="" cols="" placeholder="请输入你需要转换的文字">在线AI转换网站是一个在线服务网站。
+可在线进行文字合成语音，语音转文字，图像处理，文字识别等相关服务。
+我们也可以为你的企业需求进行定制化服务，提供专业解决方案。</textarea>
 
         <div class="ge_ti">
             <p>最多可输入<span>300</span>个字,已输入<span class="lets">0</span>个字,超出部分合成将被截断</p>
