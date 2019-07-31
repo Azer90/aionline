@@ -419,11 +419,11 @@
             var audio = document.getElementById('myMusic');
             if(compose=='立即合成'){
                 //console.log(slideVerify);
-                if(slideVerify){
+               /* if(slideVerify){
                     slideVerify.resetVerify();
-                }
-
-                var SlideVerifyPlug = window.slideVerifyPlug;
+                }*/
+                bofan();
+               /* var SlideVerifyPlug = window.slideVerifyPlug;
                  slideVerify = new SlideVerifyPlug('#verify-wrap',{
                     wrapWidth:'350',//设置 容器的宽度 ,不设置的话，会设置成100%，需要自己在外层包层div,设置宽度，这是为了适应方便点；
                     initText:'拖动滑块验证',  //设置  初始的 显示文字
@@ -435,8 +435,8 @@
                            bofan();
                        }
                     }
-                });
-                $('.ggw').css('display','flex');
+                });*/
+               // $('.ggw').css('display','flex');
             }
             if(compose=='播放'||compose=='继续播放'){
 
