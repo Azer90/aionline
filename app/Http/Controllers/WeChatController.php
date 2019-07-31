@@ -48,7 +48,9 @@ class WeChatController extends Controller
                             'user_id'=>$message['EventKey'],
                         ];
                         WechatUsers::insert($data);
-                        return "登录成功";
+                        return "在线AI转换网站是一个在线服务网站。
+可在线进行文字合成语音，语音转文字，图像处理，文字识别等相关服务。
+我们也可以为你的企业需求进行定制化服务，提供专业解决方案。";
                         break;
 
                     default:
@@ -61,7 +63,7 @@ class WeChatController extends Controller
 
 
         });
-       // $this->menu();
+
         $response = $this->app->server->serve();
 
 // 将响应输出
@@ -69,36 +71,7 @@ class WeChatController extends Controller
     }
 
 
-    public function menu(){
-        $buttons = [
-            [
-                "type" => "click",
-                "name" => "今日歌曲",
-                "key"  => "V1001_TODAY_MUSIC"
-            ],
-            [
-                "name"       => "菜单",
-                "sub_button" => [
-                    [
-                        "type" => "view",
-                        "name" => "搜索",
-                        "url"  => "http://www.soso.com/"
-                    ],
-                    [
-                        "type" => "view",
-                        "name" => "视频",
-                        "url"  => "http://v.qq.com/"
-                    ],
-                    [
-                        "type" => "click",
-                        "name" => "赞一下我们",
-                        "key" => "V1001_GOOD"
-                    ],
-                ],
-            ],
-        ];
-       // $this->app->menu->create($buttons);
-    }
+
 
 
     public function qrcode(){

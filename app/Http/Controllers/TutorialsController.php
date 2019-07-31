@@ -91,7 +91,9 @@ class TutorialsController extends Controller
         $name=$this->name;
         $seo=$this->seo;
         $config=$this->system;
-        $config['title_tag']=$tag;
+        $seo['title']=$tag.'-在线AI转换-在线文字转语音,在线语音转文字,在线文字识别,在线图像处理';
+        $seo['keywords']=$tag;
+        $seo['description']=$tag.'-在线AI转换-在线文字转语音,在线语音转文字,在线文字识别,在线图像处理';
         $article_index= Article::search($tag)->paginate(9);
         foreach ($article_index as $key=>$value){
 

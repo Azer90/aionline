@@ -1606,8 +1606,12 @@ white-space: nowrap;}
   font-size: 20px;
   text-align: center;
 }
+@media all and (min-width: 960px){
+  .payment-wrapper{
+    position: fixed;
+  }
+}
 .payment-wrapper{
-  position: fixed;
   z-index: 99;
   top: 20%;
   left: 40%;
