@@ -23,6 +23,7 @@ Route::get('tutorials/{classify_id?}', 'TutorialsController@index')->name('tutor
 Route::get('voiceCompose', 'VoiceComposeController@index')->name('voiceCompose');//在线语音合成
 Route::get('voiceToText', 'VoiceToTextController@index')->name('voiceToText');//语音转文字
 
+
 Route::get('detail/{id}', 'TutorialsController@detail')->where('id', '[0-9]+')->name('detail');
 
 Route::get('search/{tag}', 'TutorialsController@search')->name('search'); //全文搜索
