@@ -289,7 +289,6 @@ class WordsDistinguishController extends Controller
             }else{
                 file_put_contents($txt,$k."：".$v["words"].PHP_EOL,FILE_APPEND);
             }
-
         }
         DB::table("ai_dis")->insert(["path"=>$txt,"file_name"=>$hash,"create_time"=>date("Y-m-d H:i:s",time())]);
         return $hash;

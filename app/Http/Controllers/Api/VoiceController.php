@@ -66,15 +66,15 @@ class VoiceController extends Controller
         );
         $ffmpeg = FFMpeg::create($a);
 
-        $audio = $ffmpeg->open($path);
+//        $audio = $ffmpeg->open($path);
         $info = $ffmpeg->getFile($path);
         $duration = $info["duration"];//时长
 
-        $format = new \FFMpeg\Format\Audio\Wav();
+//        $format = new \FFMpeg\Format\Audio\Wav();
 
-        $format->on('progress', function ($audio, $format, $percentage) {
-//            echo "$percentage % transcoded";
-        });
+//        $format->on('progress', function ($audio, $format, $percentage) {
+////            echo "$percentage % transcoded";
+//        });
         $num = ceil($duration/30);
         set_time_limit(300);
 
@@ -86,15 +86,16 @@ class VoiceController extends Controller
         $txt = storage_path()."/app/txt/".$file_name;
         $sCon = 0;
 
-        $format->setAudioChannels(2)
-            ->setAudioKiloBitrate(256);
+//        $format->setAudioChannels(2)
+//            ->setAudioKiloBitrate(256);
         //分割转换pcm文件
 
         for ($i=0;$i < $num; $i++){
 
-            $audio->filters()->clip(TimeCode::fromSeconds($i*30), TimeCode::fromSeconds(30));
-            $pcm_path = storage_path().'/app/tem/'.uniqid().".pcm";
-            $audio->save($format,$pcm_path);
+//            $audio->filters()->clip(TimeCode::fromSeconds($i*30), TimeCode::fromSeconds(30));
+//            $pcm_path = storage_path().'/app/tem/'.uniqid().".pcm";
+//            $audio->save($format,$pcm_path);
+            $pcm_path = $this->setCutting($path,$i*30,30);
             $compound_res = $this->compound($pcm_path,$txt);
 
             if($compound_res){
@@ -112,6 +113,63 @@ class VoiceController extends Controller
         }
 
     }
+
+    public function test_ar()
+    {
+
+        $primary_path = storage_path('app/uploads')."/16k.wav";
+
+        $pcm_path = storage_path().'/app/tem/'.uniqid().".pcm";
+        $ffmpeg_path = 'D:\ffmpeg\bin\ffmpeg';
+        $command_line = $ffmpeg_path.' -y  -i '.$primary_path."  -acodec pcm_s16le -f s16le -ac 1 -ar 16000 ".$pcm_path;
+        exec($command_line,$output);
+
+        $ffmpeg_path.' -ss 00:00:00 -t 00:00:30 -i test.mp4 -vcodec copy -acodec copy output.mp4';
+
+        $client = new AipSpeech($this->app_id,$this->api_key,$this->secret_key);
+        $res = $client->asr(file_get_contents($pcm_path), 'pcm', 16000, array(
+            'dev_pid' => 1536,
+        ));
+        dump($res);
+    }
+
+    /**
+     * 格式转换
+     */
+    public function setCconversion($primary_path)
+    {
+        $ffmpeg_path = 'D:\ffmpeg\bin\ffmpeg';
+        $pcm_path = storage_path().'/app/tem/'.uniqid().".pcm";
+        $command_line = $ffmpeg_path.' -y  -i '.$primary_path."  -acodec pcm_s16le -f s16le -ac 1 -ar 16000 ".$pcm_path;
+        exec($command_line,$output);
+        @unlink($primary_path);
+        return $pcm_path;
+    }
+
+    /**
+     * 音频切割
+     */
+    public function setCutting($primary_path,$start_time,$interval)
+    {
+        $ffmpeg_path = 'D:\ffmpeg\bin\ffmpeg';
+        $end_time =gmdate('H:i:s',$start_time+$interval);//计算结束时间
+
+        $start_time = gmdate("H:i:s",$start_time);
+
+        $str=explode('.',$primary_path);
+        $ext = $str[1];//文件后缀
+
+        $primary_tem_path = storage_path().'/app/tem/'.uniqid().".".$ext;
+
+        $command_line = $ffmpeg_path.' -ss '.$start_time.' -t '.$end_time.' -i '.$primary_path.' -vcodec copy -acodec copy '.$primary_tem_path;
+        exec($command_line,$output);
+
+        $pcm_path =$this->setCconversion($primary_tem_path);
+
+
+        return $pcm_path;
+    }
+
 
     /**
      * 语音识别
