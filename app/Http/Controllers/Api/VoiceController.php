@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use FFMpeg\FFMpeg;
 use Illuminate\Support\Facades\DB;
 use Lib\imageProcessSdk\AipSpeech;
+use Illuminate\Support\Facades\Log;
 
 class VoiceController extends Controller
 {
@@ -75,7 +76,7 @@ class VoiceController extends Controller
 //        $format->on('progress', function ($audio, $format, $percentage) {
 ////            echo "$percentage % transcoded";
 //        });
-        $num = ceil($duration/30);
+        $num =(int)ceil($duration/60);
         set_time_limit(300);
 
         //文件
@@ -95,7 +96,7 @@ class VoiceController extends Controller
 //            $audio->filters()->clip(TimeCode::fromSeconds($i*30), TimeCode::fromSeconds(30));
 //            $pcm_path = storage_path().'/app/tem/'.uniqid().".pcm";
 //            $audio->save($format,$pcm_path);
-            $pcm_path = $this->setCutting($path,$i*30,30);
+            $pcm_path = $this->setCutting($path,$i*60,60);
             $compound_res = $this->compound($pcm_path,$txt);
 
             if($compound_res){
@@ -151,11 +152,10 @@ class VoiceController extends Controller
      */
     public function setCutting($primary_path,$start_time,$interval)
     {
+
         $ffmpeg_path = 'D:\ffmpeg\bin\ffmpeg';
-        $end_time =gmdate('H:i:s',$start_time+$interval);//计算结束时间
-
+        $end_time =gmdate('H:i:s',$interval);//计算结束时间
         $start_time = gmdate("H:i:s",$start_time);
-
         $str=explode('.',$primary_path);
         $ext = $str[1];//文件后缀
 
