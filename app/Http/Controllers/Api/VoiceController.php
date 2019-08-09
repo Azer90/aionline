@@ -181,7 +181,10 @@ class VoiceController extends Controller
         $res = $client->asr(file_get_contents($pcm_path), 'pcm', 16000, array(
             'dev_pid' => 1536,
         ));
-
+        $monolog = Log::getMonolog();
+        $monolog->popHandler();
+        Log::useFiles(storage_path('logs/res.log'));
+        Log::info($res);
         if($res["err_msg"]=="success."){
             file_put_contents($txt,$res["result"][0],FILE_APPEND);
             @unlink($pcm_path);
